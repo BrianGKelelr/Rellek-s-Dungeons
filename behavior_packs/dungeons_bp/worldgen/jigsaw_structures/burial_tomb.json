@@ -1,0 +1,17 @@
+{
+    "format_version": "1.21.20",
+    "minecraft:jigsaw": {
+        "description": {
+            "identifier": "dungeons:burial_tomb"
+        },
+        "step": "underground_structures",
+        "terrain_adaptation": "bury",
+        "max_depth": 10,
+        "start_pool": "dungeons:burial_tomb/entries",
+        "start_height": {
+            "type": "constant",
+            "value": { "absolute": -15}
+        },
+        "heightmap_projection": "none"
+    }
+}
