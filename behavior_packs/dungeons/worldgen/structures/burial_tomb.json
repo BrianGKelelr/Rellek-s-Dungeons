@@ -6,7 +6,7 @@
         },
         "step": "underground_structures",
         "terrain_adaptation": "bury",
-        "max_depth": 4,
+        "max_depth": 3,
         "start_pool": "minecraft:burial_tomb_entries",
         "start_height": {
             "type": "uniform",
@@ -14,9 +14,10 @@
                 "above_bottom": 20
             },
             "max": {
-                "above_bottom": 200
+                "above_bottom": 120
             } 
         },
-        "heightmap_projection": "none"
+        "heightmap_projection": "none",
+        "liquid_settings": "apply_waterlogging"
     }
 }
