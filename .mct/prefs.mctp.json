@@ -1,0 +1,68 @@
+{
+  "dataType": 1,
+  "variants": {},
+  "storageBasePath": "",
+  "contentsModified": "2026-06-09T23:58:26.379Z",
+  "created": "2026-06-09T23:51:29.417Z",
+  "lastOpened": "2026-06-09T23:51:35.196Z",
+  "dataStorageRelativePath": "/Rellek's Dungeons/",
+  "editPreference": 0,
+  "name": "Rellek's Dungeons",
+  "title": "Rellek's Dungeons",
+  "description": "Revamps the existing dungeons in Minecraft",
+  "defaultBehaviorPackUniqueId": "8308029e-191e-4ac7-9298-32c36ea459e5",
+  "defaultResourcePackUniqueId": "600051f4-9f99-428b-8472-8c2e40deb1d1",
+  "defaultScriptModuleUniqueId": "dc442034-9be6-46de-9128-b2cccff1e420",
+  "defaultDataUniqueId": "2c824cdf-9e0e-4d2a-bf04-3a6370527719",
+  "focus": 0,
+  "items": [
+    {
+      "itemType": 13,
+      "variants": {},
+      "projectPath": "/scripts/camera-grapple.ts",
+      "storageType": 0,
+      "creationType": 0,
+      "tags": [],
+      "name": "camera-grapple.ts",
+      "isInWorld": false
+    },
+    {
+      "itemType": 109,
+      "variants": {},
+      "projectPath": "/behavior_packs/dungeons_bp/",
+      "storageType": 1,
+      "creationType": 0,
+      "tags": [],
+      "name": "dungeons_bp",
+      "isInWorld": false
+    },
+    {
+      "itemType": 139,
+      "variants": {},
+      "projectPath": "/behavior_packs/dungeons_bp/worldgen/structure_set.json",
+      "storageType": 0,
+      "creationType": 0,
+      "tags": [],
+      "name": "structure_set.json"
+    },
+    {
+      "itemType": 4,
+      "variants": {},
+      "projectPath": "/behavior_packs/dungeons_bp/structures/structure.mcstructure",
+      "storageType": 0,
+      "creationType": 0,
+      "tags": [],
+      "name": "structure.mcstructure"
+    }
+  ],
+  "projectFolderTitle": "Rellek's Dungeons",
+  "originalGitHubOwner": "microsoft",
+  "originalGitHubRepoName": "minecraft-scripting-samples",
+  "originalGitHubFolder": "/editor-multi",
+  "originalGalleryId": "editor-multi",
+  "creator": "RellekOS",
+  "shortName": "dungeons",
+  "track": 0,
+  "collapsedStoragePaths": [],
+  "gitHubReferences": []
+}
