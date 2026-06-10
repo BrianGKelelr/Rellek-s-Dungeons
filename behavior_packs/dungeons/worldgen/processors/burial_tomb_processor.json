@@ -2,7 +2,7 @@
     "format_version": "1.21.20",
     "minecraft:processor_list": {
         "description": {
-            "identifier": "dungeons:burial_tomb_entry_processor"
+            "identifier": "minecraft:burial_tomb_processor"
         },
         "processors": [
             {

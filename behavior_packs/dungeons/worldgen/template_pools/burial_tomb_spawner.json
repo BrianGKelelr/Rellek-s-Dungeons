@@ -2,14 +2,14 @@
     "format_version": "1.21.20",
     "minecraft:template_pool": {
         "description": {
-            "identifier": "dungeons:burial_tomb_entries"
+            "identifier": "minecraft:burial_tomb_spawners"
         },
         "elements": [
             {
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "burial_tomb/spawners/hallway_intersection1",
-                    "processors": "dungeons:burial_tomb_processor"
+                    "processors": "minecraft:burial_tomb_processor"
                 },
                 "weight": 1
             },
@@ -17,7 +17,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "burial_tomb/spawners/hallway1",
-                    "processors": "dungeons:burial_tomb_processor"
+                    "processors": "minecraft:burial_tomb_processor"
                 },
                 "weight": 1
             },
@@ -25,7 +25,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "burial_tomb/spawners/hallway2",
-                    "processors": "dungeons:burial_tomb_processor"
+                    "processors": "minecraft:burial_tomb_processor"
                 },
                 "weight": 1
             }

@@ -1,0 +1,17 @@
+{
+    "format_version": 2,
+    "header": {
+        "name": "Rellek's Dungeons",
+        "description": "Custom dungeon structures",
+        "uuid": "0db64fbe-dfd9-4078-82cb-588d73022314",
+        "version": [1, 0, 0],
+        "min_engine_version": [1, 21, 20]
+    },
+    "modules": [
+        {
+            "type": "data",
+            "uuid": "c51e757f-f461-41b6-9712-9ceea58eddca",
+            "version": [1, 0, 0]
+        }
+    ]
+}

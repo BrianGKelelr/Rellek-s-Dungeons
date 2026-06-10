@@ -2,14 +2,14 @@
     "format_version": "1.21.20",
     "minecraft:template_pool": {
         "description": {
-            "identifier": "dungeons:burial_tomb_entries"
+            "identifier": "minecraft:burial_tomb_entries"
         },
         "elements": [
             {
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "burial_tomb/entries/hallway_intersection2",
-                    "processors": "dungeons:burial_tomb_processor"
+                    "processors": "minecraft:burial_tomb_processor"
                 },
                 "weight": 1
             }
