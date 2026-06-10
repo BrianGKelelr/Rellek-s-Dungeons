@@ -6,11 +6,16 @@
         },
         "step": "underground_structures",
         "terrain_adaptation": "bury",
-        "max_depth": 10,
+        "max_depth": 4,
         "start_pool": "minecraft:burial_tomb_entries",
         "start_height": {
-            "type": "constant",
-            "value": { "absolute": -15}
+            "type": "uniform",
+            "min": {
+                "above_bottom": 20
+            },
+            "max": {
+                "above_bottom": 200
+            } 
         },
         "heightmap_projection": "none"
     }

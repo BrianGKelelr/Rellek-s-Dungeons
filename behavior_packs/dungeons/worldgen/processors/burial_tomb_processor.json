@@ -20,12 +20,148 @@
                     },
                     {
                         "input_predicate": {
-                            "predicate_type": "minecraft:random_block_match",
-                            "block": "minecraft:stone_brick_stairs",
-                            "probability": 0.3
+                            "predicate_type": "minecraft:random_blockstate_match",
+                            "probability": 0.3,
+                            "name": "minecraft:stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 0,
+                                "upside_down_bit":"false"
+                            }
                         },
                         "output_state": {
-                            "name": "minecraft:mossy_stone_brick_stairs"
+                            "name": "minecraft:mossy_stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 0,
+                                "upside_down_bit":"false"
+                            }
+                        }
+                    },
+                    {
+                        "input_predicate": {
+                            "predicate_type": "minecraft:random_blockstate_match",
+                            "probability": 0.3,
+                            "name": "minecraft:stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 2,
+                                "upside_down_bit":"false"
+                            }
+                        },
+                        "output_state": {
+                            "name": "minecraft:mossy_stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 2,
+                                "upside_down_bit":"false"
+                            }
+                        }
+                    },
+                    {
+                        "input_predicate": {
+                            "predicate_type": "minecraft:random_blockstate_match",
+                            "probability": 0.3,
+                            "name": "minecraft:stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 1,
+                                "upside_down_bit":"false"
+                            }
+                        },
+                        "output_state": {
+                            "name": "minecraft:mossy_stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 1,
+                                "upside_down_bit":"false"
+                            }
+                        }
+                    },
+                    {
+                        "input_predicate": {
+                            "predicate_type": "minecraft:random_blockstate_match",
+                            "probability": 0.3,
+                            "name": "minecraft:stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 3,
+                                "upside_down_bit":"false"
+                            }
+                        },
+                        "output_state": {
+                            "name": "minecraft:mossy_stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 3,
+                                "upside_down_bit":"false"
+                            }
+                        }
+                    },
+                    {
+                        "input_predicate": {
+                            "predicate_type": "minecraft:random_blockstate_match",
+                            "probability": 0.3,
+                            "name": "minecraft:stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 0,
+                                "upside_down_bit":"true"
+                            }
+                        },
+                        "output_state": {
+                            "name": "minecraft:mossy_stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 0,
+                                "upside_down_bit":"true"
+                            }
+                        }
+                    },
+                    {
+                        "input_predicate": {
+                            "predicate_type": "minecraft:random_blockstate_match",
+                            "probability": 0.3,
+                            "name": "minecraft:stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 2,
+                                "upside_down_bit":"true"
+                            }
+                        },
+                        "output_state": {
+                            "name": "minecraft:mossy_stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 2,
+                                "upside_down_bit":"true"
+                            }
+                        }
+                    },
+                    {
+                        "input_predicate": {
+                            "predicate_type": "minecraft:random_blockstate_match",
+                            "probability": 0.3,
+                            "name": "minecraft:stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 1,
+                                "upside_down_bit":"true",
+                                
+                                "waterlogged": "false"
+                            }
+                        },
+                        "output_state": {
+                            "name": "minecraft:mossy_stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 1,
+                                "upside_down_bit":"true"
+                            }
+                        }
+                    },
+                    {
+                        "input_predicate": {
+                            "predicate_type": "minecraft:random_blockstate_match",
+                            "probability": 0.3,
+                            "name": "minecraft:stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 3,
+                                "upside_down_bit":"true"
+                            }
+                        },
+                        "output_state": {
+                            "name": "minecraft:mossy_stone_brick_stairs",
+                            "properties": {
+                                "weirdo_direction": 3,
+                                "upside_down_bit":"true"
+                            }
                         }
                     },
                     {
@@ -65,7 +201,10 @@
                             "probability": 0.02
                         },
                         "output_state": {
-                            "name": "minecraft:skeleton_skull"
+                            "name": "minecraft:skeleton_skull",
+                            "properties": {
+                                "facing_direction": 1
+                            }
                         }
                     },
                     {
@@ -75,7 +214,10 @@
                             "probability": 0.02
                         },
                         "output_state": {
-                            "name": "minecraft:zombie_head"
+                            "name": "minecraft:zombie_head",
+                            "properties": {
+                                "facing_direction": 1
+                            }
                         }
                     }
                 ]
