@@ -18,6 +18,6 @@
             } 
         },
         "heightmap_projection": "none",
-        "liquid_settings": "apply_waterlogging"
+        "liquid_settings": "ignore_waterlogging"
     }
 }
