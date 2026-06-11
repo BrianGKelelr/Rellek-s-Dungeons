@@ -12,7 +12,7 @@
             "input_predicate": {
               "predicate_type": "minecraft:random_block_match",
               "block": "minecraft:tuff_bricks",
-              "probability": 0.3
+              "probability": 0.25
             },
             "output_state": {
               "name": "minecraft:tuff"
@@ -26,6 +26,26 @@
             },
             "output_state": {
               "name": "minecraft:tuff"
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:tuff_bricks",
+              "probability": 0.1
+            },
+            "output_state": {
+              "name": "minecraft:mossy_cobblestone"
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:polished_tuff",
+              "probability": 0.1
+            },
+            "output_state": {
+              "name": "minecraft:mossy_cobblestone"
             }
           },
           {
@@ -147,90 +167,6 @@
             },
             "output_state": {
                 "name": "minecraft:chest",
-                "states": {
-                    "minecraft:cardinal_direction": "west"
-                }
-            }
-        },
-        {
-            "block_entity_modifier": {
-                "type": "minecraft:append_loot",
-                "loot_table": "loot_tables/chests/swamp_crypt_pot.json"
-            },
-            "input_predicate": {
-                "predicate_type": "minecraft:blockstate_match",
-                "block_state": {
-                    "name": "minecraft:decorated_pot",
-                    "states": {
-                        "minecraft:cardinal_direction": "north"
-                    }
-                }
-            },
-            "output_state": {
-                "name": "minecraft:decorated_pot",
-                "states": {
-                    "minecraft:cardinal_direction": "north"
-                }
-            }
-        },
-        {
-            "block_entity_modifier": {
-                "type": "minecraft:append_loot",
-                "loot_table": "loot_tables/chests/swamp_crypt_pot.json"
-            },
-            "input_predicate": {
-                "predicate_type": "minecraft:blockstate_match",
-                "block_state": {
-                    "name": "minecraft:decorated_pot",
-                    "states": {
-                        "minecraft:cardinal_direction": "south"
-                    }
-                }
-            },
-            "output_state": {
-                "name": "minecraft:decorated_pot",
-                "states": {
-                    "minecraft:cardinal_direction": "south"
-                }
-            }
-        },
-        {
-            "block_entity_modifier": {
-                "type": "minecraft:append_loot",
-                "loot_table": "loot_tables/chests/swamp_crypt_pot.json"
-            },
-            "input_predicate": {
-                "predicate_type": "minecraft:blockstate_match",
-                "block_state": {
-                    "name": "minecraft:decorated_pot",
-                    "states": {
-                        "minecraft:cardinal_direction": "east"
-                    }
-                }
-            },
-            "output_state": {
-                "name": "minecraft:decorated_pot",
-                "states": {
-                    "minecraft:cardinal_direction": "east"
-                }
-            }
-        },
-        {
-            "block_entity_modifier": {
-                "type": "minecraft:append_loot",
-                "loot_table": "loot_tables/chests/swamp_crypt_pot.json"
-            },
-            "input_predicate": {
-                "predicate_type": "minecraft:blockstate_match",
-                "block_state": {
-                    "name": "minecraft:decorated_pot",
-                    "states": {
-                        "minecraft:cardinal_direction": "west"
-                    }
-                }
-            },
-            "output_state": {
-                "name": "minecraft:decorated_pot",
                 "states": {
                     "minecraft:cardinal_direction": "west"
                 }
