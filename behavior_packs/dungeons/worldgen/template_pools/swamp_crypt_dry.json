@@ -68,6 +68,14 @@
                     "processors": "minecraft:swamp_crypt_processor"
                 },
                 "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/dry/dry_bridge",
+                    "processors": "minecraft:swamp_crypt_processor"
+                },
+                "weight": 1
             }
         ]
     }
