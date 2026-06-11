@@ -1,0 +1,23 @@
+{
+    "format_version": "1.21.20",
+    "minecraft:jigsaw": {
+        "description": {
+            "identifier": "minecraft:swamp_crypt"
+        },
+        "step": "underground_structures",
+        "terrain_adaptation": "bury",
+        "max_depth": 3,
+        "start_pool": "minecraft:swamp_crypt_entries",
+        "start_height": {
+            "type": "uniform",
+            "min": {
+                "above_bottom": 20
+            },
+            "max": {
+                "above_bottom": 120
+            } 
+        },
+        "heightmap_projection": "none",
+        "liquid_settings": "apply_waterlogging"
+    }
+}

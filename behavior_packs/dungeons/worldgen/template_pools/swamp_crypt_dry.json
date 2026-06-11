@@ -1,0 +1,74 @@
+{
+    "format_version": "1.21.20",
+    "minecraft:template_pool": {
+        "description": {
+            "identifier": "minecraft:swamp_crypt_dry"
+        },
+        "elements": [
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/dry/dry_hallway",
+                    "processors": "minecraft:swamp_crypt_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/dry/dry_hallway2",
+                    "processors": "minecraft:swamp_crypt_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/dry/dry_hallway2_left",
+                    "processors": "minecraft:swamp_crypt_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/dry/dry_hallway2_right",
+                    "processors": "minecraft:swamp_crypt_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/dry/dry_tomb",
+                    "processors": "minecraft:swamp_crypt_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/dry/dry_wet_stairs",
+                    "processors": "minecraft:swamp_crypt_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/dry/dry_stairs",
+                    "processors": "minecraft:swamp_crypt_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/dry/dry_chest_room",
+                    "processors": "minecraft:swamp_crypt_processor"
+                },
+                "weight": 1
+            }
+        ]
+    }
+}
