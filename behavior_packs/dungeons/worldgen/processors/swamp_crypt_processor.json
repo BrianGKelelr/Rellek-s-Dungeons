@@ -57,7 +57,91 @@
             "output_state": {
               "name": "minecraft:air"
             }
-          }
+          },
+          {
+            "block_entity_modifier": {
+                "type": "minecraft:append_loot",
+                "loot_table": "loot_tables/entities/trail_ruins_brushable_block_common.json"
+            },
+            "input_predicate": {
+                "predicate_type": "minecraft:blockstate_match",
+                "block_state": {
+                    "name": "minecraft:chest",
+                    "states": {
+                        "minecraft:cardinal_direction": "north"
+                    }
+                }
+            },
+            "output_state": {
+                "name": "minecraft:chest",
+                "states": {
+                    "minecraft:cardinal_direction": "north"
+                }
+            }
+        },
+        {
+            "block_entity_modifier": {
+                "type": "minecraft:append_loot",
+                "loot_table": "loot_tables/entities/trail_ruins_brushable_block_common.json"
+            },
+            "input_predicate": {
+                "predicate_type": "minecraft:blockstate_match",
+                "block_state": {
+                    "name": "minecraft:chest",
+                    "states": {
+                        "minecraft:cardinal_direction": "south"
+                    }
+                }
+            },
+            "output_state": {
+                "name": "minecraft:chest",
+                "states": {
+                    "minecraft:cardinal_direction": "south"
+                }
+            }
+        },
+        {
+            "block_entity_modifier": {
+                "type": "minecraft:append_loot",
+                "loot_table": "loot_tables/entities/trail_ruins_brushable_block_common.json"
+            },
+            "input_predicate": {
+                "predicate_type": "minecraft:blockstate_match",
+                "block_state": {
+                    "name": "minecraft:chest",
+                    "states": {
+                        "minecraft:cardinal_direction": "east"
+                    }
+                }
+            },
+            "output_state": {
+                "name": "minecraft:chest",
+                "states": {
+                    "minecraft:cardinal_direction": "east"
+                }
+            }
+        },
+        {
+            "block_entity_modifier": {
+                "type": "minecraft:append_loot",
+                "loot_table": "loot_tables/entities/trail_ruins_brushable_block_common.json"
+            },
+            "input_predicate": {
+                "predicate_type": "minecraft:blockstate_match",
+                "block_state": {
+                    "name": "minecraft:chest",
+                    "states": {
+                        "minecraft:cardinal_direction": "west"
+                    }
+                }
+            },
+            "output_state": {
+                "name": "minecraft:chest",
+                "states": {
+                    "minecraft:cardinal_direction": "west"
+                }
+            }
+        }
         ]
       }
     ]

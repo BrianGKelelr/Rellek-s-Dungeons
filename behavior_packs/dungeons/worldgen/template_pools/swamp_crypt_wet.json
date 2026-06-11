@@ -60,6 +60,14 @@
                     "processors": "minecraft:swamp_crypt_processor"
                 },
                 "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/wet/dry_wet_stairs",
+                    "processors": "minecraft:swamp_crypt_processor"
+                },
+                "weight": 1
             }
         ]
     }

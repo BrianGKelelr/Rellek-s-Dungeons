@@ -6,18 +6,25 @@
         },
         "step": "underground_structures",
         "terrain_adaptation": "bury",
-        "max_depth": 3,
+        "max_depth": 9,
         "start_pool": "minecraft:swamp_crypt_entries",
+        "heightmap_projection": "world_surface",
         "start_height": {
-            "type": "uniform",
-            "min": {
-                "above_bottom": 20
-            },
-            "max": {
-                "above_bottom": 120
-            } 
-        },
-        "heightmap_projection": "none",
+        "type": "constant",
+        "value": { 
+            "absolute": -20 
+        }, 
         "liquid_settings": "apply_waterlogging"
+        },
+        "biome_filters": [ 
+            { 
+                "test": "has_biome_tag", 
+                "value": "jungle" 
+            },
+            {
+                "test": "has_biome_tag",
+                "value": "swamp"
+            }
+        ]
     }
 }
