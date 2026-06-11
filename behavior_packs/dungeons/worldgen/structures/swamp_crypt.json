@@ -14,7 +14,7 @@
         "value": { 
             "absolute": -25 
         }, 
-        "liquid_settings": "apply_waterlogging"
+        "liquid_settings": "ignore_waterlogging"
         },
         "biome_filters": {
             "any_of": [ 
