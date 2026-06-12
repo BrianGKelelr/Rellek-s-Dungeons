@@ -9,7 +9,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "swamp_crypt/entries/entrance",
-                    "processors": "minecraft:swamp_crypt_processor"
+                    "processors": "minecraft:swamp_crypt_dry_processor"
                 },
                 "weight": 1
             }

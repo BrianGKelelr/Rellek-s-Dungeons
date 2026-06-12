@@ -2,7 +2,7 @@
   "format_version": "1.21.20",
   "minecraft:processor_list": {
     "description": {
-      "identifier": "minecraft:swamp_crypt_processor"
+      "identifier": "minecraft:swamp_crypt_wet_processor"
     },
     "processors": [
       {
@@ -50,12 +50,22 @@
           },
           {
             "input_predicate": {
-              "predicate_type": "minecraft:random_block_match",
-              "block": "minecraft:green_candle",
-              "probability": 0.6
+                "predicate_type": "minecraft:random_block_match",
+                "block": "minecraft:green_candle",
+                "probability": 0.5
             },
             "output_state": {
-              "name": "minecraft:air"
+                "name": "minecraft:water"
+            }
+          },
+          {
+            "input_predicate": {
+                "predicate_type": "minecraft:random_block_match",
+                "block": "minecraft:green_candle",
+                "probability": 0.1
+            },
+            "output_state": {
+                "name": "minecraft:flower_pot"
             }
           },
           {
@@ -75,17 +85,17 @@
               "probability": 0.95
             },
             "output_state": {
-              "name": "minecraft:air"
+              "name": "minecraft:water"
             }
           },
           {
             "input_predicate": {
-              "predicate_type": "minecraft:random_block_match",
-              "block": "minecraft:decorated_pot",
-              "probability": 0.90
+                "predicate_type": "minecraft:random_block_match",
+                "block": "minecraft:decorated_pot",
+                "probability": 0.9
             },
             "output_state": {
-              "name": "minecraft:water"
+                "name": "minecraft:water"
             }
           },
           {
@@ -171,6 +181,20 @@
                     "minecraft:cardinal_direction": "west"
                 }
             }
+        },
+        {
+          "input_predicate": {
+            "predicate_type": "minecraft:random_block_match",
+            "block": "minecraft:decorated_pot",
+            "probability": 0.9
+          },
+          "output_state": {
+            "name": "minecraft:decorated_pot"
+          },
+          "block_entity_modifier": {
+            "type": "minecraft:append_loot",
+            "loot_table": "loot_tables/chests/swamp_crypt_pots.json"
+          }
         }
         ]
       }

@@ -10,11 +10,10 @@
         "start_pool": "minecraft:swamp_crypt_entries",
         "heightmap_projection": "world_surface",
         "start_height": {
-        "type": "constant",
-        "value": { 
-            "absolute": -25 
-        }, 
-        "liquid_settings": "ignore_waterlogging"
+            "type": "constant",
+            "value": { 
+                "absolute": -25 
+            }
         },
         "biome_filters": {
             "any_of": [ 
