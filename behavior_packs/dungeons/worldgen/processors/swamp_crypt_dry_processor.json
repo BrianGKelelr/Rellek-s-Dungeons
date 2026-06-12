@@ -52,7 +52,7 @@
             "input_predicate": {
                 "predicate_type": "minecraft:random_block_match",
                 "block": "minecraft:green_candle",
-                "probability": 0.5
+                "probability": 0.4
             },
             "output_state": {
                 "name": "minecraft:air"
@@ -66,6 +66,26 @@
             },
             "output_state": {
                 "name": "minecraft:flower_pot"
+            }
+          },
+          {
+            "input_predicate": {
+                "predicate_type": "minecraft:random_block_match",
+                "block": "minecraft:green_candle",
+                "probability": 0.1
+            },
+            "output_state": {
+                "name": "minecraft:brown_mushroom"
+            }
+          },
+          {
+            "input_predicate": {
+                "predicate_type": "minecraft:random_block_match",
+                "block": "minecraft:green_candle",
+                "probability": 0.1
+            },
+            "output_state": {
+                "name": "minecraft:red_mushroom"
             }
           },
           {
