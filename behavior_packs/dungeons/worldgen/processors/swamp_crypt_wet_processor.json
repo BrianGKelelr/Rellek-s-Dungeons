@@ -85,7 +85,7 @@
               "probability": 0.95
             },
             "output_state": {
-              "name": "minecraft:water"
+              "name": "minecraft:air"
             }
           },
           {
