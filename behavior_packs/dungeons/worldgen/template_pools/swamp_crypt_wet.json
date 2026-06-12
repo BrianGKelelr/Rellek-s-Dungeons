@@ -68,6 +68,22 @@
                     "processors": "minecraft:swamp_crypt_wet_processor"
                 },
                 "weight": 2
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/wet/wet_chest_room2",
+                    "processors": "minecraft:swamp_crypt_wet_processor"
+                },
+                "weight": 5
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/wet/wet_chest_room3",
+                    "processors": "minecraft:swamp_crypt_wet_processor"
+                },
+                "weight": 5
             }
         ]
     }
