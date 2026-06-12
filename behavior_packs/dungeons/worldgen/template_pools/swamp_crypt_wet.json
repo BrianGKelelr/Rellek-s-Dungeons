@@ -11,7 +11,7 @@
                     "location": "swamp_crypt/wet/wet_hallway",
                     "processors": "minecraft:swamp_crypt_wet_processor"
                 },
-                "weight": 1
+                "weight": 6
             },
             {
                 "element": {
@@ -19,7 +19,7 @@
                     "location": "swamp_crypt/wet/wet_hallway2",
                     "processors": "minecraft:swamp_crypt_wet_processor"
                 },
-                "weight": 1
+                "weight": 6
             },
             {
                 "element": {
@@ -27,7 +27,7 @@
                     "location": "swamp_crypt/wet/wet_hallway2_left",
                     "processors": "minecraft:swamp_crypt_wet_processor"
                 },
-                "weight": 1
+                "weight": 6
             },
             {
                 "element": {
@@ -35,7 +35,7 @@
                     "location": "swamp_crypt/wet/wet_hallway2_right",
                     "processors": "minecraft:swamp_crypt_wet_processor"
                 },
-                "weight": 1
+                "weight": 6
             },
             {
                 "element": {
@@ -43,7 +43,7 @@
                     "location": "swamp_crypt/wet/wet_tomb",
                     "processors": "minecraft:swamp_crypt_wet_processor"
                 },
-                "weight": 1
+                "weight": 5
             },
             {
                 "element": {
@@ -51,7 +51,7 @@
                     "location": "swamp_crypt/wet/wet_stairs",
                     "processors": "minecraft:swamp_crypt_wet_processor"
                 },
-                "weight": 1
+                "weight": 4
             },
             {
                 "element": {
@@ -59,7 +59,7 @@
                     "location": "swamp_crypt/wet/wet_chest_room",
                     "processors": "minecraft:swamp_crypt_wet_processor"
                 },
-                "weight": 1
+                "weight": 5
             },
             {
                 "element": {
@@ -67,7 +67,7 @@
                     "location": "swamp_crypt/wet/wet_bridge",
                     "processors": "minecraft:swamp_crypt_wet_processor"
                 },
-                "weight": 1
+                "weight": 2
             }
         ]
     }

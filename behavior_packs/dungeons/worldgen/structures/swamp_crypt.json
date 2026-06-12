@@ -7,6 +7,7 @@
         "step": "underground_structures",
         "terrain_adaptation": "bury",
         "max_depth": 9,
+        "liquid_settings": "ignore_waterlogging",
         "start_pool": "minecraft:swamp_crypt_entries",
         "heightmap_projection": "world_surface",
         "start_height": {

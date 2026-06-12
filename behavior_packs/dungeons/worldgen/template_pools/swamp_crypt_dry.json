@@ -11,7 +11,7 @@
                     "location": "swamp_crypt/dry/dry_hallway",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 1
+                "weight": 6
             },
             {
                 "element": {
@@ -19,7 +19,7 @@
                     "location": "swamp_crypt/dry/dry_hallway2",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 1
+                "weight": 6
             },
             {
                 "element": {
@@ -27,7 +27,7 @@
                     "location": "swamp_crypt/dry/dry_hallway2_left",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 1
+                "weight": 6
             },
             {
                 "element": {
@@ -35,7 +35,7 @@
                     "location": "swamp_crypt/dry/dry_hallway2_right",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 1
+                "weight": 6
             },
             {
                 "element": {
@@ -43,7 +43,7 @@
                     "location": "swamp_crypt/dry/dry_tomb",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 1
+                "weight": 5
             },
             {
                 "element": {
@@ -51,7 +51,7 @@
                     "location": "swamp_crypt/dry/dry_wet_stairs",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 1
+                "weight": 4
             },
             {
                 "element": {
@@ -59,7 +59,7 @@
                     "location": "swamp_crypt/dry/dry_stairs",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 1
+                "weight": 4
             },
             {
                 "element": {
@@ -67,7 +67,7 @@
                     "location": "swamp_crypt/dry/dry_chest_room",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 1
+                "weight": 5
             },
             {
                 "element": {
@@ -75,7 +75,7 @@
                     "location": "swamp_crypt/dry/dry_bridge",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 1
+                "weight": 3
             }
         ]
     }
