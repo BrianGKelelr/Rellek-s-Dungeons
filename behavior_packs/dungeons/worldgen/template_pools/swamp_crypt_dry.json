@@ -59,7 +59,7 @@
                     "location": "swamp_crypt/dry/dry_stairs",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 4
+                "weight": 3
             },
             {
                 "element": {
@@ -75,7 +75,7 @@
                     "location": "swamp_crypt/dry/dry_bridge",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 3
+                "weight": 4
             },
             {
                 "element": {
@@ -83,7 +83,7 @@
                     "location": "swamp_crypt/dry/dry_chest_room2",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 5
+                "weight": 3
             },
             {
                 "element": {
@@ -92,6 +92,22 @@
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
                 "weight": 5
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/dry/dry_tomb2",
+                    "processors": "minecraft:swamp_crypt_dry_processor"
+                },
+                "weight": 4
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "swamp_crypt/dry/dry_slime",
+                    "processors": "minecraft:swamp_crypt_dry_processor"
+                },
+                "weight": 4
             }
         ]
     }
