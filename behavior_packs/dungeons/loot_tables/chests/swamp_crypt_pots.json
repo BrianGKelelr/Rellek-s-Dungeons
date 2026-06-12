@@ -6,7 +6,7 @@
         {
           "type": "item",
           "name": "minecraft:arrow",
-          "weight": 100,
+          "weight": 20,
           "functions": [
             {
               "function": "set_count",
@@ -21,7 +21,7 @@
         {
           "type": "item",
           "name": "minecraft:lapis_lazuli",
-          "weight": 125,
+          "weight": 25,
           "functions": [
             {
               "function": "set_count",
@@ -32,7 +32,7 @@
         {
           "type": "item",
           "name": "minecraft:iron_ingot",
-          "weight": 100,
+          "weight": 20,
           "functions": [
             {
               "function": "set_count",
@@ -43,7 +43,7 @@
         {
           "type": "item",
           "name": "minecraft:diamond",
-          "weight": 5,
+          "weight": 1,
           "functions": [
             {
               "function": "set_count",
@@ -54,7 +54,7 @@
         {
           "type": "item",
           "name": "minecraft:skeleton_skull",
-          "weight": 5,
+          "weight": 1,
           "functions": [
             {
               "function": "set_count",
@@ -65,7 +65,7 @@
         {
           "type": "item",
           "name": "minecraft:potion",
-          "weight": 10,
+          "weight": 7,
           "functions": [
             {
               "function": "set_count",
@@ -80,7 +80,7 @@
         {
           "type": "item",
           "name": "minecraft:zombie_head",
-          "weight": 5,
+          "weight": 1,
           "functions": [
             {
               "function": "set_count",
@@ -91,7 +91,7 @@
         {
           "type": "item",
           "name": "minecraft:torch",
-          "weight": 20,
+          "weight": 4,
           "functions": [
             {
               "function": "set_count",
@@ -102,18 +102,18 @@
         {
           "type": "item",
           "name": "minecraft:glow_berries",
-          "weight": 20,
+          "weight": 4,
           "functions": [
             {
               "function": "set_count",
-              "count": {"min": 1, "max": 20}
+              "count": {"min": 5, "max": 20}
             }
           ]
         },
         {
           "type": "item",
           "name": "minecraft:lapis_block",
-          "weight": 5,
+          "weight": 2,
           "functions": [
             {
               "function": "set_count",
@@ -124,7 +124,7 @@
         {
           "type": "item",
           "name": "minecraft:iron_block",
-          "weight": 5,
+          "weight": 2,
           "functions": [
             {
               "function": "set_count",

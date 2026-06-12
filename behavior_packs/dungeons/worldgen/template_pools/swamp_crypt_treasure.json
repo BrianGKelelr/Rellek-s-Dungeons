@@ -9,7 +9,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "swamp_crypt/treasure/treasure_room",
-                    "processors": "minecraft:swamp_crypt_dry_processor"
+                    "processors": "minecraft:swamp_crypt_treasure_processor"
                 },
                 "weight": 1
             }
