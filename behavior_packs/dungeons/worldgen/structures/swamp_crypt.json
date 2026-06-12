@@ -25,6 +25,10 @@
                 {
                     "test": "has_biome_tag",
                     "value": "swamp"
+                },
+                {
+                    "test": "has_biome_tag",
+                    "value": "mangrove_swamp"
                 }
             ]
         }
