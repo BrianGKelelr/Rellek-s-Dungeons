@@ -18,7 +18,7 @@ const TRIGGER_RADIUS = 8;
 
 const ZOMBIE_COUNT = 5;
 
-const COOLDOWN_TICKS = 36000;
+const COOLDOWN_TICKS = 36000; //36000 = 30 minutes
 
 const CHECK_INTERVAL = 60;
 
@@ -153,7 +153,7 @@ function spawnWave(loc: DimensionLocation): void {
 
 function giveReward(loc: DimensionLocation): void {
     try{
-        loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 1} ${loc.z} loot "chests/swamp_crypt_pots"`);
+        loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 1.1} ${loc.z} loot "chests/swamp_crypt_pots"`);
     } catch (e) {
 
         console.warn(
@@ -166,8 +166,21 @@ function giveReward(loc: DimensionLocation): void {
 ============================================================ */
 
 function tickSpawner(loc: DimensionLocation): void {
-
     const now = system.currentTick;
+
+    // Resync block visual state with the stored active flag on every tick.
+    // This corrects any mismatch caused by the block being unloaded mid-wave.
+    const block = loc.dimension.getBlock(loc);
+    if (block) {
+        const litState = block.permutation.getState("relleks_dungeons:is_lit");
+        const shouldBeLit = isActive(loc);
+        if (litState !== shouldBeLit) {
+            block.setPermutation(
+                block.permutation.withState("relleks_dungeons:is_lit", shouldBeLit)
+            );
+        }
+    }
+
     const cooldown = getCooldown(loc);
 
     if (cooldown > now)
@@ -233,10 +246,13 @@ system.runInterval(() => {
         for (const loc of activeSpawners.values()) {
             try {
                 tickSpawner(loc);
-            } catch (e) {
+            } catch {
+                // The chunk is likely unloaded — we can't access the block to call
+                // setActive(), but we CAN still write dynamic properties since those
+                // are world-level and don't require the chunk to be loaded.
+                // Reset state directly so the spawner recovers when the chunk reloads.
                 const now = system.currentTick;
-                setActive(loc, false);
-
+                world.setDynamicProperty(PROP_ACTIVE + posKey(loc), false);
                 setCooldown(loc, now + COOLDOWN_TICKS);
             }
         }

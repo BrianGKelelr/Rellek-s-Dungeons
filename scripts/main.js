@@ -6,7 +6,7 @@ import {
 var SPAWNER_BLOCK_ID = "relleks_dungeons:drowned_spawner";
 var TRIGGER_RADIUS = 8;
 var ZOMBIE_COUNT = 5;
-var COOLDOWN_TICKS = 36e3;
+var COOLDOWN_TICKS = 600;
 var CHECK_INTERVAL = 60;
 var DISCOVERY_INTERVAL = 200;
 var DISCOVERY_RADIUS = 16;
@@ -89,6 +89,16 @@ function giveReward(loc) {
 }
 function tickSpawner(loc) {
   const now = system.currentTick;
+  const block = loc.dimension.getBlock(loc);
+  if (block) {
+    const litState = block.permutation.getState("relleks_dungeons:is_lit");
+    const shouldBeLit = isActive(loc);
+    if (litState !== shouldBeLit) {
+      block.setPermutation(
+        block.permutation.withState("relleks_dungeons:is_lit", shouldBeLit)
+      );
+    }
+  }
   const cooldown = getCooldown(loc);
   if (cooldown > now)
     return;
@@ -136,9 +146,9 @@ system.runInterval(
     for (const loc of activeSpawners.values()) {
       try {
         tickSpawner(loc);
-      } catch (e) {
+      } catch {
         const now = system.currentTick;
-        setActive(loc, false);
+        world.setDynamicProperty(PROP_ACTIVE + posKey(loc), false);
         setCooldown(loc, now + COOLDOWN_TICKS);
       }
     }
