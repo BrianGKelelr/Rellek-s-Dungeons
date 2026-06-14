@@ -42,20 +42,13 @@ const PROP_ACTIVE =
    ACTIVE SPAWNERS
 ============================================================ */
 
-const activeSpawners =
-    new Map<string, DimensionLocation>();
+const activeSpawners = new Map<string, DimensionLocation>();
 
-function posKey(
-    loc: DimensionLocation
-): string {
-
+function posKey(loc: DimensionLocation): string {
     return `${loc.dimension.id}_${loc.x}_${loc.y}_${loc.z}`;
 }
 
-function registerSpawner(
-    loc: DimensionLocation
-): void {
-
+function registerSpawner(loc: DimensionLocation): void {
     const key = posKey(loc);
 
     if (activeSpawners.has(key))
@@ -68,83 +61,39 @@ function registerSpawner(
    STATE
 ============================================================ */
 
-function getCooldown(
-    loc: DimensionLocation
-): number {
+function getCooldown(loc: DimensionLocation): number {
+    const value = world.getDynamicProperty(PROP_COOLDOWN + posKey(loc));
 
-    const value =
-        world.getDynamicProperty(
-            PROP_COOLDOWN + posKey(loc)
-        );
-
-    return typeof value === "number"
-        ? value
-        : 0;
+    return typeof value === "number" ? value : 0;
 }
 
-function setCooldown(
-    loc: DimensionLocation,
-    value: number
-): void {
-
-    world.setDynamicProperty(
-        PROP_COOLDOWN + posKey(loc),
-        value
-    );
+function setCooldown(loc: DimensionLocation, value: number): void {
+    world.setDynamicProperty(PROP_COOLDOWN + posKey(loc), value);
 }
 
-function isActive(
-    loc: DimensionLocation
-): boolean {
-
-    const value =
-        world.getDynamicProperty(
-            PROP_ACTIVE + posKey(loc)
-        );
+function isActive(loc: DimensionLocation): boolean {
+    const value = world.getDynamicProperty(PROP_ACTIVE + posKey(loc));
 
     return value === true;
 }
 
-function setActive(
-    loc: DimensionLocation,
-    value: boolean
-): void {
-
-    world.setDynamicProperty(
-        PROP_ACTIVE + posKey(loc),
-        value
-    );
+function setActive(loc: DimensionLocation, value: boolean): void {
+    world.setDynamicProperty(PROP_ACTIVE + posKey(loc), value);
 }
 
 /* ============================================================
    PLAYER CHECK
 ============================================================ */
 
-function playerNearby(
-    loc: DimensionLocation
-): boolean {
+function playerNearby(loc: DimensionLocation): boolean {
+    const radiusSq = TRIGGER_RADIUS * TRIGGER_RADIUS;
 
-    const radiusSq =
-        TRIGGER_RADIUS * TRIGGER_RADIUS;
+    for (const player of loc.dimension.getPlayers()) {
+        const dx = player.location.x - loc.x;
+        const dy = player.location.y - loc.y;
+        const dz = player.location.z - loc.z;
 
-    for (
-        const player
-        of loc.dimension.getPlayers()
-    ) {
-
-        const dx =
-            player.location.x - loc.x;
-
-        const dy =
-            player.location.y - loc.y;
-
-        const dz =
-            player.location.z - loc.z;
-
-        const distSq =
-            dx * dx +
-            dy * dy +
-            dz * dz;
+        const distSq = dx * dx + dy * dy + dz * dz;
 
         if (distSq <= radiusSq)
             return true;
@@ -157,10 +106,7 @@ function playerNearby(
    ENEMY TAG
 ============================================================ */
 
-function getSpawnerTag(
-    loc: DimensionLocation
-): string {
-
+function getSpawnerTag(loc: DimensionLocation): string {
     return `crypt_${posKey(loc)}`;
 }
 
@@ -168,49 +114,28 @@ function getSpawnerTag(
    SPAWN WAVE
 ============================================================ */
 
-function spawnWave(
-    loc: DimensionLocation
-): void {
-
-    const tag =
-        getSpawnerTag(loc);
+function spawnWave(loc: DimensionLocation): void {
+    const tag = getSpawnerTag(loc);
 
     let spawned = 0;
 
-    for (
-        let i = 0;
-        i < ZOMBIE_COUNT;
-        i++
-    ) {
-
+    for (let i = 0; i < ZOMBIE_COUNT; i++) {
         try {
-
-            const drowned =
-                loc.dimension.spawnEntity(
-                    "minecraft:drowned",
+            const drowned = loc.dimension.spawnEntity("minecraft:drowned",
                     {
-                        x:
-                            loc.x +
-                            (Math.random() * 4 - 2),
-
-                        y:
-                            loc.y + 1,
-
-                        z:
-                            loc.z +
-                            (Math.random() * 4 - 2),
+                        x: loc.x +(Math.random() * 4 - 2),
+                        y: loc.y + 1,
+                        z: loc.z + (Math.random() * 4 - 2),
                     }
                 );
 
             drowned.addTag(tag);
-
             spawned++;
 
         } catch {}
     }
 
     if (spawned > 0) {
-
         setActive(loc, true);
     }
 }
@@ -219,80 +144,38 @@ function spawnWave(
    REWARD
 ============================================================ */
 
-function giveReward(
-    loc: DimensionLocation
-): void {
+function giveReward(loc: DimensionLocation): void {
+    try{
+        loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 1} ${loc.z} loot "chests/swamp_crypt_pots"`);
+    } catch (e) {
 
-    loc.dimension.spawnItem(
-        new ItemStack(
-            "minecraft:emerald",
-            3
-        ),
-        {
-            x: loc.x + 0.5,
-            y: loc.y + 1,
-            z: loc.z + 0.5,
-        }
-    );
-
-    loc.dimension.spawnItem(
-        new ItemStack(
-            "minecraft:golden_apple",
-            1
-        ),
-        {
-            x: loc.x + 0.5,
-            y: loc.y + 1,
-            z: loc.z + 0.5,
-        }
-    );
+        console.warn(
+            `Reward command failed: ${e}`
+        );}
 }
 
 /* ============================================================
    SPAWNER TICK
 ============================================================ */
 
-function tickSpawner(
-    loc: DimensionLocation
-): void {
+function tickSpawner(loc: DimensionLocation): void {
 
-    const now =
-        system.currentTick;
-
-    const cooldown =
-        getCooldown(loc);
+    const now = system.currentTick;
+    const cooldown = getCooldown(loc);
 
     if (cooldown > now)
         return;
 
-    const tag =
-        getSpawnerTag(loc);
+    const tag = getSpawnerTag(loc);
 
     if (isActive(loc)) {
+        const remaining = loc.dimension.getEntities({ tags: [tag]});
 
-        const remaining =
-            loc.dimension.getEntities({
-                tags: [tag]
-            });
-
-        if (
-            remaining.length === 0
-        ) {
-
+        if (remaining.length === 0) {
             giveReward(loc);
-
-            setActive(
-                loc,
-                false
-            );
-
-            setCooldown(
-                loc,
-                now +
-                COOLDOWN_TICKS
-            );
+            setActive(loc, false);
+            setCooldown(loc, now + COOLDOWN_TICKS);
         }
-
         return;
     }
 
@@ -307,83 +190,22 @@ function tickSpawner(
 
 function discoverSpawners() {
 
-    for (
-        const player
-        of world.getAllPlayers()
-    ) {
+    for (const player of world.getAllPlayers()) {
 
-        const dim =
-            player.dimension;
+        const dim = player.dimension;
+        const px = Math.floor(player.location.x);
+        const py = Math.floor(player.location.y);
+        const pz = Math.floor(player.location.z);
 
-        const px =
-            Math.floor(
-                player.location.x
-            );
-
-        const py =
-            Math.floor(
-                player.location.y
-            );
-
-        const pz =
-            Math.floor(
-                player.location.z
-            );
-
-        for (
-            let x =
-                px -
-                DISCOVERY_RADIUS;
-            x <=
-                px +
-                DISCOVERY_RADIUS;
-            x++
-        ) {
-
-            for (
-                let z =
-                    pz -
-                    DISCOVERY_RADIUS;
-                z <=
-                    pz +
-                    DISCOVERY_RADIUS;
-                z++
-            ) {
-
-                for (
-                    let y =
-                        py -
-                        DISCOVERY_HEIGHT;
-                    y <=
-                        py +
-                        DISCOVERY_HEIGHT;
-                    y++
-                ) {
-
+        for (let x = px - DISCOVERY_RADIUS; x <= px + DISCOVERY_RADIUS; x++) {
+            for (let z = pz - DISCOVERY_RADIUS; z <= pz + DISCOVERY_RADIUS; z++) {
+                for (let y = py - DISCOVERY_HEIGHT; y <= py + DISCOVERY_HEIGHT; y++) {
                     try {
+                        const block = dim.getBlock({x, y, z,});
 
-                        const block =
-                            dim.getBlock({
-                                x,
-                                y,
-                                z,
-                            });
-
-                        if (
-                            block?.typeId ===
-                            SPAWNER_BLOCK_ID
-                        ) {
-
-                            registerSpawner({
-                                dimension:
-                                    dim,
-
-                                x,
-                                y,
-                                z,
-                            });
+                        if (block?.typeId === SPAWNER_BLOCK_ID) {
+                            registerSpawner({dimension:dim, x, y, z,});
                         }
-
                     } catch {}
                 }
             }
@@ -400,28 +222,17 @@ system.runInterval(
     DISCOVERY_INTERVAL
 );
 
-system.runInterval(
-    () => {
-
-        for (
-            const loc
-            of activeSpawners.values()
-        ) {
-
+system.runInterval(() => {
+        for (const loc of activeSpawners.values()) {
             try {
-
-                tickSpawner(
-                    loc
-                );
-
+                tickSpawner(loc);
             } catch (e) {
+                const now = system.currentTick;
+                setActive(loc, false);
 
-                console.warn(
-                    String(e)
-                );
+                setCooldown(loc, now + COOLDOWN_TICKS);
             }
         }
-
     },
     CHECK_INTERVAL
 );
@@ -433,14 +244,7 @@ system.runInterval(
 export default class
 DrownedspawnerActions
 implements BlockCustomComponent {
-
-    onStepOn(
-        _event:
-        BlockComponentStepOnEvent
-    ): void {
-
-        // no-op
-    }
+    onStepOn(_event:BlockComponentStepOnEvent): void {}
 }
 
 /* ============================================================

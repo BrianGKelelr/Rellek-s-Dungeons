@@ -1,6 +1,6 @@
 {
   "format_version": [1, 21, 0],
   "relleks_dungeons:drowned_spawner": {
-    "sound": "stone"
+    "sound": "mob_spawner"
   }
 }

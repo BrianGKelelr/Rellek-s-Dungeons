@@ -75,13 +75,7 @@ function spawnWave(loc) {
   }
 }
 function giveReward(loc) {
-  try {
-    loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 0.5} ${loc.z} loot "chests/swamp_crypt_pots"`);
-  } catch (e) {
-    console.warn(
-      `Reward command failed: ${e}`
-    );
-  }
+  loc.dimension.runCommandAsync('loot spawn ~ ~1 ~ loot "chests/swamp_crypt_pots"');
 }
 function tickSpawner(loc) {
   const now = system.currentTick;
@@ -133,9 +127,13 @@ system.runInterval(
       try {
         tickSpawner(loc);
       } catch (e) {
-        const now = system.currentTick;
-        setActive(loc, false);
-        setCooldown(loc, now + COOLDOWN_TICKS);
+        const tag = getSpawnerTag(loc);
+        const remaining = loc.dimension.getEntities({ tags: [tag] });
+        remaining.length = 0;
+        console.warn(
+          //TODO: remove this warning
+          String(e)
+        );
       }
     }
   },
