@@ -11,6 +11,45 @@
           {
             "input_predicate": {
               "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:blue_concrete",
+              "probability": 1
+            },
+            "output_state": {
+              "name": "relleks_dungeons:drowned_spawner",
+              "states": {
+                "relleks_dungeons:spawner_type": "drowned"
+              }
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:lime_concrete",
+              "probability": 1
+            },
+            "output_state": {
+              "name": "relleks_dungeons:drowned_spawner",
+              "states": {
+                "relleks_dungeons:spawner_type": "slime"
+              }
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:black_concrete",
+              "probability": 1
+            },
+            "output_state": {
+              "name": "relleks_dungeons:drowned_spawner",
+              "states": {
+                "relleks_dungeons:spawner_type": "bogged"
+              }
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
               "block": "minecraft:tuff_bricks",
               "probability": 0.25
             },
