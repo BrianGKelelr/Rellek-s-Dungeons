@@ -111,7 +111,7 @@
             "input_predicate": {
               "predicate_type": "minecraft:random_block_match",
               "block": "minecraft:mud",
-              "probability": 0.2
+              "probability": 0.1
             },
             "output_state": {
               "name": "minecraft:muddy_mangrove_roots"

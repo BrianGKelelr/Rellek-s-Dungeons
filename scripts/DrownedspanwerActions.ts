@@ -14,11 +14,11 @@ import {
 const SPAWNER_BLOCK_ID =
     "relleks_dungeons:drowned_spawner";
 
-const TRIGGER_RADIUS = 8;
+const TRIGGER_RADIUS = 14;
 
 const ZOMBIE_COUNT = 8;
 const SKELETON_COUNT = 5;
-const SLIME_COUNT = 5;
+const SLIME_COUNT = 3;
 const SILVERFISH_COUNT = 15;
 const SPIDER_COUNT = 8;
 const CAVE_SPIDER_COUNT = 5;
@@ -27,11 +27,11 @@ const COOLDOWN_TICKS = 36000; //36000 = 30 minutes
 
 const CHECK_INTERVAL = 60;
 
-const DISCOVERY_INTERVAL = 200;
+const DISCOVERY_INTERVAL = 100;
 
-const DISCOVERY_RADIUS = 16;
+const DISCOVERY_RADIUS = 25;
 
-const DISCOVERY_HEIGHT = 8;
+const DISCOVERY_HEIGHT = 5;
 
 /* ============================================================
    DYNAMIC PROPERTY KEYS
@@ -136,9 +136,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:drowned",
                         {
-                            x: loc.x +(Math.random() * 4 - 2),
+                            x: loc.x +(Math.random() * 4 - 3),
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 2),
+                            z: loc.z + (Math.random() * 4 - 3),
                         }
                     );
 
@@ -152,9 +152,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:bogged",
                         {
-                            x: loc.x +(Math.random() * 4 - 2),
+                            x: loc.x +(Math.random() * 4 - 3),
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 2),
+                            z: loc.z + (Math.random() * 4 - 3),
                         }
                     );
 
@@ -168,9 +168,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:zombie",
                         {
-                            x: loc.x +(Math.random() * 4 - 2),
+                            x: loc.x +(Math.random() * 4 - 3),
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 2),
+                            z: loc.z + (Math.random() * 4 - 3),
                         }
                     );
 
@@ -184,9 +184,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:skeleton",
                         {
-                            x: loc.x +(Math.random() * 4 - 2),
+                            x: loc.x +(Math.random() * 4 - 3),
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 2),
+                            z: loc.z + (Math.random() * 4 - 3),
                         }
                     );
 
@@ -200,9 +200,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:husk",
                         {
-                            x: loc.x +(Math.random() * 4 - 2),
+                            x: loc.x +(Math.random() * 4 - 3),
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 2),
+                            z: loc.z + (Math.random() * 4 - 3),
                         }
                     );
 
@@ -216,9 +216,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:parched",
                         {
-                            x: loc.x +(Math.random() * 4 - 2),
+                            x: loc.x +(Math.random() * 4 - 3),
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 2),
+                            z: loc.z + (Math.random() * 4 - 3),
                         }
                     );
 
@@ -232,9 +232,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:spider",
                         {
-                            x: loc.x +(Math.random() * 4 - 2),
+                            x: loc.x +(Math.random() * 4 - 3),
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 2),
+                            z: loc.z + (Math.random() * 4 - 3),
                         }
                     );
 
@@ -248,9 +248,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:cave_spider",
                         {
-                            x: loc.x +(Math.random() * 4 - 2),
+                            x: loc.x +(Math.random() * 4 - 3),
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 2),
+                            z: loc.z + (Math.random() * 4 - 3),
                         }
                     );
 
@@ -264,9 +264,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:slime",
                         {
-                            x: loc.x +(Math.random() * 4 - 2),
+                            x: loc.x +(Math.random() * 4 - 3),
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 2),
+                            z: loc.z + (Math.random() * 4 - 3),
                         }
                     );
 
@@ -280,9 +280,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:silverfish",
                         {
-                            x: loc.x +(Math.random() * 4 - 2),
+                            x: loc.x +(Math.random() * 4 - 3),
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 2),
+                            z: loc.z + (Math.random() * 4 - 3),
                         }
                     );
 
@@ -296,9 +296,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:skeleton",
                         {
-                            x: loc.x +(Math.random() * 4 - 2),
+                            x: loc.x +(Math.random() * 4 - 3),
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 2),
+                            z: loc.z + (Math.random() * 4 - 3),
                         }
                     );
 
@@ -321,7 +321,16 @@ function spawnWave(loc: DimensionLocation): void {
 
 function giveReward(loc: DimensionLocation): void {
     try{
-        loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 1.3} ${loc.z} loot "chests/swamp_crypt_pots"`);
+        for (const player of loc.dimension.getPlayers()) {
+            const dx = player.location.x - loc.x;
+            const dy = player.location.y - loc.y;
+            const dz = player.location.z - loc.z;
+            const distSq = dx * dx + dy * dy + dz * dz;
+
+            if (distSq <= 400){
+                loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 1.3} ${loc.z} loot "spawners/swamp_crypt_spawners"`);
+            }
+        }
     } catch (e) {
         console.warn(`Reward command failed: ${e}`);}
 }
