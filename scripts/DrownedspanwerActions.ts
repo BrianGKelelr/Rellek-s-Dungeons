@@ -79,6 +79,12 @@ function isActive(loc: DimensionLocation): boolean {
 
 function setActive(loc: DimensionLocation, value: boolean): void {
     world.setDynamicProperty(PROP_ACTIVE + posKey(loc), value);
+
+    // Retrieve the Block object from the dimension, then update its state
+    const block = loc.dimension.getBlock(loc);
+    if (block) {
+        block.setPermutation(block.permutation.withState("relleks_dungeons:is_lit", value));
+    }
 }
 
 /* ============================================================
@@ -121,6 +127,7 @@ function spawnWave(loc: DimensionLocation): void {
 
     for (let i = 0; i < ZOMBIE_COUNT; i++) {
         try {
+            
             const drowned = loc.dimension.spawnEntity("minecraft:drowned",
                     {
                         x: loc.x +(Math.random() * 4 - 2),

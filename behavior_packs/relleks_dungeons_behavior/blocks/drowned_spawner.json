@@ -3,6 +3,9 @@
   "minecraft:block": {
     "description": {
       "identifier": "relleks_dungeons:drowned_spawner",
+      "states": {
+            "relleks_dungeons:is_lit": [false, true]
+        },
       "menu_category": {
         "category": "construction"
       }
@@ -12,7 +15,7 @@
       "minecraft:destructible_by_explosion": {
         "explosion_resistance": 1200
       },
-      "minecraft:light_emission": 4,
+      "minecraft:light_emission": 0,
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 10
       },
@@ -25,6 +28,14 @@
         }
       },
       "relleks_dungeons:drownedspawner_actions": {}
-    }
+    },
+    "permutations": [
+        {
+            "condition": "query.block_state('relleks_dungeons:is_lit') == true",
+            "components": {
+                "minecraft:light_emission": 8
+            }
+        }
+    ]
   }
 }

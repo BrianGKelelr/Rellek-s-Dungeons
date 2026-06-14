@@ -36,6 +36,10 @@ function isActive(loc) {
 }
 function setActive(loc, value) {
   world.setDynamicProperty(PROP_ACTIVE + posKey(loc), value);
+  const block = loc.dimension.getBlock(loc);
+  if (block) {
+    block.setPermutation(block.permutation.withState("relleks_dungeons:is_lit", value));
+  }
 }
 function playerNearby(loc) {
   const radiusSq = TRIGGER_RADIUS * TRIGGER_RADIUS;
@@ -76,7 +80,7 @@ function spawnWave(loc) {
 }
 function giveReward(loc) {
   try {
-    loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 0.5} ${loc.z} loot "chests/swamp_crypt_pots"`);
+    loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 1} ${loc.z} loot "chests/swamp_crypt_pots"`);
   } catch (e) {
     console.warn(
       `Reward command failed: ${e}`
