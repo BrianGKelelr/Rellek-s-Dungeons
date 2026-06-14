@@ -6,7 +6,7 @@ import {
 var SPAWNER_BLOCK_ID = "relleks_dungeons:drowned_spawner";
 var TRIGGER_RADIUS = 8;
 var ZOMBIE_COUNT = 5;
-var COOLDOWN_TICKS = 600;
+var COOLDOWN_TICKS = 36e3;
 var CHECK_INTERVAL = 60;
 var DISCOVERY_INTERVAL = 200;
 var DISCOVERY_RADIUS = 16;
@@ -80,7 +80,7 @@ function spawnWave(loc) {
 }
 function giveReward(loc) {
   try {
-    loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 1} ${loc.z} loot "chests/swamp_crypt_pots"`);
+    loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 1.1} ${loc.z} loot "chests/swamp_crypt_pots"`);
   } catch (e) {
     console.warn(
       `Reward command failed: ${e}`

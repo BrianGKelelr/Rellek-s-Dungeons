@@ -11,6 +11,19 @@
           {
             "input_predicate": {
               "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:mob_spawner",
+              "probability": 1
+            },
+            "output_state": {
+              "name": "relleks_dungeons:drowned_spawner",
+              "states": {
+                "relleks_dungeons:spawner_type": "drowned"
+              }
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
               "block": "minecraft:tuff_bricks",
               "probability": 0.25
             },

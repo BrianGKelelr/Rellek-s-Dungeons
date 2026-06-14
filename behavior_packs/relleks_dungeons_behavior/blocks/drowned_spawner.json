@@ -4,7 +4,13 @@
     "description": {
       "identifier": "relleks_dungeons:drowned_spawner",
       "states": {
-            "relleks_dungeons:is_lit": [false, true]
+            "relleks_dungeons:is_lit": [false, true],
+            "relleks_dungeons:spawner_type": [
+              "drowned", "bogged","zombie", 
+              "skeleton", "husk", "parched",
+              "spider", "cave_spider", "slime",
+              "silverfish", "stray"
+              ]
         },
       "menu_category": {
         "category": "construction"
@@ -23,19 +29,140 @@
       "minecraft:geometry": "minecraft:geometry.full_block",
       "minecraft:material_instances": {
         "*": {
-          "texture": "relleks_dungeons_resources:drowned_spawner",
-          "render_method": "opaque"
+            "texture": "drowned_spawner",
+            "render_method": "opaque"
         }
-      },
+    },
       "relleks_dungeons:drownedspawner_actions": {}
     },
     "permutations": [
-        {
-            "condition": "query.block_state('relleks_dungeons:is_lit') == true",
-            "components": {
-                "minecraft:light_emission": 8
-            }
+      {
+        "condition": "query.block_state('relleks_dungeons:is_lit') == true",
+        "components": {
+          "minecraft:light_emission": 8
         }
+      },
+      {
+        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'drowned'",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "drowned_spawner",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'bogged'",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "bogged_spawner",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'zombie'",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "zombie_spawner",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'skeleton'",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "skeleton_spawner",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'husk'",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "husk_spawner",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'parched'",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "parched_spawner",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'spider'",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "spider_spawner",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'cave_spider'",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "cave_spider_spawner",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'slime'",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "slime_spawner",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'silverfish'",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "silverfish_spawner",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'stray'",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "stray_spawner",
+              "render_method": "opaque"
+            }
+          }
+        }
+      }
     ]
   }
 }

@@ -6,6 +6,36 @@
   "texture_data": {
     "drowned_spawner": {
       "textures": "textures/blocks/drowned_spawner"
+    },
+    "bogged_spawner": {
+      "textures": "textures/blocks/drowned_spawner"
+    },
+    "zombie_spawner": {
+      "textures": "textures/blocks/drowned_spawner"
+    },
+    "skeleton_spawner": {
+      "textures": "textures/blocks/drowned_spawner"
+    },
+    "husk_spawner": {
+      "textures": "textures/blocks/drowned_spawner"
+    },
+    "parched_spawner": {
+      "textures": "textures/blocks/drowned_spawner"
+    },
+    "spider_spawner": {
+      "textures": "textures/blocks/drowned_spawner"
+    },
+    "cave_spider_spawner": {
+      "textures": "textures/blocks/drowned_spawner"
+    },
+    "slime_spawner": {
+      "textures": "textures/blocks/drowned_spawner"
+    },
+    "silverfish_spawner": {
+      "textures": "textures/blocks/drowned_spawner"
+    },
+    "stray_spawner": {
+      "textures": "textures/blocks/drowned_spawner"
     }
   }
 }
