@@ -5,16 +5,34 @@ import {
     BlockComponentStepOnEvent,
     DimensionLocation,
     ItemStack,
+    Entity,
+    EntityComponentTypes,
+    EquipmentSlot,
+    Enchantment,
+    
 } from "@minecraft/server";
 
 /* ============================================================
    CONFIG
 ============================================================ */
 
+function enchantItem(item: ItemStack, enchantment: string, level: number): void {
+    const enchantable = item.getComponent("minecraft:enchantable");
+
+    if (!enchantable)
+        return;
+
+    try {
+        enchantable.addEnchantment(new Enchantment(enchantment, level));
+    } catch (e) {
+        console.error(`Error enchanting item: ${e}`);
+    }
+}
+
 const SPAWNER_BLOCK_ID =
     "relleks_dungeons:drowned_spawner";
 
-const TRIGGER_RADIUS = 14;
+const TRIGGER_RADIUS = 11;
 
 const ZOMBIE_COUNT = 8;
 const SKELETON_COUNT = 5;
@@ -27,7 +45,7 @@ const COOLDOWN_TICKS = 36000; //36000 = 30 minutes
 
 const CHECK_INTERVAL = 60;
 
-const DISCOVERY_INTERVAL = 100;
+const DISCOVERY_INTERVAL = 200;
 
 const DISCOVERY_RADIUS = 25;
 
@@ -125,52 +143,139 @@ function getSpawnerTag(loc: DimensionLocation): string {
    SPAWN WAVE
 ============================================================ */
 
+function equipDrowned(enemy: Entity, loc: DimensionLocation): void {
+    system.runTimeout(() => {
+        const { x, y, z } = enemy.location;
+        const roll = Math.random();
+        let material = "";
+
+        if (roll > 0.9)       material = "iron";
+        else if (roll > 0.75) material = "chainmail";
+        else if (roll > 0.4)  material = "copper";
+
+        if (material) {
+            loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.head 0 ${material}_helmet`);
+            loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.chest 0 ${material}_chestplate`);
+            loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.legs 0 ${material}_leggings`);
+            loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.feet 0 ${material}_boots`);
+        }
+
+        if (Math.random() > 0.7) {
+            loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.weapon.mainhand 0 trident`);
+        }
+    }, 1);
+}
+
+function equipBogged(enemy: Entity, loc: DimensionLocation): void {
+    system.runTimeout(() => {
+        const { x, y, z } = enemy.location;
+        const roll = Math.random();
+        let material = "";
+
+        if (roll > 0.9)       material = "iron";
+        else if (roll > 0.75) material = "chainmail";
+        else if (roll > 0.4)  material = "copper";
+
+        if (material) {
+            loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.head 0 ${material}_helmet`);
+            loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.chest 0 ${material}_chestplate`);
+            loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.legs 0 ${material}_leggings`);
+            loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.feet 0 ${material}_boots`);
+        }
+
+        if (Math.random() > 0.7) {
+            loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run enchant @n[type=bogged] power 2`);
+            loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run enchant @n[type=bogged] punch 1`);
+        }
+    }, 1);
+}
+
+
+function isValidSpawnPosition(loc: DimensionLocation, x: number, y: number, z: number): boolean {
+    try {
+        const feet = loc.getBlock({x, y, z});
+        const head = loc.getBlock({x, y: y + 1, z});
+
+        // Feet and head space must be clear
+        if (!feet || !head)
+            return false;
+        if (!feet.isAir && !feet.isLiquid)
+            return false;
+        if (!head.isAir && !head.isLiquid)
+            return false;
+
+        return true;
+    } catch (e) {
+        console.warn(`Spawner Error: ${e}`);
+        return false;
+    }
+}
+
 function spawnWave(loc: DimensionLocation): void {
     const tag = getSpawnerTag(loc);
 
+    const MAX_ATTEMPTS = 10; // attempts per mob before giving up
     let spawned = 0;
     const block = loc.dimension.getBlock(loc);
     
     if(block.permutation.getState("relleks_dungeons:spawner_type") === "drowned"){
         for (let i = 0; i < ZOMBIE_COUNT; i++) {
-            try {
-                const enemy = loc.dimension.spawnEntity("minecraft:drowned",
-                        {
-                            x: loc.x +(Math.random() * 4 - 3),
-                            y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 3),
-                        }
-                    );
+            let placed = false;
+            for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+                const x = Math.floor(loc.x + (Math.random() * 4 - 2));
+                const z = Math.floor(loc.z + (Math.random() * 4 - 2));
+                const y = loc.y + 1;
 
-                enemy.addTag(tag);
-                spawned++;
+                if (!isValidSpawnPosition(loc.dimension, x, y, z)) continue;
 
-            } catch {}
+                try {
+                    const enemy = loc.dimension.spawnEntity("minecraft:drowned",{ x, y, z });
+                    enemy.addTag(tag);
+                    spawned++;
+                    placed = true;
+                    equipDrowned(enemy, loc);
+                    break;
+                } catch (e) {
+                console.warn(`Spawner Error: ${e}`);} // Couldn't find a valid position for this mob — skip it
+            }
+            if (!placed) {} // Couldn't find a valid position for this mob after MAX_ATTEMPTS — skip it
+        }
+        if (spawned > 0) {
+            setActive(loc, true);
         }
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "bogged"){
         for (let i = 0; i < SKELETON_COUNT; i++) {
-            try {
-                const enemy = loc.dimension.spawnEntity("minecraft:bogged",
-                        {
-                            x: loc.x +(Math.random() * 4 - 3),
-                            y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 3),
-                        }
-                    );
+            let placed = false;
+            for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+                const x = Math.floor(loc.x + (Math.random() * 4 - 2));
+                const z = Math.floor(loc.z + (Math.random() * 4 - 2));
+                const y = loc.y + 1;
 
-                enemy.addTag(tag);
-                spawned++;
+                if (!isValidSpawnPosition(loc.dimension, x, y, z)) continue;
 
-            } catch {}
+                try {
+                    const enemy = loc.dimension.spawnEntity("minecraft:bogged",{ x, y, z });
+                    enemy.addTag(tag);
+                    spawned++;
+                    placed = true;
+                    equipBogged(enemy, loc);
+                    break;
+                } catch (e) {
+                console.warn(`Spawner Error: ${e}`);} // Couldn't find a valid position for this mob — skip it
+            }
+            if (!placed) {} // Couldn't find a valid position for this mob after MAX_ATTEMPTS — skip it
+        }
+        if (spawned > 0) {
+            setActive(loc, true);
         }
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "zombie"){
         for (let i = 0; i < ZOMBIE_COUNT; i++) {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:zombie",
                         {
-                            x: loc.x +(Math.random() * 4 - 3),
+                            x: loc.x,
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 3),
+                            z: loc.z,
                         }
                     );
 
@@ -184,9 +289,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:skeleton",
                         {
-                            x: loc.x +(Math.random() * 4 - 3),
+                            x: loc.x,
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 3),
+                            z: loc.z,
                         }
                     );
 
@@ -200,9 +305,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:husk",
                         {
-                            x: loc.x +(Math.random() * 4 - 3),
+                            x: loc.x,
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 3),
+                            z: loc.z,
                         }
                     );
 
@@ -216,9 +321,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:parched",
                         {
-                            x: loc.x +(Math.random() * 4 - 3),
+                            x: loc.x,
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 3),
+                            z: loc.z,
                         }
                     );
 
@@ -232,9 +337,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:spider",
                         {
-                            x: loc.x +(Math.random() * 4 - 3),
+                            x: loc.x,
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 3),
+                            z: loc.z,
                         }
                     );
 
@@ -248,9 +353,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:cave_spider",
                         {
-                            x: loc.x +(Math.random() * 4 - 3),
+                            x: loc.x,
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 3),
+                            z: loc.z,
                         }
                     );
 
@@ -264,9 +369,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:slime",
                         {
-                            x: loc.x +(Math.random() * 4 - 3),
+                            x: loc.x,
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 3),
+                            z: loc.z,
                         }
                     );
 
@@ -280,9 +385,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:silverfish",
                         {
-                            x: loc.x +(Math.random() * 4 - 3),
+                            x: loc.x,
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 3),
+                            z: loc.z,
                         }
                     );
 
@@ -296,9 +401,9 @@ function spawnWave(loc: DimensionLocation): void {
             try {
                 const enemy = loc.dimension.spawnEntity("minecraft:skeleton",
                         {
-                            x: loc.x +(Math.random() * 4 - 3),
+                            x: loc.x,
                             y: loc.y + 1,
-                            z: loc.z + (Math.random() * 4 - 3),
+                            z: loc.z,
                         }
                     );
 

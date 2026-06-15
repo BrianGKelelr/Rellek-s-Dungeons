@@ -59,7 +59,7 @@
                     "location": "swamp_crypt/dry/dry_stairs",
                     "processors": "minecraft:swamp_crypt_dry_processor"
                 },
-                "weight": 3
+                "weight": 2
             },
             {
                 "element": {

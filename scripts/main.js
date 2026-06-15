@@ -1,21 +1,22 @@
 // ct:./DrownedspanwerActions
 import {
   world,
-  system
+  system,
+  Enchantment
 } from "@minecraft/server";
 var SPAWNER_BLOCK_ID = "relleks_dungeons:drowned_spawner";
-var TRIGGER_RADIUS = 8;
+var TRIGGER_RADIUS = 11;
 var ZOMBIE_COUNT = 8;
 var SKELETON_COUNT = 5;
-var SLIME_COUNT = 5;
+var SLIME_COUNT = 3;
 var SILVERFISH_COUNT = 15;
 var SPIDER_COUNT = 8;
 var CAVE_SPIDER_COUNT = 5;
 var COOLDOWN_TICKS = 36e3;
 var CHECK_INTERVAL = 60;
 var DISCOVERY_INTERVAL = 200;
-var DISCOVERY_RADIUS = 16;
-var DISCOVERY_HEIGHT = 8;
+var DISCOVERY_RADIUS = 25;
+var DISCOVERY_HEIGHT = 5;
 var PROP_COOLDOWN = "relleks_dungeons:cooldown_";
 var PROP_ACTIVE = "relleks_dungeons:active_";
 var activeSpawners = /* @__PURE__ */ new Map();
@@ -61,41 +62,115 @@ function playerNearby(loc) {
 function getSpawnerTag(loc) {
   return `crypt_${posKey(loc)}`;
 }
+function equipDrowned(enemy, loc) {
+  system.runTimeout(() => {
+    const { x, y, z } = enemy.location;
+    const roll = Math.random();
+    let material = "";
+    if (roll > 0.9) material = "iron";
+    else if (roll > 0.75) material = "chainmail";
+    else if (roll > 0.4) material = "copper";
+    if (material) {
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.head 0 ${material}_helmet`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.chest 0 ${material}_chestplate`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.legs 0 ${material}_leggings`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.feet 0 ${material}_boots`);
+    }
+    if (Math.random() > 0.7) {
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.weapon.mainhand 0 trident`);
+    }
+  }, 1);
+}
+function equipBogged(enemy, loc) {
+  system.runTimeout(() => {
+    const { x, y, z } = enemy.location;
+    const roll = Math.random();
+    let material = "";
+    if (roll > 0.9) material = "iron";
+    else if (roll > 0.75) material = "chainmail";
+    else if (roll > 0.4) material = "copper";
+    if (material) {
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.head 0 ${material}_helmet`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.chest 0 ${material}_chestplate`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.legs 0 ${material}_leggings`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.feet 0 ${material}_boots`);
+    }
+    if (Math.random() > 0.7) {
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run enchant @n[type=bogged] power 2`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run enchant @n[type=bogged] punch 1`);
+    }
+  }, 1);
+}
+function isValidSpawnPosition(loc, x, y, z) {
+  try {
+    const feet = loc.getBlock({ x, y, z });
+    const head = loc.getBlock({ x, y: y + 1, z });
+    if (!feet || !head)
+      return false;
+    if (!feet.isAir && !feet.isLiquid)
+      return false;
+    if (!head.isAir && !head.isLiquid)
+      return false;
+    return true;
+  } catch (e) {
+    console.warn(`Spawner Error: ${e}`);
+    return false;
+  }
+}
 function spawnWave(loc) {
   const tag = getSpawnerTag(loc);
+  const MAX_ATTEMPTS = 10;
   let spawned = 0;
   const block = loc.dimension.getBlock(loc);
   if (block.permutation.getState("relleks_dungeons:spawner_type") === "drowned") {
     for (let i = 0; i < ZOMBIE_COUNT; i++) {
-      try {
-        const enemy = loc.dimension.spawnEntity(
-          "minecraft:drowned",
-          {
-            x: loc.x + (Math.random() * 4 - 2),
-            y: loc.y + 1,
-            z: loc.z + (Math.random() * 4 - 2)
-          }
-        );
-        enemy.addTag(tag);
-        spawned++;
-      } catch {
+      let placed = false;
+      for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+        const x = Math.floor(loc.x + (Math.random() * 4 - 2));
+        const z = Math.floor(loc.z + (Math.random() * 4 - 2));
+        const y = loc.y + 1;
+        if (!isValidSpawnPosition(loc.dimension, x, y, z)) continue;
+        try {
+          const enemy = loc.dimension.spawnEntity("minecraft:drowned", { x, y, z });
+          enemy.addTag(tag);
+          spawned++;
+          placed = true;
+          equipDrowned(enemy, loc);
+          break;
+        } catch (e) {
+          console.warn(`Spawner Error: ${e}`);
+        }
       }
+      if (!placed) {
+      }
+    }
+    if (spawned > 0) {
+      setActive(loc, true);
     }
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "bogged") {
     for (let i = 0; i < SKELETON_COUNT; i++) {
-      try {
-        const enemy = loc.dimension.spawnEntity(
-          "minecraft:bogged",
-          {
-            x: loc.x + (Math.random() * 4 - 2),
-            y: loc.y + 1,
-            z: loc.z + (Math.random() * 4 - 2)
-          }
-        );
-        enemy.addTag(tag);
-        spawned++;
-      } catch {
+      let placed = false;
+      for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+        const x = Math.floor(loc.x + (Math.random() * 4 - 2));
+        const z = Math.floor(loc.z + (Math.random() * 4 - 2));
+        const y = loc.y + 1;
+        if (!isValidSpawnPosition(loc.dimension, x, y, z)) continue;
+        try {
+          const enemy = loc.dimension.spawnEntity("minecraft:bogged", { x, y, z });
+          enemy.addTag(tag);
+          spawned++;
+          placed = true;
+          equipBogged(enemy, loc);
+          break;
+        } catch (e) {
+          console.warn(`Spawner Error: ${e}`);
+        }
       }
+      if (!placed) {
+      }
+    }
+    if (spawned > 0) {
+      setActive(loc, true);
     }
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "zombie") {
     for (let i = 0; i < ZOMBIE_COUNT; i++) {
@@ -103,9 +178,9 @@ function spawnWave(loc) {
         const enemy = loc.dimension.spawnEntity(
           "minecraft:zombie",
           {
-            x: loc.x + (Math.random() * 4 - 2),
+            x: loc.x,
             y: loc.y + 1,
-            z: loc.z + (Math.random() * 4 - 2)
+            z: loc.z
           }
         );
         enemy.addTag(tag);
@@ -119,9 +194,9 @@ function spawnWave(loc) {
         const enemy = loc.dimension.spawnEntity(
           "minecraft:skeleton",
           {
-            x: loc.x + (Math.random() * 4 - 2),
+            x: loc.x,
             y: loc.y + 1,
-            z: loc.z + (Math.random() * 4 - 2)
+            z: loc.z
           }
         );
         enemy.addTag(tag);
@@ -135,9 +210,9 @@ function spawnWave(loc) {
         const enemy = loc.dimension.spawnEntity(
           "minecraft:husk",
           {
-            x: loc.x + (Math.random() * 4 - 2),
+            x: loc.x,
             y: loc.y + 1,
-            z: loc.z + (Math.random() * 4 - 2)
+            z: loc.z
           }
         );
         enemy.addTag(tag);
@@ -151,9 +226,9 @@ function spawnWave(loc) {
         const enemy = loc.dimension.spawnEntity(
           "minecraft:parched",
           {
-            x: loc.x + (Math.random() * 4 - 2),
+            x: loc.x,
             y: loc.y + 1,
-            z: loc.z + (Math.random() * 4 - 2)
+            z: loc.z
           }
         );
         enemy.addTag(tag);
@@ -167,9 +242,9 @@ function spawnWave(loc) {
         const enemy = loc.dimension.spawnEntity(
           "minecraft:spider",
           {
-            x: loc.x + (Math.random() * 4 - 2),
+            x: loc.x,
             y: loc.y + 1,
-            z: loc.z + (Math.random() * 4 - 2)
+            z: loc.z
           }
         );
         enemy.addTag(tag);
@@ -183,9 +258,9 @@ function spawnWave(loc) {
         const enemy = loc.dimension.spawnEntity(
           "minecraft:cave_spider",
           {
-            x: loc.x + (Math.random() * 4 - 2),
+            x: loc.x,
             y: loc.y + 1,
-            z: loc.z + (Math.random() * 4 - 2)
+            z: loc.z
           }
         );
         enemy.addTag(tag);
@@ -199,9 +274,9 @@ function spawnWave(loc) {
         const enemy = loc.dimension.spawnEntity(
           "minecraft:slime",
           {
-            x: loc.x + (Math.random() * 4 - 2),
+            x: loc.x,
             y: loc.y + 1,
-            z: loc.z + (Math.random() * 4 - 2)
+            z: loc.z
           }
         );
         enemy.addTag(tag);
@@ -215,9 +290,9 @@ function spawnWave(loc) {
         const enemy = loc.dimension.spawnEntity(
           "minecraft:silverfish",
           {
-            x: loc.x + (Math.random() * 4 - 2),
+            x: loc.x,
             y: loc.y + 1,
-            z: loc.z + (Math.random() * 4 - 2)
+            z: loc.z
           }
         );
         enemy.addTag(tag);
@@ -231,9 +306,9 @@ function spawnWave(loc) {
         const enemy = loc.dimension.spawnEntity(
           "minecraft:skeleton",
           {
-            x: loc.x + (Math.random() * 4 - 2),
+            x: loc.x,
             y: loc.y + 1,
-            z: loc.z + (Math.random() * 4 - 2)
+            z: loc.z
           }
         );
         enemy.addTag(tag);
@@ -248,7 +323,15 @@ function spawnWave(loc) {
 }
 function giveReward(loc) {
   try {
-    loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 1.3} ${loc.z} loot "chests/swamp_crypt_pots"`);
+    for (const player of loc.dimension.getPlayers()) {
+      const dx = player.location.x - loc.x;
+      const dy = player.location.y - loc.y;
+      const dz = player.location.z - loc.z;
+      const distSq = dx * dx + dy * dy + dz * dz;
+      if (distSq <= 400) {
+        loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 1.3} ${loc.z} loot "spawners/swamp_crypt_spawners"`);
+      }
+    }
   } catch (e) {
     console.warn(`Reward command failed: ${e}`);
   }
