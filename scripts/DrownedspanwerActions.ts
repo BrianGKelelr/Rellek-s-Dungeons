@@ -163,7 +163,7 @@ function equipDrowned(enemy: Entity, loc: DimensionLocation): void {
         if (Math.random() > 0.7) {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.weapon.mainhand 0 trident`);
         }
-    }, 1);
+    }, 1); // 1 tick delay to allow entity to fully initialize before equipping
 }
 
 function equipBogged(enemy: Entity, loc: DimensionLocation): void {
@@ -187,7 +187,7 @@ function equipBogged(enemy: Entity, loc: DimensionLocation): void {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run enchant @n[type=bogged] power 2`);
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run enchant @n[type=bogged] punch 1`);
         }
-    }, 1);
+    }, 1); // 1 tick delay to allow entity to fully initialize before equipping
 }
 
 
