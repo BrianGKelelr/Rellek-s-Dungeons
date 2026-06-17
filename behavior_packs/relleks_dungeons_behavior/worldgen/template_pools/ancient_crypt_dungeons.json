@@ -1,0 +1,50 @@
+{
+    "format_version": "1.21.20",
+    "minecraft:template_pool": {
+        "description": {
+            "identifier": "minecraft:ancient_crypt_dungeons"
+        },
+        "elements": [
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/pit_room",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/tomb",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/tomb2",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/trap_hall",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/trap_hall2",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            }
+        ]
+    }
+}

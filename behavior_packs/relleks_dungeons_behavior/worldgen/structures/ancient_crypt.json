@@ -1,0 +1,56 @@
+{
+    "format_version": "1.21.20",
+    "minecraft:jigsaw": {
+        "description": {
+            "identifier": "minecraft:ancient_crypt"
+        },
+        "step": "underground_structures",
+        "terrain_adaptation": "encapsulate",
+        "max_depth": 9,
+        "liquid_settings": "ignore_waterlogging",
+        "start_pool": "minecraft:ancient_crypt_dungeons",
+        "start_height": {
+            "type": "uniform",
+            "min": {
+                "above_bottom": 60
+            },
+            "max": {
+                "above_bottom": 120
+            } 
+        },
+        "biome_filters": {
+            "any_of": [ 
+                { 
+                    "test": "has_biome_tag", 
+                    "value": "plains" 
+                },
+                {
+                    "test": "has_biome_tag",
+                    "value": "forest"
+                },
+                {
+                    "test": "has_biome_tag",
+                    "value": "flower_forest"
+                }
+            ],
+            "none_of": [
+                {
+                    "test": "has_biome_tag",
+                    "value": "extreme_hills"
+                },
+                {
+                    "test": "has_biome_tag",
+                    "value": "cold"
+                },
+                {
+                    "test": "has_biome_tag",
+                    "value": "mutated"
+                },
+                {
+                    "test": "has_biome_tag",
+                    "value": "warm"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "format_version": "1.21.20",
+    "minecraft:template_pool": {
+        "description": {
+            "identifier": "minecraft:ancient_crypt_caves"
+        },
+        "elements": [
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/cave/giant_spider",
+                    "processors": "minecraft:ancient_crypt_cave_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/cave/spider_pit",
+                    "processors": "minecraft:ancient_crypt_cave_processor"
+                },
+                "weight": 1
+            }
+        ]
+    }
+}
