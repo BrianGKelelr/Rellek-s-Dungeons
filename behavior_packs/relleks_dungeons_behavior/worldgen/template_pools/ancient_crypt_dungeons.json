@@ -40,7 +40,7 @@
             {
                 "element": {
                     "element_type": "minecraft:single_pool_element",
-                    "location": "ancient_crypt/dungeon/trap_hall2",
+                    "location": "ancient_crypt/dungeon/broken_room",
                     "processors": "minecraft:ancient_crypt_dungeon_processor"
                 },
                 "weight": 1
