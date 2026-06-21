@@ -200,6 +200,10 @@ function spawnWaveRecursive(loc, count, type, equip, iterations) {
   if (iterations > 35 || count <= 0) {
     return;
   }
+  const block = loc.dimension.getBlock(loc);
+  if (cleanupSpawner(loc) || !block) {
+    return;
+  }
   if (count > 0) {
     system.runTimeout(() => {
       const tag = getSpawnerTag(loc);
@@ -247,6 +251,9 @@ function giveReward(loc, players) {
   }, 20);
 }
 function tickSpawner(loc) {
+  if (cleanupSpawner(loc)) {
+    return;
+  }
   const now = system.currentTick;
   const block = loc.dimension.getBlock(loc);
   if (block) {
@@ -294,42 +301,43 @@ function discoverSpawners() {
     }
   }
 }
-function cleanupSpawners() {
-  for (const [key, loc] of activeSpawners) {
-    let block;
-    try {
-      block = loc.dimension.getBlock(loc);
-      console.warn(`Checked spawner at ${loc.dimension.id} ${loc.x} ${loc.y} ${loc.z}`);
-    } catch {
-      continue;
-    }
-    if (block === void 0) {
-      continue;
-    }
-    if (block.typeId !== SPAWNER_BLOCK_ID) {
-      activeSpawners.delete(key);
-      world.setDynamicProperty(PROP_COOLDOWN + key, void 0);
-      world.setDynamicProperty(PROP_ACTIVE + key, void 0);
-      console.warn(`removed spawner at ${loc.dimension.id} ${loc.x} ${loc.y} ${loc.z}`);
-      const tag = getSpawnerTag(loc);
-      for (const entity of loc.dimension.getEntities({ tags: [tag] })) {
-        console.warn(`Checked entity`);
-        try {
-          entity.remove();
-        } catch {
-        }
+function cleanupSpawner(loc) {
+  const block = loc.dimension.getBlock(loc);
+  const key = posKey(loc);
+  if (block.typeId !== SPAWNER_BLOCK_ID) {
+    activeSpawners.delete(key);
+    world.setDynamicProperty(PROP_COOLDOWN + key, void 0);
+    world.setDynamicProperty(PROP_ACTIVE + key, void 0);
+    const tag = getSpawnerTag(loc);
+    for (const entity of loc.dimension.getEntities({ tags: [tag] })) {
+      try {
+        entity.removeTag(tag);
+      } catch {
       }
     }
+    return true;
   }
+  return false;
 }
+world.beforeEvents.worldInitialize.subscribe((event) => {
+  event.blockComponentRegistry.registerCustomComponent("relleks_dungeons:spawner_cleanup", {
+    onBreak(event2) {
+      const block = event2.block;
+      const dimension = event2.dimension;
+      const loc = {
+        // the block location
+        dimension,
+        x: block.location.x,
+        y: block.location.y,
+        z: block.location.z
+      };
+      cleanupSpawner(loc);
+    }
+  });
+});
 system.runInterval(
   discoverSpawners,
   DISCOVERY_INTERVAL
-);
-system.runInterval(
-  cleanupSpawners,
-  CHECK_INTERVAL * 0.5
-  //20
 );
 system.runInterval(
   () => {
@@ -350,14 +358,9 @@ var DrownedspawnerActions = class {
   }
 };
 function initDrownedspawnerActions() {
-  system.beforeEvents.startup.subscribe(
-    (event) => {
-      event.blockComponentRegistry.registerCustomComponent(
-        "relleks_dungeons:drownedspawner_actions",
-        new DrownedspawnerActions()
-      );
-    }
-  );
+  system.beforeEvents.startup.subscribe((event) => {
+    event.blockComponentRegistry.registerCustomComponent("relleks_dungeons:drownedspawner_actions", new DrownedspawnerActions());
+  });
 }
 
 // ct:/main.js

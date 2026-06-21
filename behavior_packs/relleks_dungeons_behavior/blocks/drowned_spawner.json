@@ -4,14 +4,14 @@
     "description": {
       "identifier": "relleks_dungeons:drowned_spawner",
       "states": {
-            "relleks_dungeons:is_lit": [false, true],
-            "relleks_dungeons:spawner_type": [
-              "drowned", "bogged","zombie", 
-              "skeleton", "husk", "parched",
-              "spider", "cave_spider", "slime",
-              "silverfish", "stray"
-              ]
-        },
+        "relleks_dungeons:is_lit": [false, true],
+        "relleks_dungeons:spawner_type": [
+          "drowned", "bogged","zombie", 
+          "skeleton", "husk", "parched",
+          "spider", "cave_spider", "slime",
+          "silverfish", "stray"
+        ]
+      },
       "menu_category": {
         "category": "construction"
       }

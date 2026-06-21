@@ -6,8 +6,6 @@ import {
     DimensionLocation,
     ItemStack,
     Entity,
-    EntityComponentTypes,
-    EquipmentSlot,
     Enchantment,
     
 } from "@minecraft/server";
@@ -304,7 +302,7 @@ function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string,
     }
 
     const block = loc.dimension.getBlock(loc);
-    if (!block) {   
+    if (cleanupSpawner(loc) || !block) {   
         return; // Block is not loaded or no longer exists, so stop trying to spawn mobs
     }
     
@@ -369,6 +367,10 @@ function giveReward(loc: DimensionLocation, players: number): void {
 ============================================================ */
 
 function tickSpawner(loc: DimensionLocation): void {
+    if(cleanupSpawner(loc)){
+        return; // Spawner no longer exists, so stop processing
+    }
+
     const now = system.currentTick;
 
     // Resync block visual state with the stored active flag on every tick.
@@ -438,34 +440,26 @@ function discoverSpawners() {
    CLEANUP — remove spawners that no longer exist
 ============================================================ */
 
-function cleanupSpawners(): void {
-    for (const [key, loc] of activeSpawners) {
-        let block;
-        try {
-            block = loc.dimension.getBlock(loc);
-        } catch {
-            // Chunk likely unloaded — can't verify, so leave it alone
-            continue;
-        }
+// Returns true if the spawner was cleaned up, false if it still exists
+function cleanupSpawner(loc: DimensionLocation): boolean {
+    const block = loc.dimension.getBlock(loc);
+    const key = posKey(loc);
+    if (block.typeId !== SPAWNER_BLOCK_ID) {
+        // Block was broken/replaced — remove tracking and clean up state
+        activeSpawners.delete(key);
+        world.setDynamicProperty(PROP_COOLDOWN + key, undefined);
+        world.setDynamicProperty(PROP_ACTIVE + key, undefined);
 
-        if (block === undefined) {
-            // Chunk not loaded — leave it alone
-            continue;
+        // Also clear tags of any leftover mobs tagged to this spawner
+        const tag = getSpawnerTag(loc);
+        for (const entity of loc.dimension.getEntities({ tags: [tag] })) {
+            try { 
+                entity.removeTag(tag); 
+            } catch {}
         }
-
-        if (block.typeId !== SPAWNER_BLOCK_ID) {
-            // Block was broken/replaced — remove tracking and clean up state
-            activeSpawners.delete(key);
-            world.setDynamicProperty(PROP_COOLDOWN + key, undefined);
-            world.setDynamicProperty(PROP_ACTIVE + key, undefined);
-
-            // Also clear any leftover mobs tagged to this spawner
-            const tag = getSpawnerTag(loc);
-            for (const entity of loc.dimension.getEntities({ tags: [tag] })) {
-                try { entity.remove(); } catch {}
-            }
-        }
+        return true;
     }
+    return false;
 }
 
 /* ============================================================
@@ -475,11 +469,6 @@ function cleanupSpawners(): void {
 system.runInterval(
     discoverSpawners,
     DISCOVERY_INTERVAL
-);
-
-system.runInterval(
-    cleanupSpawners,
-    CHECK_INTERVAL * 20
 );
 
 system.runInterval(() => {
@@ -514,20 +503,8 @@ implements BlockCustomComponent {
    INIT
 ============================================================ */
 
-export function
-initDrownedspawnerActions() {
-
-    system.beforeEvents
-        .startup
-        .subscribe(
-            event => {
-
-                event
-                    .blockComponentRegistry
-                    .registerCustomComponent(
-                        "relleks_dungeons:drownedspawner_actions",
-                        new DrownedspawnerActions()
-                    );
-            }
-        );
+export function initDrownedspawnerActions() {
+    system.beforeEvents.startup.subscribe(event => {
+        event.blockComponentRegistry.registerCustomComponent("relleks_dungeons:drownedspawner_actions", new DrownedspawnerActions());
+    });
 }
