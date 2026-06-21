@@ -140,7 +140,7 @@ function getSpawnerTag(loc: DimensionLocation): string {
 }
 
 /* ============================================================
-   SPAWN WAVE
+   Equip WAVE
 ============================================================ */
 
 function equipDrowned(enemy: Entity, loc: DimensionLocation): void {
@@ -230,6 +230,18 @@ function equipSkeleton(enemy: Entity, loc: DimensionLocation): void {
     }, 1); // 1 tick delay to allow entity to fully initialize before equipping
 }
 
+function equipHusk(enemy: Entity, loc: DimensionLocation): void {}
+function equipParched(enemy: Entity, loc: DimensionLocation): void {}
+function equipSpider(enemy: Entity, loc: DimensionLocation): void {}
+function equipCaveSpider(enemy: Entity, loc: DimensionLocation): void {}
+function equipSlime(enemy: Entity, loc: DimensionLocation): void {}
+function equipSilverfish(enemy: Entity, loc: DimensionLocation): void {}
+function equipStray(enemy: Entity, loc: DimensionLocation): void {}
+
+/* ============================================================
+   Spawn WAVE
+============================================================ */
+
 
 function isValidSpawnPosition(loc: DimensionLocation, x: number, y: number, z: number): boolean {
     try {
@@ -253,236 +265,74 @@ function isValidSpawnPosition(loc: DimensionLocation, x: number, y: number, z: n
 
 function spawnWave(loc: DimensionLocation): void {
     const tag = getSpawnerTag(loc);
-
-    const MAX_ATTEMPTS = 10; // attempts per mob before giving up
-    let spawned = 0;
     const block = loc.dimension.getBlock(loc);
     
     if(block.permutation.getState("relleks_dungeons:spawner_type") === "drowned"){
-        for (let i = 0; i < ZOMBIE_COUNT; i++) {
-            let placed = false;
-            for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-                const x = Math.floor(loc.x + (Math.random() * 4 - 2));
-                const z = Math.floor(loc.z + (Math.random() * 4 - 2));
-                const y = loc.y + 1;
-
-                if (!isValidSpawnPosition(loc.dimension, x, y, z)) continue;
-
-                try {
-                    const enemy = loc.dimension.spawnEntity("minecraft:drowned",{ x, y, z });
-                    enemy.addTag(tag);
-                    spawned++;
-                    placed = true;
-                    equipDrowned(enemy, loc);
-                    break;
-                } catch (e) {
-                console.warn(`Spawner Error: ${e}`);} // Couldn't find a valid position for this mob — skip it
-            }
-            if (!placed) {} // Couldn't find a valid position for this mob after MAX_ATTEMPTS — skip it
-        }
-        if (spawned > 0) {
-            setActive(loc, true);
-        }
+        setActive(loc, true);
+        spawnWaveRecursive(loc, ZOMBIE_COUNT, "drowned", equipDrowned, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "bogged"){
-        for (let i = 0; i < SKELETON_COUNT; i++) {
-            let placed = false;
-            for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-                const x = Math.floor(loc.x + (Math.random() * 4 - 2));
-                const z = Math.floor(loc.z + (Math.random() * 4 - 2));
-                const y = loc.y + 1;
-
-                if (!isValidSpawnPosition(loc.dimension, x, y, z)) continue;
-
-                try {
-                    const enemy = loc.dimension.spawnEntity("minecraft:bogged",{ x, y, z });
-                    enemy.addTag(tag);
-                    spawned++;
-                    placed = true;
-                    equipBogged(enemy, loc);
-                    break;
-                } catch (e) {
-                console.warn(`Spawner Error: ${e}`);} // Couldn't find a valid position for this mob — skip it
-            }
-            if (!placed) {} // Couldn't find a valid position for this mob after MAX_ATTEMPTS — skip it
-        }
-        if (spawned > 0) {
-            setActive(loc, true);
-        }
+        setActive(loc, true);
+        spawnWaveRecursive(loc, SKELETON_COUNT, "bogged", equipBogged, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "zombie"){
-        for (let i = 0; i < ZOMBIE_COUNT; i++) {
-            let placed = false;
-            for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-                const x = Math.floor(loc.x + (Math.random() * 4 - 2));
-                const z = Math.floor(loc.z + (Math.random() * 4 - 2));
-                const y = loc.y + 1;
-
-                if (!isValidSpawnPosition(loc.dimension, x, y, z)) continue;
-
-                try {
-                    const enemy = loc.dimension.spawnEntity("minecraft:zombie",{ x, y, z });
-                    enemy.addTag(tag);
-                    spawned++;
-                    placed = true;
-                    equipZombie(enemy, loc);
-                    break;
-                } catch (e) {
-                console.warn(`Spawner Error: ${e}`);} // Couldn't find a valid position for this mob — skip it
-            }
-            if (!placed) {} // Couldn't find a valid position for this mob after MAX_ATTEMPTS — skip it
-        }
-        if (spawned > 0) {
-            setActive(loc, true);
-        }
+        setActive(loc, true);
+        spawnWaveRecursive(loc, ZOMBIE_COUNT, "zombie", equipZombie, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "skeleton"){
-        for (let i = 0; i < SKELETON_COUNT; i++) {
-            let placed = false;
-            for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-                const x = Math.floor(loc.x + (Math.random() * 4 - 2));
-                const z = Math.floor(loc.z + (Math.random() * 4 - 2));
-                const y = loc.y + 1;
-
-                if (!isValidSpawnPosition(loc.dimension, x, y, z)) continue;
-
-                try {
-                    const enemy = loc.dimension.spawnEntity("minecraft:skeleton",{ x, y, z });
-                    enemy.addTag(tag);
-                    spawned++;
-                    placed = true;
-                    equipSkeleton(enemy, loc);
-                    break;
-                } catch (e) {
-                console.warn(`Spawner Error: ${e}`);} // Couldn't find a valid position for this mob — skip it
-            }
-            if (!placed) {} // Couldn't find a valid position for this mob after MAX_ATTEMPTS — skip it
-        }
-        if (spawned > 0) {
-            setActive(loc, true);
-        }
+        setActive(loc, true);
+        spawnWaveRecursive(loc, SKELETON_COUNT, "skeleton", equipSkeleton, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "husk"){
-        for (let i = 0; i < ZOMBIE_COUNT; i++) {
-            try {
-                const enemy = loc.dimension.spawnEntity("minecraft:husk",
-                        {
-                            x: loc.x,
-                            y: loc.y + 1,
-                            z: loc.z,
-                        }
-                    );
-
-                enemy.addTag(tag);
-                spawned++;
-
-            } catch {}
-        }
+        setActive(loc, true);
+        spawnWaveRecursive(loc, ZOMBIE_COUNT, "husk", equipHusk, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "parched"){
-        for (let i = 0; i < SKELETON_COUNT; i++) {
-            try {
-                const enemy = loc.dimension.spawnEntity("minecraft:parched",
-                        {
-                            x: loc.x,
-                            y: loc.y + 1,
-                            z: loc.z,
-                        }
-                    );
-
-                enemy.addTag(tag);
-                spawned++;
-
-            } catch {}
-        }
+        setActive(loc, true);
+        spawnWaveRecursive(loc, SKELETON_COUNT, "parched", equipParched, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "spider"){
-        for (let i = 0; i < SPIDER_COUNT; i++) {
-            let placed = false;
-            for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-                const x = Math.floor(loc.x + (Math.random() * 4 - 2));
-                const z = Math.floor(loc.z + (Math.random() * 4 - 2));
-                const y = loc.y + 1;
-
-                if (!isValidSpawnPosition(loc.dimension, x, y, z)) continue;
-
-                try {
-                    const enemy = loc.dimension.spawnEntity("minecraft:spider",{ x, y, z });
-                    enemy.addTag(tag);
-                    spawned++;
-                    placed = true;
-                    break;
-                } catch (e) {
-                console.warn(`Spawner Error: ${e}`);} // Couldn't find a valid position for this mob — skip it
-            }
-            if (!placed) {} // Couldn't find a valid position for this mob after MAX_ATTEMPTS — skip it
-        }
-        if (spawned > 0) {
-            setActive(loc, true);
-        }
+        setActive(loc, true);
+        spawnWaveRecursive(loc, SPIDER_COUNT, "spider", equipSpider, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "cave_spider"){
-        for (let i = 0; i < CAVE_SPIDER_COUNT; i++) {
-            try {
-                const enemy = loc.dimension.spawnEntity("minecraft:cave_spider",
-                        {
-                            x: loc.x,
-                            y: loc.y + 1,
-                            z: loc.z,
-                        }
-                    );
-
-                enemy.addTag(tag);
-                spawned++;
-
-            } catch {}
-        }
+        setActive(loc, true);
+        spawnWaveRecursive(loc, CAVE_SPIDER_COUNT, "cave_spider", equipCaveSpider, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "slime"){
-        for (let i = 0; i < SLIME_COUNT; i++) {
-            try {
-                const enemy = loc.dimension.spawnEntity("minecraft:slime",
-                        {
-                            x: loc.x,
-                            y: loc.y + 1,
-                            z: loc.z,
-                        }
-                    );
-
-                enemy.addTag(tag);
-                spawned++;
-
-            } catch {}
-        }
+        setActive(loc, true);
+        spawnWaveRecursive(loc, SLIME_COUNT, "slime", equipSlime, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "silverfish"){
-        for (let i = 0; i < SILVERFISH_COUNT; i++) {
-            try {
-                const enemy = loc.dimension.spawnEntity("minecraft:silverfish",
-                        {
-                            x: loc.x,
-                            y: loc.y + 1,
-                            z: loc.z,
-                        }
-                    );
-
-                enemy.addTag(tag);
-                spawned++;
-
-            } catch {}
-        }
+        setActive(loc, true);
+        spawnWaveRecursive(loc, SILVERFISH_COUNT, "silverfish", equipSilverfish, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "stray"){
-        for (let i = 0; i < SKELETON_COUNT; i++) {
-            try {
-                const enemy = loc.dimension.spawnEntity("minecraft:skeleton",
-                        {
-                            x: loc.x,
-                            y: loc.y + 1,
-                            z: loc.z,
-                        }
-                    );
+        setActive(loc, true);
+        spawnWaveRecursive(loc, SKELETON_COUNT, "stray", equipStray, 0);
+    }
+}
 
-                enemy.addTag(tag);
-                spawned++;
-
-            } catch {}
-        }
+function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string, equip: (enemy: Entity, loc: DimensionLocation) => void, iterations: number): void {
+    if (iterations > 35 || count <= 0) {
+        return; // Prevent infinite recursion / exit normally if count is 0 or less
     }
     
+    if (count > 0) {
+        system.runTimeout(() => {
+            const tag = getSpawnerTag(loc);
+            const MAX_ATTEMPTS = 10; // attempts per mob before giving up
 
-    if (spawned > 0) {
-        setActive(loc, true);
+            for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+                const x = Math.floor(loc.x + (Math.random() * 4 - 2));
+                const z = Math.floor(loc.z + (Math.random() * 4 - 2));
+                const y = loc.y + 1;
+
+                if (!isValidSpawnPosition(loc.dimension, x, y, z)){
+                    continue;
+                }
+
+                try {
+                    const enemy = loc.dimension.spawnEntity(`minecraft:${type}`,{ x, y, z });
+                    enemy.addTag(tag);
+                    equip(enemy, loc);
+                    break;
+                } catch (e) {
+                console.warn(`Spawner Error: ${e}`);} // Couldn't find a valid position for this mob — skip it
+            }
+
+            spawnWaveRecursive(loc, count - 1, type, equip, iterations + 1);
+        }, 40); // Two second delay before spawning next mob to give players a chance to react
     }
 }
 

@@ -7,9 +7,9 @@ import {
 var SPAWNER_BLOCK_ID = "relleks_dungeons:drowned_spawner";
 var TRIGGER_RADIUS = 11;
 var ZOMBIE_COUNT = 8;
-var SKELETON_COUNT = 5;
-var SLIME_COUNT = 3;
-var SILVERFISH_COUNT = 15;
+var SKELETON_COUNT = 4;
+var SLIME_COUNT = 2;
+var SILVERFISH_COUNT = 12;
 var SPIDER_COUNT = 8;
 var CAVE_SPIDER_COUNT = 5;
 var COOLDOWN_TICKS = 36e3;
@@ -101,6 +101,53 @@ function equipBogged(enemy, loc) {
     }
   }, 1);
 }
+function equipZombie(enemy, loc) {
+  system.runTimeout(() => {
+    const { x, y, z } = enemy.location;
+    const roll = Math.random();
+    let material = "";
+    if (roll > 0.9) material = "chainmail";
+    else if (roll > 0.75) material = "copper";
+    if (material) {
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.head 0 ${material}_helmet`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.chest 0 ${material}_chestplate`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.legs 0 ${material}_leggings`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.feet 0 ${material}_boots`);
+    }
+    if (Math.random() > 0.7) {
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.weapon.mainhand 0 iron_sword`);
+    }
+  }, 1);
+}
+function equipSkeleton(enemy, loc) {
+  system.runTimeout(() => {
+    const { x, y, z } = enemy.location;
+    const roll = Math.random();
+    let material = "";
+    if (roll > 0.9) material = "chainmail";
+    else if (roll > 0.75) material = "copper";
+    if (material) {
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=skeleton] slot.armor.head 0 ${material}_helmet`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=skeleton] slot.armor.chest 0 ${material}_chestplate`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=skeleton] slot.armor.legs 0 ${material}_leggings`);
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=skeleton] slot.armor.feet 0 ${material}_boots`);
+    }
+  }, 1);
+}
+function equipHusk(enemy, loc) {
+}
+function equipParched(enemy, loc) {
+}
+function equipSpider(enemy, loc) {
+}
+function equipCaveSpider(enemy, loc) {
+}
+function equipSlime(enemy, loc) {
+}
+function equipSilverfish(enemy, loc) {
+}
+function equipStray(enemy, loc) {
+}
 function isValidSpawnPosition(loc, x, y, z) {
   try {
     const feet = loc.getBlock({ x, y, z });
@@ -119,206 +166,68 @@ function isValidSpawnPosition(loc, x, y, z) {
 }
 function spawnWave(loc) {
   const tag = getSpawnerTag(loc);
-  const MAX_ATTEMPTS = 10;
-  let spawned = 0;
   const block = loc.dimension.getBlock(loc);
   if (block.permutation.getState("relleks_dungeons:spawner_type") === "drowned") {
-    for (let i = 0; i < ZOMBIE_COUNT; i++) {
-      let placed = false;
-      for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-        const x = Math.floor(loc.x + (Math.random() * 4 - 2));
-        const z = Math.floor(loc.z + (Math.random() * 4 - 2));
-        const y = loc.y + 1;
-        if (!isValidSpawnPosition(loc.dimension, x, y, z)) continue;
-        try {
-          const enemy = loc.dimension.spawnEntity("minecraft:drowned", { x, y, z });
-          enemy.addTag(tag);
-          spawned++;
-          placed = true;
-          equipDrowned(enemy, loc);
-          break;
-        } catch (e) {
-          console.warn(`Spawner Error: ${e}`);
-        }
-      }
-      if (!placed) {
-      }
-    }
-    if (spawned > 0) {
-      setActive(loc, true);
-    }
-  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "bogged") {
-    for (let i = 0; i < SKELETON_COUNT; i++) {
-      let placed = false;
-      for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-        const x = Math.floor(loc.x + (Math.random() * 4 - 2));
-        const z = Math.floor(loc.z + (Math.random() * 4 - 2));
-        const y = loc.y + 1;
-        if (!isValidSpawnPosition(loc.dimension, x, y, z)) continue;
-        try {
-          const enemy = loc.dimension.spawnEntity("minecraft:bogged", { x, y, z });
-          enemy.addTag(tag);
-          spawned++;
-          placed = true;
-          equipBogged(enemy, loc);
-          break;
-        } catch (e) {
-          console.warn(`Spawner Error: ${e}`);
-        }
-      }
-      if (!placed) {
-      }
-    }
-    if (spawned > 0) {
-      setActive(loc, true);
-    }
-  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "zombie") {
-    for (let i = 0; i < ZOMBIE_COUNT; i++) {
-      try {
-        const enemy = loc.dimension.spawnEntity(
-          "minecraft:zombie",
-          {
-            x: loc.x,
-            y: loc.y + 1,
-            z: loc.z
-          }
-        );
-        enemy.addTag(tag);
-        spawned++;
-      } catch {
-      }
-    }
-  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "skeleton") {
-    for (let i = 0; i < SKELETON_COUNT; i++) {
-      try {
-        const enemy = loc.dimension.spawnEntity(
-          "minecraft:skeleton",
-          {
-            x: loc.x,
-            y: loc.y + 1,
-            z: loc.z
-          }
-        );
-        enemy.addTag(tag);
-        spawned++;
-      } catch {
-      }
-    }
-  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "husk") {
-    for (let i = 0; i < ZOMBIE_COUNT; i++) {
-      try {
-        const enemy = loc.dimension.spawnEntity(
-          "minecraft:husk",
-          {
-            x: loc.x,
-            y: loc.y + 1,
-            z: loc.z
-          }
-        );
-        enemy.addTag(tag);
-        spawned++;
-      } catch {
-      }
-    }
-  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "parched") {
-    for (let i = 0; i < SKELETON_COUNT; i++) {
-      try {
-        const enemy = loc.dimension.spawnEntity(
-          "minecraft:parched",
-          {
-            x: loc.x,
-            y: loc.y + 1,
-            z: loc.z
-          }
-        );
-        enemy.addTag(tag);
-        spawned++;
-      } catch {
-      }
-    }
-  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "spider") {
-    for (let i = 0; i < SPIDER_COUNT; i++) {
-      try {
-        const enemy = loc.dimension.spawnEntity(
-          "minecraft:spider",
-          {
-            x: loc.x,
-            y: loc.y + 1,
-            z: loc.z
-          }
-        );
-        enemy.addTag(tag);
-        spawned++;
-      } catch {
-      }
-    }
-  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "cave_spider") {
-    for (let i = 0; i < CAVE_SPIDER_COUNT; i++) {
-      try {
-        const enemy = loc.dimension.spawnEntity(
-          "minecraft:cave_spider",
-          {
-            x: loc.x,
-            y: loc.y + 1,
-            z: loc.z
-          }
-        );
-        enemy.addTag(tag);
-        spawned++;
-      } catch {
-      }
-    }
-  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "slime") {
-    for (let i = 0; i < SLIME_COUNT; i++) {
-      try {
-        const enemy = loc.dimension.spawnEntity(
-          "minecraft:slime",
-          {
-            x: loc.x,
-            y: loc.y + 1,
-            z: loc.z
-          }
-        );
-        enemy.addTag(tag);
-        spawned++;
-      } catch {
-      }
-    }
-  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "silverfish") {
-    for (let i = 0; i < SILVERFISH_COUNT; i++) {
-      try {
-        const enemy = loc.dimension.spawnEntity(
-          "minecraft:silverfish",
-          {
-            x: loc.x,
-            y: loc.y + 1,
-            z: loc.z
-          }
-        );
-        enemy.addTag(tag);
-        spawned++;
-      } catch {
-      }
-    }
-  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "stray") {
-    for (let i = 0; i < SKELETON_COUNT; i++) {
-      try {
-        const enemy = loc.dimension.spawnEntity(
-          "minecraft:skeleton",
-          {
-            x: loc.x,
-            y: loc.y + 1,
-            z: loc.z
-          }
-        );
-        enemy.addTag(tag);
-        spawned++;
-      } catch {
-      }
-    }
-  }
-  if (spawned > 0) {
     setActive(loc, true);
+    spawnWaveRecursive(loc, ZOMBIE_COUNT, "drowned", equipDrowned, 0);
+  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "bogged") {
+    setActive(loc, true);
+    spawnWaveRecursive(loc, SKELETON_COUNT, "bogged", equipBogged, 0);
+  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "zombie") {
+    setActive(loc, true);
+    spawnWaveRecursive(loc, ZOMBIE_COUNT, "zombie", equipZombie, 0);
+  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "skeleton") {
+    setActive(loc, true);
+    spawnWaveRecursive(loc, SKELETON_COUNT, "skeleton", equipSkeleton, 0);
+  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "husk") {
+    setActive(loc, true);
+    spawnWaveRecursive(loc, ZOMBIE_COUNT, "husk", equipHusk, 0);
+  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "parched") {
+    setActive(loc, true);
+    spawnWaveRecursive(loc, SKELETON_COUNT, "parched", equipParched, 0);
+  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "spider") {
+    setActive(loc, true);
+    spawnWaveRecursive(loc, SPIDER_COUNT, "spider", equipSpider, 0);
+  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "cave_spider") {
+    setActive(loc, true);
+    spawnWaveRecursive(loc, CAVE_SPIDER_COUNT, "cave_spider", equipCaveSpider, 0);
+  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "slime") {
+    setActive(loc, true);
+    spawnWaveRecursive(loc, SLIME_COUNT, "slime", equipSlime, 0);
+  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "silverfish") {
+    setActive(loc, true);
+    spawnWaveRecursive(loc, SILVERFISH_COUNT, "silverfish", equipSilverfish, 0);
+  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "stray") {
+    setActive(loc, true);
+    spawnWaveRecursive(loc, SKELETON_COUNT, "stray", equipStray, 0);
+  }
+}
+function spawnWaveRecursive(loc, count, type, equip, iterations) {
+  if (iterations > 35 || count <= 0) {
+    return;
+  }
+  if (count > 0) {
+    system.runTimeout(() => {
+      const tag = getSpawnerTag(loc);
+      const MAX_ATTEMPTS = 10;
+      for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+        const x = Math.floor(loc.x + (Math.random() * 4 - 2));
+        const z = Math.floor(loc.z + (Math.random() * 4 - 2));
+        const y = loc.y + 1;
+        if (!isValidSpawnPosition(loc.dimension, x, y, z)) {
+          continue;
+        }
+        try {
+          const enemy = loc.dimension.spawnEntity(`minecraft:${type}`, { x, y, z });
+          enemy.addTag(tag);
+          equip(enemy, loc);
+          break;
+        } catch (e) {
+          console.warn(`Spawner Error: ${e}`);
+        }
+      }
+      spawnWaveRecursive(loc, count - 1, type, equip, iterations + 1);
+    }, 20);
   }
 }
 function giveReward(loc) {
