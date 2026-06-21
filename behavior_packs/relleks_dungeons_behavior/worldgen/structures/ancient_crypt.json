@@ -6,7 +6,7 @@
         },
         "step": "underground_structures",
         "terrain_adaptation": "encapsulate",
-        "max_depth": 9,
+        "max_depth": 13,
         "liquid_settings": "ignore_waterlogging",
         "start_pool": "minecraft:ancient_crypt_dungeons",
         "start_height": {

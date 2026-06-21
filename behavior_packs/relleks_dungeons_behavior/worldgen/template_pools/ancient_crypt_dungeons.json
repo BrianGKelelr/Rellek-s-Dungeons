@@ -44,6 +44,38 @@
                     "processors": "minecraft:ancient_crypt_dungeon_processor"
                 },
                 "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/hall",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/hall2",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/hall_turn",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/hall_turn2",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
             }
         ]
     }
