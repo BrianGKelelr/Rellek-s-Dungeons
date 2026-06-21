@@ -294,9 +294,42 @@ function discoverSpawners() {
     }
   }
 }
+function cleanupSpawners() {
+  for (const [key, loc] of activeSpawners) {
+    let block;
+    try {
+      block = loc.dimension.getBlock(loc);
+      console.warn(`Checked spawner at ${loc.dimension.id} ${loc.x} ${loc.y} ${loc.z}`);
+    } catch {
+      continue;
+    }
+    if (block === void 0) {
+      continue;
+    }
+    if (block.typeId !== SPAWNER_BLOCK_ID) {
+      activeSpawners.delete(key);
+      world.setDynamicProperty(PROP_COOLDOWN + key, void 0);
+      world.setDynamicProperty(PROP_ACTIVE + key, void 0);
+      console.warn(`removed spawner at ${loc.dimension.id} ${loc.x} ${loc.y} ${loc.z}`);
+      const tag = getSpawnerTag(loc);
+      for (const entity of loc.dimension.getEntities({ tags: [tag] })) {
+        console.warn(`Checked entity`);
+        try {
+          entity.remove();
+        } catch {
+        }
+      }
+    }
+  }
+}
 system.runInterval(
   discoverSpawners,
   DISCOVERY_INTERVAL
+);
+system.runInterval(
+  cleanupSpawners,
+  CHECK_INTERVAL * 0.5
+  //20
 );
 system.runInterval(
   () => {

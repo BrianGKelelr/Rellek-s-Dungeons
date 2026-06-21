@@ -302,6 +302,11 @@ function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string,
     if (iterations > 35 || count <= 0) {
         return; // Prevent infinite recursion / exit normally if count is 0 or less
     }
+
+    const block = loc.dimension.getBlock(loc);
+    if (!block) {   
+        return; // Block is not loaded or no longer exists, so stop trying to spawn mobs
+    }
     
     if (count > 0) {
         system.runTimeout(() => {
@@ -430,12 +435,51 @@ function discoverSpawners() {
 }
 
 /* ============================================================
+   CLEANUP — remove spawners that no longer exist
+============================================================ */
+
+function cleanupSpawners(): void {
+    for (const [key, loc] of activeSpawners) {
+        let block;
+        try {
+            block = loc.dimension.getBlock(loc);
+        } catch {
+            // Chunk likely unloaded — can't verify, so leave it alone
+            continue;
+        }
+
+        if (block === undefined) {
+            // Chunk not loaded — leave it alone
+            continue;
+        }
+
+        if (block.typeId !== SPAWNER_BLOCK_ID) {
+            // Block was broken/replaced — remove tracking and clean up state
+            activeSpawners.delete(key);
+            world.setDynamicProperty(PROP_COOLDOWN + key, undefined);
+            world.setDynamicProperty(PROP_ACTIVE + key, undefined);
+
+            // Also clear any leftover mobs tagged to this spawner
+            const tag = getSpawnerTag(loc);
+            for (const entity of loc.dimension.getEntities({ tags: [tag] })) {
+                try { entity.remove(); } catch {}
+            }
+        }
+    }
+}
+
+/* ============================================================
    INTERVALS
 ============================================================ */
 
 system.runInterval(
     discoverSpawners,
     DISCOVERY_INTERVAL
+);
+
+system.runInterval(
+    cleanupSpawners,
+    CHECK_INTERVAL * 20
 );
 
 system.runInterval(() => {
