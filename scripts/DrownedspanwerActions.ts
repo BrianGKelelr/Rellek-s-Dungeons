@@ -268,39 +268,31 @@ function spawnWave(loc: DimensionLocation): void {
     const block = loc.dimension.getBlock(loc);
     
     if(block.permutation.getState("relleks_dungeons:spawner_type") === "drowned"){
-        setActive(loc, true);
         spawnWaveRecursive(loc, ZOMBIE_COUNT, "drowned", equipDrowned, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "bogged"){
-        setActive(loc, true);
         spawnWaveRecursive(loc, SKELETON_COUNT, "bogged", equipBogged, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "zombie"){
-        setActive(loc, true);
         spawnWaveRecursive(loc, ZOMBIE_COUNT, "zombie", equipZombie, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "skeleton"){
-        setActive(loc, true);
         spawnWaveRecursive(loc, SKELETON_COUNT, "skeleton", equipSkeleton, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "husk"){
-        setActive(loc, true);
         spawnWaveRecursive(loc, ZOMBIE_COUNT, "husk", equipHusk, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "parched"){
-        setActive(loc, true);
         spawnWaveRecursive(loc, SKELETON_COUNT, "parched", equipParched, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "spider"){
-        setActive(loc, true);
         spawnWaveRecursive(loc, SPIDER_COUNT, "spider", equipSpider, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "cave_spider"){
-        setActive(loc, true);
         spawnWaveRecursive(loc, CAVE_SPIDER_COUNT, "cave_spider", equipCaveSpider, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "slime"){
-        setActive(loc, true);
         spawnWaveRecursive(loc, SLIME_COUNT, "slime", equipSlime, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "silverfish"){
-        setActive(loc, true);
         spawnWaveRecursive(loc, SILVERFISH_COUNT, "silverfish", equipSilverfish, 0);
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "stray"){
-        setActive(loc, true);
         spawnWaveRecursive(loc, SKELETON_COUNT, "stray", equipStray, 0);
     }
+
+    setActive(loc, true);
+    loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
 }
 
 function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string, equip: (enemy: Entity, loc: DimensionLocation) => void, iterations: number): void {
@@ -324,6 +316,7 @@ function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string,
 
                 try {
                     const enemy = loc.dimension.spawnEntity(`minecraft:${type}`,{ x, y, z });
+                    loc.dimension.runCommand(`playsound trial_spawner.spawn_mob @a ${loc.x} ${loc.y} ${loc.z}`);
                     enemy.addTag(tag);
                     equip(enemy, loc);
                     break;
@@ -340,20 +333,27 @@ function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string,
    REWARD
 ============================================================ */
 
-function giveReward(loc: DimensionLocation): void {
-    try{
-        for (const player of loc.dimension.getPlayers()) {
-            const dx = player.location.x - loc.x;
-            const dy = player.location.y - loc.y;
-            const dz = player.location.z - loc.z;
-            const distSq = dx * dx + dy * dy + dz * dz;
-
-            if (distSq <= 400){
-                loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 1.3} ${loc.z} loot "spawners/swamp_crypt_spawners"`);
-            }
+function getNearbyPlayers(loc: DimensionLocation): number {
+    let players = 0;
+    for (const player of loc.dimension.getPlayers()) {
+        const dx = player.location.x - loc.x;
+        const dy = player.location.y - loc.y;
+        const dz = player.location.z - loc.z;
+        const distSq = dx * dx + dy * dy + dz * dz;
+        if (distSq <= 400) {
+            players++;
         }
-    } catch (e) {
-        console.warn(`Reward command failed: ${e}`);}
+    }
+    return players;
+}
+
+function giveReward(loc: DimensionLocation, players: number): void {
+    system.runTimeout(() => {
+        if (players > 0) {
+            loc.dimension.runCommand(`loot spawn ${loc.x} ${loc.y + 1.3} ${loc.z} loot "spawners/swamp_crypt_spawners"`);
+            loc.dimension.runCommand(`playsound trial_spawner.eject_item @a ${loc.x} ${loc.y} ${loc.z}`);
+        }
+    }, 20); // Delay next reward by 1 second 
 }
 
 /* ============================================================
@@ -387,7 +387,7 @@ function tickSpawner(loc: DimensionLocation): void {
         const remaining = loc.dimension.getEntities({ tags: [tag]});
 
         if (remaining.length === 0) {
-            giveReward(loc);
+            giveReward(loc, getNearbyPlayers(loc));
             setActive(loc, false);
             setCooldown(loc, now + COOLDOWN_TICKS);
         }
