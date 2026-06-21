@@ -45,6 +45,10 @@ function setActive(loc, value) {
   const block = loc.dimension.getBlock(loc);
   if (block) {
     block.setPermutation(block.permutation.withState("relleks_dungeons:is_lit", value));
+    if (value) {
+      loc.dimension.spawnParticle("minecraft:trial_spawner_detection", loc);
+      loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
+    }
   }
 }
 function playerNearby(loc) {
@@ -191,7 +195,6 @@ function spawnWave(loc) {
     spawnWaveRecursive(loc, SKELETON_COUNT, "stray", equipStray, 0);
   }
   setActive(loc, true);
-  loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
 }
 function spawnWaveRecursive(loc, count, type, equip, iterations) {
   if (iterations > 35 || count <= 0) {
@@ -250,9 +253,7 @@ function tickSpawner(loc) {
     const litState = block.permutation.getState("relleks_dungeons:is_lit");
     const shouldBeLit = isActive(loc);
     if (litState !== shouldBeLit) {
-      block.setPermutation(
-        block.permutation.withState("relleks_dungeons:is_lit", shouldBeLit)
-      );
+      block.setPermutation(block.permutation.withState("relleks_dungeons:is_lit", shouldBeLit));
     }
   }
   const cooldown = getCooldown(loc);

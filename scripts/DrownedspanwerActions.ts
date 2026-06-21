@@ -107,6 +107,10 @@ function setActive(loc: DimensionLocation, value: boolean): void {
     const block = loc.dimension.getBlock(loc);
     if (block) {
         block.setPermutation(block.permutation.withState("relleks_dungeons:is_lit", value));
+        if(value){
+            loc.dimension.spawnParticle("minecraft:trial_spawner_detection", loc);
+            loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
+        }
     }
 }
 
@@ -292,7 +296,6 @@ function spawnWave(loc: DimensionLocation): void {
     }
 
     setActive(loc, true);
-    loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
 }
 
 function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string, equip: (enemy: Entity, loc: DimensionLocation) => void, iterations: number): void {
@@ -370,9 +373,7 @@ function tickSpawner(loc: DimensionLocation): void {
         const litState = block.permutation.getState("relleks_dungeons:is_lit");
         const shouldBeLit = isActive(loc);
         if (litState !== shouldBeLit) {
-            block.setPermutation(
-                block.permutation.withState("relleks_dungeons:is_lit", shouldBeLit)
-            );
+            block.setPermutation(block.permutation.withState("relleks_dungeons:is_lit", shouldBeLit));
         }
     }
 
