@@ -148,8 +148,6 @@ function playerNearby(loc: DimensionLocation): [boolean, boolean] {
     return [false, false];
 }
 
-
-
 /* ============================================================
    ENEMY TAG
 ============================================================ */
@@ -427,6 +425,7 @@ function tickSpawner(loc: DimensionLocation): void {
     const tag = getSpawnerTag(loc);
 
     if (isActive(loc)) {
+        despawnMobs(loc);
         const remaining = loc.dimension.getEntities({ tags: [tag]});
 
         if (remaining.length === 0) {
@@ -498,6 +497,31 @@ function cleanupSpawner(loc: DimensionLocation): boolean {
         return true;
     }
     return false;
+}
+
+function despawnMobs(loc: DimensionLocation): void {
+    const radiusSq = TRIGGER_RADIUS * TRIGGER_RADIUS * 3; // Despawn radius is 3x the trigger radius
+
+    const anyPlayerInRange = loc.dimension.getPlayers().some(player => {
+        const dx = player.location.x - loc.x;
+        const dy = player.location.y - loc.y;
+        const dz = player.location.z - loc.z;
+        const distSq = dx * dx + dy * dy + dz * dz;
+        return distSq < radiusSq;
+    }); 
+
+    if (anyPlayerInRange) {
+        return; // At least one player is still close enough so don't despawn
+    }
+
+    const tag = getSpawnerTag(loc);
+    for (const entity of loc.dimension.getEntities({ tags: [tag] })) {
+        try { entity.remove(); } catch {}
+    }
+
+    const now = system.currentTick;
+    setActive(loc, false, false);
+    setCooldown(loc, now + COOLDOWN_TICKS);
 }
 
 world.afterEvents.playerBreakBlock.subscribe((event) => {

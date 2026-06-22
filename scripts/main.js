@@ -40,14 +40,19 @@ function isActive(loc) {
   const value = world.getDynamicProperty(PROP_ACTIVE + posKey(loc));
   return value === true;
 }
-function setActive(loc, value) {
-  world.setDynamicProperty(PROP_ACTIVE + posKey(loc), value);
+function setActive(loc, activate, isOminous) {
+  world.setDynamicProperty(PROP_ACTIVE + posKey(loc), activate);
   const block = loc.dimension.getBlock(loc);
   if (block) {
-    block.setPermutation(block.permutation.withState("relleks_dungeons:is_lit", value));
-    if (value) {
-      loc.dimension.spawnParticle("minecraft:trial_spawner_detection", loc);
-      loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
+    block.setPermutation(block.permutation.withState("relleks_dungeons:is_lit", activate));
+    if (activate) {
+      if (isOminous) {
+        loc.dimension.spawnParticle("minecraft:trial_spawner_detection_ominous", loc);
+        loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
+      } else {
+        loc.dimension.spawnParticle("minecraft:trial_spawner_detection", loc);
+        loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
+      }
     }
   }
 }
@@ -59,19 +64,15 @@ function playerNearby(loc) {
     const dz = player.location.z - loc.z;
     const distSq = dx * dx + dy * dy + dz * dz;
     if (distSq <= radiusSq) {
-      console.warn("player is nearby spawner, checking for bad omen effect");
       const effect = player.getEffect("bad_omen");
-      console.warn("player is nearby spawner, checked for bad omen effect");
-      if (effect) {
-        console.warn("player has bad omen, player is nearby spawner");
+      const effect2 = player.getEffect("trial_omen");
+      if (effect || effect2) {
         return [true, true];
       } else {
-        console.warn("player does not have bad omen, player is nearby spawner");
         return [true, false];
       }
     }
   }
-  console.warn("player is not nearby spawner");
   return [false, false];
 }
 function getSpawnerTag(loc) {
@@ -186,29 +187,29 @@ function isValidSpawnPosition(loc, x, y, z) {
 function spawnWave(loc, hasBadOmen) {
   const block = loc.dimension.getBlock(loc);
   if (block.permutation.getState("relleks_dungeons:spawner_type") === "drowned") {
-    spawnWaveRecursive(loc, ZOMBIE_COUNT * (hasBadOmen ? 2 : 1), "drowned", equipDrowned, hasBadOmen, 0);
+    spawnWaveRecursive(loc, Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1)), "drowned", equipDrowned, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "bogged") {
-    spawnWaveRecursive(loc, SKELETON_COUNT * (hasBadOmen ? 2 : 1), "bogged", equipBogged, hasBadOmen, 0);
+    spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "bogged", equipBogged, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "zombie") {
-    spawnWaveRecursive(loc, ZOMBIE_COUNT * (hasBadOmen ? 2 : 1), "zombie", equipZombie, hasBadOmen, 0);
+    spawnWaveRecursive(loc, Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1)), "zombie", equipZombie, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "skeleton") {
-    spawnWaveRecursive(loc, SKELETON_COUNT * (hasBadOmen ? 2 : 1), "skeleton", equipSkeleton, hasBadOmen, 0);
+    spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "skeleton", equipSkeleton, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "husk") {
-    spawnWaveRecursive(loc, ZOMBIE_COUNT * (hasBadOmen ? 2 : 1), "husk", equipHusk, hasBadOmen, 0);
+    spawnWaveRecursive(loc, Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1)), "husk", equipHusk, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "parched") {
-    spawnWaveRecursive(loc, SKELETON_COUNT * (hasBadOmen ? 2 : 1), "parched", equipParched, hasBadOmen, 0);
+    spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "parched", equipParched, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "spider") {
-    spawnWaveRecursive(loc, SPIDER_COUNT * (hasBadOmen ? 2 : 1), "spider", equipSpider, hasBadOmen, 0);
+    spawnWaveRecursive(loc, Math.floor(SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "spider", equipSpider, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "cave_spider") {
-    spawnWaveRecursive(loc, CAVE_SPIDER_COUNT * (hasBadOmen ? 2 : 1), "cave_spider", equipCaveSpider, hasBadOmen, 0);
+    spawnWaveRecursive(loc, Math.floor(CAVE_SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "cave_spider", equipCaveSpider, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "slime") {
-    spawnWaveRecursive(loc, SLIME_COUNT * (hasBadOmen ? 2 : 1), "slime", equipSlime, hasBadOmen, 0);
+    spawnWaveRecursive(loc, Math.floor(SLIME_COUNT * (hasBadOmen ? 1.5 : 1)), "slime", equipSlime, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "silverfish") {
-    spawnWaveRecursive(loc, SILVERFISH_COUNT * (hasBadOmen ? 2 : 1), "silverfish", equipSilverfish, hasBadOmen, 0);
+    spawnWaveRecursive(loc, Math.floor(SILVERFISH_COUNT * (hasBadOmen ? 1.5 : 1)), "silverfish", equipSilverfish, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "stray") {
-    spawnWaveRecursive(loc, SKELETON_COUNT * (hasBadOmen ? 2 : 1), "stray", equipStray, hasBadOmen, 0);
+    spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "stray", equipStray, hasBadOmen, 0);
   }
-  setActive(loc, true);
+  setActive(loc, true, hasBadOmen);
 }
 function spawnWaveRecursive(loc, count, type, equip, hasBadOmen, iterations) {
   if (iterations > 35 || count <= 0) {
@@ -282,17 +283,17 @@ function tickSpawner(loc) {
     return;
   const tag = getSpawnerTag(loc);
   if (isActive(loc)) {
+    despawnMobs(loc);
     const remaining = loc.dimension.getEntities({ tags: [tag] });
     if (remaining.length === 0) {
       giveReward(loc, getNearbyPlayers(loc));
-      setActive(loc, false);
+      setActive(loc, false, false);
       setCooldown(loc, now + COOLDOWN_TICKS);
     }
     return;
   }
   const [playerIsNearby, hasBadOmen] = playerNearby(loc);
   if (playerIsNearby) {
-    console.warn("Calling spawn wave");
     spawnWave(loc, hasBadOmen);
   }
 }
@@ -337,6 +338,29 @@ function cleanupSpawner(loc) {
     return true;
   }
   return false;
+}
+function despawnMobs(loc) {
+  const radiusSq = TRIGGER_RADIUS * TRIGGER_RADIUS * 3;
+  const anyPlayerInRange = loc.dimension.getPlayers().some((player) => {
+    const dx = player.location.x - loc.x;
+    const dy = player.location.y - loc.y;
+    const dz = player.location.z - loc.z;
+    const distSq = dx * dx + dy * dy + dz * dz;
+    return distSq < radiusSq;
+  });
+  if (anyPlayerInRange) {
+    return;
+  }
+  const tag = getSpawnerTag(loc);
+  for (const entity of loc.dimension.getEntities({ tags: [tag] })) {
+    try {
+      entity.remove();
+    } catch {
+    }
+  }
+  const now = system.currentTick;
+  setActive(loc, false, false);
+  setCooldown(loc, now + COOLDOWN_TICKS);
 }
 world.afterEvents.playerBreakBlock.subscribe((event) => {
   const blockId = event.brokenBlockPermutation.type.id;
