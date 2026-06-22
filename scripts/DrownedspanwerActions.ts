@@ -98,16 +98,22 @@ function isActive(loc: DimensionLocation): boolean {
     return value === true;
 }
 
-function setActive(loc: DimensionLocation, value: boolean): void {
-    world.setDynamicProperty(PROP_ACTIVE + posKey(loc), value);
+function setActive(loc: DimensionLocation, activate: boolean, isOminous: boolean): void {
+    world.setDynamicProperty(PROP_ACTIVE + posKey(loc), activate);
 
     // Retrieve the Block object from the dimension, then update its state
     const block = loc.dimension.getBlock(loc);
     if (block) {
-        block.setPermutation(block.permutation.withState("relleks_dungeons:is_lit", value));
-        if(value){
-            loc.dimension.spawnParticle("minecraft:trial_spawner_detection", loc);
-            loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
+        block.setPermutation(block.permutation.withState("relleks_dungeons:is_lit", activate));
+        if(activate){
+            if(isOminous){
+                loc.dimension.spawnParticle("minecraft:trial_spawner_detection_ominous", loc);
+                loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
+            }
+            else{
+                loc.dimension.spawnParticle("minecraft:trial_spawner_detection", loc);
+                loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
+            }
         }
     }
 }
@@ -321,7 +327,7 @@ function spawnWave(loc: DimensionLocation, hasBadOmen: boolean): void {
         spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "stray", equipStray, hasBadOmen, 0);
     }
 
-    setActive(loc, true);
+    setActive(loc, true, hasBadOmen);
 }
 
 function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string, equip: (enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean) => void, hasBadOmen: boolean, iterations: number): void {
@@ -425,7 +431,7 @@ function tickSpawner(loc: DimensionLocation): void {
 
         if (remaining.length === 0) {
             giveReward(loc, getNearbyPlayers(loc));
-            setActive(loc, false);
+            setActive(loc, false, false);
             setCooldown(loc, now + COOLDOWN_TICKS);
         }
         return;
