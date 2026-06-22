@@ -127,22 +127,18 @@ function playerNearby(loc: DimensionLocation): [boolean, boolean] {
         const distSq = dx * dx + dy * dy + dz * dz;
 
         if (distSq <= radiusSq){
-            console.warn("player is nearby spawner, checking for bad omen effect");
             const effect = player.getEffect("bad_omen");
-            console.warn("player is nearby spawner, checked for bad omen effect");
-            if(effect){
-                console.warn("player has bad omen, player is nearby spawner");
+            const effect2 = player.getEffect("trial_omen");
+
+            if(effect || effect2){
                 return [true, true];
             }
             else{
-                console.warn("player does not have bad omen, player is nearby spawner");
                 return [true, false];
             }
 
         }  
     }
-
-    console.warn("player is not nearby spawner");
     return [false, false];
 }
 
@@ -320,7 +316,7 @@ function spawnWave(loc: DimensionLocation, hasBadOmen: boolean): void {
 
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "silverfish"){
         spawnWaveRecursive(loc, Math.floor(SILVERFISH_COUNT * (hasBadOmen ? 1.5 : 1)), "silverfish", equipSilverfish, hasBadOmen, 0);
-        
+
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "stray"){
         spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "stray", equipStray, hasBadOmen, 0);
     }
@@ -437,7 +433,6 @@ function tickSpawner(loc: DimensionLocation): void {
 
     const [playerIsNearby, hasBadOmen] = playerNearby(loc);
     if (playerIsNearby) {
-        console.warn("Calling spawn wave");
         spawnWave(loc, hasBadOmen);
     }
 }
