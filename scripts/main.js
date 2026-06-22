@@ -319,21 +319,19 @@ function cleanupSpawner(loc) {
   }
   return false;
 }
-world.beforeEvents.worldInitialize.subscribe((event) => {
-  event.blockComponentRegistry.registerCustomComponent("relleks_dungeons:spawner_cleanup", {
-    onBreak(event2) {
-      const block = event2.block;
-      const dimension = event2.dimension;
-      const loc = {
-        // the block location
-        dimension,
-        x: block.location.x,
-        y: block.location.y,
-        z: block.location.z
-      };
-      cleanupSpawner(loc);
-    }
-  });
+world.afterEvents.playerBreakBlock.subscribe((event) => {
+  const blockId = event.brokenBlockPermutation.type.id;
+  if (blockId !== SPAWNER_BLOCK_ID) {
+    return;
+  }
+  const loc = {
+    // the block location
+    dimension: event.dimension,
+    x: event.block.x,
+    y: event.block.y,
+    z: event.block.z
+  };
+  cleanupSpawner(loc);
 });
 system.runInterval(
   discoverSpawners,

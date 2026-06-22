@@ -27,8 +27,7 @@ function enchantItem(item: ItemStack, enchantment: string, level: number): void 
     }
 }
 
-const SPAWNER_BLOCK_ID =
-    "relleks_dungeons:drowned_spawner";
+const SPAWNER_BLOCK_ID = "relleks_dungeons:drowned_spawner";
 
 const TRIGGER_RADIUS = 11;
 
@@ -300,14 +299,15 @@ function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string,
     if (iterations > 35 || count <= 0) {
         return; // Prevent infinite recursion / exit normally if count is 0 or less
     }
-
-    const block = loc.dimension.getBlock(loc);
-    if (cleanupSpawner(loc) || !block) {   
-        return; // Block is not loaded or no longer exists, so stop trying to spawn mobs
-    }
     
     if (count > 0) {
         system.runTimeout(() => {
+
+            const block = loc.dimension.getBlock(loc);
+            if (!block || block.typeId !== SPAWNER_BLOCK_ID){ 
+                return; // Block is not loaded or has been broken, so stop trying to spawn mobs
+            }
+
             const tag = getSpawnerTag(loc);
             const MAX_ATTEMPTS = 10; // attempts per mob before giving up
 
@@ -461,6 +461,22 @@ function cleanupSpawner(loc: DimensionLocation): boolean {
     }
     return false;
 }
+
+world.afterEvents.playerBreakBlock.subscribe((event) => {
+    const blockId = event.brokenBlockPermutation.type.id;
+    if (blockId !== SPAWNER_BLOCK_ID){
+        return;
+    }
+
+    const loc = {   // the block location
+        dimension: event.dimension,
+        x: event.block.x,
+        y: event.block.y,
+        z: event.block.z
+    };
+
+    cleanupSpawner(loc);
+});
 
 /* ============================================================
    INTERVALS
