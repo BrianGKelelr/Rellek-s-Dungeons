@@ -7,6 +7,7 @@ import {
     ItemStack,
     Entity,
     Enchantment,
+    EffectTypes,
     
 } from "@minecraft/server";
 
@@ -115,7 +116,7 @@ function setActive(loc: DimensionLocation, value: boolean): void {
    PLAYER CHECK
 ============================================================ */
 
-function playerNearby(loc: DimensionLocation): boolean {
+function playerNearby(loc: DimensionLocation): [boolean, boolean] {
     const radiusSq = TRIGGER_RADIUS * TRIGGER_RADIUS;
 
     for (const player of loc.dimension.getPlayers()) {
@@ -125,12 +126,27 @@ function playerNearby(loc: DimensionLocation): boolean {
 
         const distSq = dx * dx + dy * dy + dz * dz;
 
-        if (distSq <= radiusSq)
-            return true;
+        if (distSq <= radiusSq){
+            console.warn("player is nearby spawner, checking for bad omen effect");
+            const effect = player.getEffect("bad_omen");
+            console.warn("player is nearby spawner, checked for bad omen effect");
+            if(effect){
+                console.warn("player has bad omen, player is nearby spawner");
+                return [true, true];
+            }
+            else{
+                console.warn("player does not have bad omen, player is nearby spawner");
+                return [true, false];
+            }
+
+        }  
     }
 
-    return false;
+    console.warn("player is not nearby spawner");
+    return [false, false];
 }
+
+
 
 /* ============================================================
    ENEMY TAG
@@ -144,15 +160,17 @@ function getSpawnerTag(loc: DimensionLocation): string {
    Equip WAVE
 ============================================================ */
 
-function equipDrowned(enemy: Entity, loc: DimensionLocation): void {
+function equipDrowned(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {
     system.runTimeout(() => {
         const { x, y, z } = enemy.location;
         const roll = Math.random();
         let material = "";
 
-        if (roll > 0.9)       material = "iron";
-        else if (roll > 0.75) material = "chainmail";
-        else if (roll > 0.4)  material = "copper";
+        const multiplier = hasBadOmen ? 1.5 : 1;
+
+        if (roll * multiplier > 0.9)       material = "iron";
+        else if (roll * multiplier > 0.75) material = "chainmail";
+        else if (roll * multiplier > 0.4)  material = "copper";
 
         if (material) {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.head 0 ${material}_helmet`);
@@ -161,21 +179,23 @@ function equipDrowned(enemy: Entity, loc: DimensionLocation): void {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.feet 0 ${material}_boots`);
         }
 
-        if (Math.random() > 0.7) {
+        if (Math.random() * multiplier > 0.7) {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.weapon.mainhand 0 trident`);
         }
     }, 1); // 1 tick delay to allow entity to fully initialize before equipping
 }
 
-function equipBogged(enemy: Entity, loc: DimensionLocation): void {
+function equipBogged(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {
     system.runTimeout(() => {
         const { x, y, z } = enemy.location;
         const roll = Math.random();
         let material = "";
 
-        if (roll > 0.9)       material = "iron";
-        else if (roll > 0.75) material = "chainmail";
-        else if (roll > 0.4)  material = "copper";
+        const multiplier = hasBadOmen ? 1.5 : 1;
+
+        if (roll * multiplier > 0.9)       material = "iron";
+        else if (roll * multiplier > 0.75) material = "chainmail";
+        else if (roll * multiplier > 0.4)  material = "copper";
 
         if (material) {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.head 0 ${material}_helmet`);
@@ -184,21 +204,23 @@ function equipBogged(enemy: Entity, loc: DimensionLocation): void {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.feet 0 ${material}_boots`);
         }
 
-        if (Math.random() > 0.7) {
+        if (Math.random() * multiplier > 0.7) {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run enchant @n[type=bogged] power 2`);
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run enchant @n[type=bogged] punch 1`);
         }
     }, 1); // 1 tick delay to allow entity to fully initialize before equipping
 }
 
-function equipZombie(enemy: Entity, loc: DimensionLocation): void {
+function equipZombie(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {
     system.runTimeout(() => {
         const { x, y, z } = enemy.location;
         const roll = Math.random();
         let material = "";
 
-        if (roll > 0.9)       material = "chainmail";
-        else if (roll > 0.75) material = "copper";
+        const multiplier = hasBadOmen ? 1.5 : 1;
+
+        if (roll * multiplier > 0.9)       material = "chainmail";
+        else if (roll * multiplier > 0.75) material = "copper";
 
         if (material) {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.head 0 ${material}_helmet`);
@@ -207,20 +229,22 @@ function equipZombie(enemy: Entity, loc: DimensionLocation): void {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.feet 0 ${material}_boots`);
         }
 
-        if (Math.random() > 0.7) {
+        if (Math.random() * multiplier > 0.7) {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.weapon.mainhand 0 iron_sword`);
         }
     }, 1); // 1 tick delay to allow entity to fully initialize before equipping
 }
 
-function equipSkeleton(enemy: Entity, loc: DimensionLocation): void {
+function equipSkeleton(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {
     system.runTimeout(() => {
         const { x, y, z } = enemy.location;
         const roll = Math.random();
         let material = "";
 
-        if (roll > 0.9)       material = "chainmail";
-        else if (roll > 0.75) material = "copper";
+        const multiplier = hasBadOmen ? 1.5 : 1;
+
+        if (roll * multiplier > 0.9)       material = "chainmail";
+        else if (roll * multiplier > 0.75) material = "copper";
 
         if (material) {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=skeleton] slot.armor.head 0 ${material}_helmet`);
@@ -231,13 +255,13 @@ function equipSkeleton(enemy: Entity, loc: DimensionLocation): void {
     }, 1); // 1 tick delay to allow entity to fully initialize before equipping
 }
 
-function equipHusk(enemy: Entity, loc: DimensionLocation): void {}
-function equipParched(enemy: Entity, loc: DimensionLocation): void {}
-function equipSpider(enemy: Entity, loc: DimensionLocation): void {}
-function equipCaveSpider(enemy: Entity, loc: DimensionLocation): void {}
-function equipSlime(enemy: Entity, loc: DimensionLocation): void {}
-function equipSilverfish(enemy: Entity, loc: DimensionLocation): void {}
-function equipStray(enemy: Entity, loc: DimensionLocation): void {}
+function equipHusk(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
+function equipParched(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
+function equipSpider(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
+function equipCaveSpider(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
+function equipSlime(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
+function equipSilverfish(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
+function equipStray(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
 
 /* ============================================================
    Spawn WAVE
@@ -264,38 +288,47 @@ function isValidSpawnPosition(loc: DimensionLocation, x: number, y: number, z: n
     }
 }
 
-function spawnWave(loc: DimensionLocation): void {
-    const tag = getSpawnerTag(loc);
+function spawnWave(loc: DimensionLocation, hasBadOmen: boolean): void {
     const block = loc.dimension.getBlock(loc);
     
     if(block.permutation.getState("relleks_dungeons:spawner_type") === "drowned"){
-        spawnWaveRecursive(loc, ZOMBIE_COUNT, "drowned", equipDrowned, 0);
+        spawnWaveRecursive(loc, Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1)), "drowned", equipDrowned, hasBadOmen, 0);
+
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "bogged"){
-        spawnWaveRecursive(loc, SKELETON_COUNT, "bogged", equipBogged, 0);
+        spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "bogged", equipBogged, hasBadOmen, 0);
+
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "zombie"){
-        spawnWaveRecursive(loc, ZOMBIE_COUNT, "zombie", equipZombie, 0);
+        spawnWaveRecursive(loc, Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1)), "zombie", equipZombie, hasBadOmen, 0);
+
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "skeleton"){
-        spawnWaveRecursive(loc, SKELETON_COUNT, "skeleton", equipSkeleton, 0);
+        spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "skeleton", equipSkeleton, hasBadOmen, 0);
+
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "husk"){
-        spawnWaveRecursive(loc, ZOMBIE_COUNT, "husk", equipHusk, 0);
+        spawnWaveRecursive(loc, Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1)), "husk", equipHusk, hasBadOmen, 0);
+
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "parched"){
-        spawnWaveRecursive(loc, SKELETON_COUNT, "parched", equipParched, 0);
+        spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "parched", equipParched, hasBadOmen, 0);
+
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "spider"){
-        spawnWaveRecursive(loc, SPIDER_COUNT, "spider", equipSpider, 0);
+        spawnWaveRecursive(loc, Math.floor(SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "spider", equipSpider, hasBadOmen, 0);
+
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "cave_spider"){
-        spawnWaveRecursive(loc, CAVE_SPIDER_COUNT, "cave_spider", equipCaveSpider, 0);
+        spawnWaveRecursive(loc, Math.floor(CAVE_SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "cave_spider", equipCaveSpider, hasBadOmen, 0);
+
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "slime"){
-        spawnWaveRecursive(loc, SLIME_COUNT, "slime", equipSlime, 0);
+        spawnWaveRecursive(loc, Math.floor(SLIME_COUNT * (hasBadOmen ? 1.5 : 1)), "slime", equipSlime, hasBadOmen, 0);
+
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "silverfish"){
-        spawnWaveRecursive(loc, SILVERFISH_COUNT, "silverfish", equipSilverfish, 0);
+        spawnWaveRecursive(loc, Math.floor(SILVERFISH_COUNT * (hasBadOmen ? 1.5 : 1)), "silverfish", equipSilverfish, hasBadOmen, 0);
+        
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "stray"){
-        spawnWaveRecursive(loc, SKELETON_COUNT, "stray", equipStray, 0);
+        spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "stray", equipStray, hasBadOmen, 0);
     }
 
     setActive(loc, true);
 }
 
-function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string, equip: (enemy: Entity, loc: DimensionLocation) => void, iterations: number): void {
+function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string, equip: (enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean) => void, hasBadOmen: boolean, iterations: number): void {
     if (iterations > 35 || count <= 0) {
         return; // Prevent infinite recursion / exit normally if count is 0 or less
     }
@@ -324,13 +357,13 @@ function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string,
                     const enemy = loc.dimension.spawnEntity(`minecraft:${type}`,{ x, y, z });
                     loc.dimension.runCommand(`playsound trial_spawner.spawn_mob @a ${loc.x} ${loc.y} ${loc.z}`);
                     enemy.addTag(tag);
-                    equip(enemy, loc);
+                    equip(enemy, loc, hasBadOmen);
                     break;
                 } catch (e) {
                 console.warn(`Spawner Error: ${e}`);} // Couldn't find a valid position for this mob — skip it
             }
 
-            spawnWaveRecursive(loc, count - 1, type, equip, iterations + 1);
+            spawnWaveRecursive(loc, count - 1, type, equip, hasBadOmen, iterations + 1);
         }, 40); // Two second delay before spawning next mob to give players a chance to react
     }
 }
@@ -402,8 +435,10 @@ function tickSpawner(loc: DimensionLocation): void {
         return;
     }
 
-    if (playerNearby(loc)) {
-        spawnWave(loc);
+    const [playerIsNearby, hasBadOmen] = playerNearby(loc);
+    if (playerIsNearby) {
+        console.warn("Calling spawn wave");
+        spawnWave(loc, hasBadOmen);
     }
 }
 
@@ -444,18 +479,20 @@ function discoverSpawners() {
 function cleanupSpawner(loc: DimensionLocation): boolean {
     const block = loc.dimension.getBlock(loc);
     const key = posKey(loc);
+
+    if (!block) {
+        // Chunk not loaded — can't verify, don't treat as broken
+        return false;
+    }
+
     if (block.typeId !== SPAWNER_BLOCK_ID) {
-        // Block was broken/replaced — remove tracking and clean up state
         activeSpawners.delete(key);
         world.setDynamicProperty(PROP_COOLDOWN + key, undefined);
         world.setDynamicProperty(PROP_ACTIVE + key, undefined);
 
-        // Also clear tags of any leftover mobs tagged to this spawner
         const tag = getSpawnerTag(loc);
         for (const entity of loc.dimension.getEntities({ tags: [tag] })) {
-            try { 
-                entity.removeTag(tag); 
-            } catch {}
+            try { entity.removeTag(tag); } catch {}
         }
         return true;
     }

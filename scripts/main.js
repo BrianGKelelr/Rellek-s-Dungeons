@@ -58,78 +58,93 @@ function playerNearby(loc) {
     const dy = player.location.y - loc.y;
     const dz = player.location.z - loc.z;
     const distSq = dx * dx + dy * dy + dz * dz;
-    if (distSq <= radiusSq)
-      return true;
+    if (distSq <= radiusSq) {
+      console.warn("player is nearby spawner, checking for bad omen effect");
+      const effect = player.getEffect("bad_omen");
+      console.warn("player is nearby spawner, checked for bad omen effect");
+      if (effect) {
+        console.warn("player has bad omen, player is nearby spawner");
+        return [true, true];
+      } else {
+        console.warn("player does not have bad omen, player is nearby spawner");
+        return [true, false];
+      }
+    }
   }
-  return false;
+  console.warn("player is not nearby spawner");
+  return [false, false];
 }
 function getSpawnerTag(loc) {
   return `crypt_${posKey(loc)}`;
 }
-function equipDrowned(enemy, loc) {
+function equipDrowned(enemy, loc, hasBadOmen) {
   system.runTimeout(() => {
     const { x, y, z } = enemy.location;
     const roll = Math.random();
     let material = "";
-    if (roll > 0.9) material = "iron";
-    else if (roll > 0.75) material = "chainmail";
-    else if (roll > 0.4) material = "copper";
+    const multiplier = hasBadOmen ? 1.5 : 1;
+    if (roll * multiplier > 0.9) material = "iron";
+    else if (roll * multiplier > 0.75) material = "chainmail";
+    else if (roll * multiplier > 0.4) material = "copper";
     if (material) {
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.head 0 ${material}_helmet`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.chest 0 ${material}_chestplate`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.legs 0 ${material}_leggings`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.armor.feet 0 ${material}_boots`);
     }
-    if (Math.random() > 0.7) {
+    if (Math.random() * multiplier > 0.7) {
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=drowned] slot.weapon.mainhand 0 trident`);
     }
   }, 1);
 }
-function equipBogged(enemy, loc) {
+function equipBogged(enemy, loc, hasBadOmen) {
   system.runTimeout(() => {
     const { x, y, z } = enemy.location;
     const roll = Math.random();
     let material = "";
-    if (roll > 0.9) material = "iron";
-    else if (roll > 0.75) material = "chainmail";
-    else if (roll > 0.4) material = "copper";
+    const multiplier = hasBadOmen ? 1.5 : 1;
+    if (roll * multiplier > 0.9) material = "iron";
+    else if (roll * multiplier > 0.75) material = "chainmail";
+    else if (roll * multiplier > 0.4) material = "copper";
     if (material) {
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.head 0 ${material}_helmet`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.chest 0 ${material}_chestplate`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.legs 0 ${material}_leggings`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=bogged] slot.armor.feet 0 ${material}_boots`);
     }
-    if (Math.random() > 0.7) {
+    if (Math.random() * multiplier > 0.7) {
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run enchant @n[type=bogged] power 2`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run enchant @n[type=bogged] punch 1`);
     }
   }, 1);
 }
-function equipZombie(enemy, loc) {
+function equipZombie(enemy, loc, hasBadOmen) {
   system.runTimeout(() => {
     const { x, y, z } = enemy.location;
     const roll = Math.random();
     let material = "";
-    if (roll > 0.9) material = "chainmail";
-    else if (roll > 0.75) material = "copper";
+    const multiplier = hasBadOmen ? 1.5 : 1;
+    if (roll * multiplier > 0.9) material = "chainmail";
+    else if (roll * multiplier > 0.75) material = "copper";
     if (material) {
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.head 0 ${material}_helmet`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.chest 0 ${material}_chestplate`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.legs 0 ${material}_leggings`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.feet 0 ${material}_boots`);
     }
-    if (Math.random() > 0.7) {
+    if (Math.random() * multiplier > 0.7) {
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.weapon.mainhand 0 iron_sword`);
     }
   }, 1);
 }
-function equipSkeleton(enemy, loc) {
+function equipSkeleton(enemy, loc, hasBadOmen) {
   system.runTimeout(() => {
     const { x, y, z } = enemy.location;
     const roll = Math.random();
     let material = "";
-    if (roll > 0.9) material = "chainmail";
-    else if (roll > 0.75) material = "copper";
+    const multiplier = hasBadOmen ? 1.5 : 1;
+    if (roll * multiplier > 0.9) material = "chainmail";
+    else if (roll * multiplier > 0.75) material = "copper";
     if (material) {
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=skeleton] slot.armor.head 0 ${material}_helmet`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=skeleton] slot.armor.chest 0 ${material}_chestplate`);
@@ -138,19 +153,19 @@ function equipSkeleton(enemy, loc) {
     }
   }, 1);
 }
-function equipHusk(enemy, loc) {
+function equipHusk(enemy, loc, hasBadOmen) {
 }
-function equipParched(enemy, loc) {
+function equipParched(enemy, loc, hasBadOmen) {
 }
-function equipSpider(enemy, loc) {
+function equipSpider(enemy, loc, hasBadOmen) {
 }
-function equipCaveSpider(enemy, loc) {
+function equipCaveSpider(enemy, loc, hasBadOmen) {
 }
-function equipSlime(enemy, loc) {
+function equipSlime(enemy, loc, hasBadOmen) {
 }
-function equipSilverfish(enemy, loc) {
+function equipSilverfish(enemy, loc, hasBadOmen) {
 }
-function equipStray(enemy, loc) {
+function equipStray(enemy, loc, hasBadOmen) {
 }
 function isValidSpawnPosition(loc, x, y, z) {
   try {
@@ -168,44 +183,43 @@ function isValidSpawnPosition(loc, x, y, z) {
     return false;
   }
 }
-function spawnWave(loc) {
-  const tag = getSpawnerTag(loc);
+function spawnWave(loc, hasBadOmen) {
   const block = loc.dimension.getBlock(loc);
   if (block.permutation.getState("relleks_dungeons:spawner_type") === "drowned") {
-    spawnWaveRecursive(loc, ZOMBIE_COUNT, "drowned", equipDrowned, 0);
+    spawnWaveRecursive(loc, ZOMBIE_COUNT * (hasBadOmen ? 2 : 1), "drowned", equipDrowned, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "bogged") {
-    spawnWaveRecursive(loc, SKELETON_COUNT, "bogged", equipBogged, 0);
+    spawnWaveRecursive(loc, SKELETON_COUNT * (hasBadOmen ? 2 : 1), "bogged", equipBogged, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "zombie") {
-    spawnWaveRecursive(loc, ZOMBIE_COUNT, "zombie", equipZombie, 0);
+    spawnWaveRecursive(loc, ZOMBIE_COUNT * (hasBadOmen ? 2 : 1), "zombie", equipZombie, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "skeleton") {
-    spawnWaveRecursive(loc, SKELETON_COUNT, "skeleton", equipSkeleton, 0);
+    spawnWaveRecursive(loc, SKELETON_COUNT * (hasBadOmen ? 2 : 1), "skeleton", equipSkeleton, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "husk") {
-    spawnWaveRecursive(loc, ZOMBIE_COUNT, "husk", equipHusk, 0);
+    spawnWaveRecursive(loc, ZOMBIE_COUNT * (hasBadOmen ? 2 : 1), "husk", equipHusk, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "parched") {
-    spawnWaveRecursive(loc, SKELETON_COUNT, "parched", equipParched, 0);
+    spawnWaveRecursive(loc, SKELETON_COUNT * (hasBadOmen ? 2 : 1), "parched", equipParched, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "spider") {
-    spawnWaveRecursive(loc, SPIDER_COUNT, "spider", equipSpider, 0);
+    spawnWaveRecursive(loc, SPIDER_COUNT * (hasBadOmen ? 2 : 1), "spider", equipSpider, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "cave_spider") {
-    spawnWaveRecursive(loc, CAVE_SPIDER_COUNT, "cave_spider", equipCaveSpider, 0);
+    spawnWaveRecursive(loc, CAVE_SPIDER_COUNT * (hasBadOmen ? 2 : 1), "cave_spider", equipCaveSpider, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "slime") {
-    spawnWaveRecursive(loc, SLIME_COUNT, "slime", equipSlime, 0);
+    spawnWaveRecursive(loc, SLIME_COUNT * (hasBadOmen ? 2 : 1), "slime", equipSlime, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "silverfish") {
-    spawnWaveRecursive(loc, SILVERFISH_COUNT, "silverfish", equipSilverfish, 0);
+    spawnWaveRecursive(loc, SILVERFISH_COUNT * (hasBadOmen ? 2 : 1), "silverfish", equipSilverfish, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "stray") {
-    spawnWaveRecursive(loc, SKELETON_COUNT, "stray", equipStray, 0);
+    spawnWaveRecursive(loc, SKELETON_COUNT * (hasBadOmen ? 2 : 1), "stray", equipStray, hasBadOmen, 0);
   }
   setActive(loc, true);
 }
-function spawnWaveRecursive(loc, count, type, equip, iterations) {
+function spawnWaveRecursive(loc, count, type, equip, hasBadOmen, iterations) {
   if (iterations > 35 || count <= 0) {
-    return;
-  }
-  const block = loc.dimension.getBlock(loc);
-  if (cleanupSpawner(loc) || !block) {
     return;
   }
   if (count > 0) {
     system.runTimeout(() => {
+      const block = loc.dimension.getBlock(loc);
+      if (!block || block.typeId !== SPAWNER_BLOCK_ID) {
+        return;
+      }
       const tag = getSpawnerTag(loc);
       const MAX_ATTEMPTS = 10;
       for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
@@ -219,13 +233,13 @@ function spawnWaveRecursive(loc, count, type, equip, iterations) {
           const enemy = loc.dimension.spawnEntity(`minecraft:${type}`, { x, y, z });
           loc.dimension.runCommand(`playsound trial_spawner.spawn_mob @a ${loc.x} ${loc.y} ${loc.z}`);
           enemy.addTag(tag);
-          equip(enemy, loc);
+          equip(enemy, loc, hasBadOmen);
           break;
         } catch (e) {
           console.warn(`Spawner Error: ${e}`);
         }
       }
-      spawnWaveRecursive(loc, count - 1, type, equip, iterations + 1);
+      spawnWaveRecursive(loc, count - 1, type, equip, hasBadOmen, iterations + 1);
     }, 40);
   }
 }
@@ -276,8 +290,10 @@ function tickSpawner(loc) {
     }
     return;
   }
-  if (playerNearby(loc)) {
-    spawnWave(loc);
+  const [playerIsNearby, hasBadOmen] = playerNearby(loc);
+  if (playerIsNearby) {
+    console.warn("Calling spawn wave");
+    spawnWave(loc, hasBadOmen);
   }
 }
 function discoverSpawners() {
@@ -304,6 +320,9 @@ function discoverSpawners() {
 function cleanupSpawner(loc) {
   const block = loc.dimension.getBlock(loc);
   const key = posKey(loc);
+  if (!block) {
+    return false;
+  }
   if (block.typeId !== SPAWNER_BLOCK_ID) {
     activeSpawners.delete(key);
     world.setDynamicProperty(PROP_COOLDOWN + key, void 0);
