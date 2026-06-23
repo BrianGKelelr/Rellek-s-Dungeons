@@ -163,6 +163,22 @@
                     {
                         "cause": "wither",
                         "deals_damage": false
+                    },
+                    {
+                        "cause": "fire",
+                        "deals_damage": false
+                    },
+                    {
+                        "cause": "lava",
+                        "deals_damage": false
+                    },
+                    {
+                        "cause": "campfire",
+                        "deals_damage": false
+                    },
+                    {
+                        "cause": "magma",
+                        "deals_damage": false
                     }
                 ]
             }
