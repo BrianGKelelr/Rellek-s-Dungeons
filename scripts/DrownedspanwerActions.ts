@@ -7,7 +7,6 @@ import {
     ItemStack,
     Entity,
     Enchantment,
-    EffectTypes,
     
 } from "@minecraft/server";
 
