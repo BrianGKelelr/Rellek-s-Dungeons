@@ -4,38 +4,47 @@
   "padding": 8,
   "num_mip_levels": 4,
   "texture_data": {
-    "drowned_spawner": {
-      "textures": "textures/blocks/drowned_spawner"
+    "spawner_top": {
+      "textures": "textures/blocks/spawner_top"
     },
-    "bogged_spawner": {
-      "textures": "textures/blocks/drowned_spawner"
+    "spawner_top_open": {
+      "textures": "textures/blocks/spawner_top_open"
     },
-    "zombie_spawner": {
-      "textures": "textures/blocks/drowned_spawner"
+    "spawner_bottom": {
+      "textures": "textures/blocks/spawner_bottom"
     },
-    "skeleton_spawner": {
-      "textures": "textures/blocks/drowned_spawner"
+    "drowned_spawner_side": {
+      "textures": "textures/blocks/drowned_spawner_side"
     },
-    "husk_spawner": {
-      "textures": "textures/blocks/drowned_spawner"
+    "bogged_spawner_side": {
+      "textures": "textures/blocks/bogged_spawner_side"
     },
-    "parched_spawner": {
-      "textures": "textures/blocks/drowned_spawner"
+    "zombie_spawner_side": {
+      "textures": "textures/blocks/zombie_spawner_side"
     },
-    "spider_spawner": {
-      "textures": "textures/blocks/drowned_spawner"
+    "skeleton_spawner_side": {
+      "textures": "textures/blocks/skeleton_spawner_side"
     },
-    "cave_spider_spawner": {
-      "textures": "textures/blocks/drowned_spawner"
+    "spider_spawner_side": {
+      "textures": "textures/blocks/spider_spawner_side"
     },
-    "slime_spawner": {
-      "textures": "textures/blocks/drowned_spawner"
+    "slime_spawner_side": {
+      "textures": "textures/blocks/slime_spawner_side"
     },
-    "silverfish_spawner": {
-      "textures": "textures/blocks/drowned_spawner"
+    "cave_spider_spawner_side": {
+      "textures": "textures/blocks/zombie_spawner_side"
     },
-    "stray_spawner": {
-      "textures": "textures/blocks/drowned_spawner"
+    "silverfish_spawner_side": {
+      "textures": "textures/blocks/zombie_spawner_side"
+    },
+    "stray_spawner_side": {
+      "textures": "textures/blocks/zombie_spawner_side"
+    },
+    "husk_spawner_side": {
+      "textures": "textures/blocks/zombie_spawner_side"
+    },
+    "parched_spawner_side": {
+      "textures": "textures/blocks/zombie_spawner_side"
     }
   }
 }

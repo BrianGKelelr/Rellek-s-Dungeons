@@ -1,20 +1,18 @@
 {
   "format_version": 2,
   "header": {
-    "name": "Rellek's Dungeons",
+    "name": "relleks_dungeons_resources",
     "description": "Custom dungeon structures",
-    "version": [
-      0,
-      0,
-      1
-    ],
-    "min_engine_version": [
-      1,
-      20,
-      10
-    ],
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 20, 10],
     "uuid": "b066e11d-eec1-413b-84d4-aae3de991209"
   },
-  "modules": [],
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "155dbb0e-b068-46b4-a176-8f4bd60ae8c5",
+      "version": [1, 0, 0]
+    }
+  ],
   "dependencies": []
 }

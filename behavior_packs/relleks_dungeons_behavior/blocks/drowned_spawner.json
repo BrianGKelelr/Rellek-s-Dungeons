@@ -29,10 +29,18 @@
       "minecraft:map_color": "#6c896e",
       "minecraft:geometry": "minecraft:geometry.full_block",
       "minecraft:material_instances": {
-        "*": {
-            "texture": "drowned_spawner",
-            "render_method": "opaque"
-        }
+      "*": {
+        "texture": "drowned_spawner_side",
+        "render_method": "alpha_test"
+      },
+      "up": {
+        "texture": "spawner_top",
+        "render_method": "alpha_test"
+      },
+      "down": {
+        "texture": "spawner_bottom",
+        "render_method": "alpha_test"
+      }
     },
       "relleks_dungeons:drownedspawner_actions": {}
     },
@@ -40,7 +48,13 @@
       {
         "condition": "query.block_state('relleks_dungeons:is_lit') == true",
         "components": {
-          "minecraft:light_emission": 8
+          "minecraft:light_emission": 8,
+          "minecraft:material_instances": {
+            "up": {
+              "texture": "spawner_top_open",
+              "render_method": "alpha_test"
+            }
+          }
         }
       },
       {
@@ -48,8 +62,16 @@
         "components": {
           "minecraft:material_instances": {
             "*": {
-              "texture": "drowned_spawner",
-              "render_method": "opaque"
+              "texture": "drowned_spawner_side",
+              "render_method": "alpha_test"
+            },
+            "up": {
+              "texture": "spawner_top",
+              "render_method": "alpha_test"
+            },
+            "down": {
+              "texture": "spawner_bottom",
+              "render_method": "alpha_test"
             }
           }
         }
@@ -59,8 +81,16 @@
         "components": {
           "minecraft:material_instances": {
             "*": {
-              "texture": "bogged_spawner",
-              "render_method": "opaque"
+              "texture": "bogged_spawner_side",
+              "render_method": "alpha_test"
+            },
+            "up": {
+              "texture": "spawner_top",
+              "render_method": "alpha_test"
+            },
+            "down": {
+              "texture": "spawner_bottom",
+              "render_method": "alpha_test"
             }
           }
         }
@@ -70,8 +100,16 @@
         "components": {
           "minecraft:material_instances": {
             "*": {
-              "texture": "zombie_spawner",
-              "render_method": "opaque"
+              "texture": "zombie_spawner_side",
+              "render_method": "alpha_test"
+            },
+            "up": {
+              "texture": "spawner_top",
+              "render_method": "alpha_test"
+            },
+            "down": {
+              "texture": "spawner_bottom",
+              "render_method": "alpha_test"
             }
           }
         }
@@ -81,30 +119,16 @@
         "components": {
           "minecraft:material_instances": {
             "*": {
-              "texture": "skeleton_spawner",
-              "render_method": "opaque"
-            }
-          }
-        }
-      },
-      {
-        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'husk'",
-        "components": {
-          "minecraft:material_instances": {
-            "*": {
-              "texture": "husk_spawner",
-              "render_method": "opaque"
-            }
-          }
-        }
-      },
-      {
-        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'parched'",
-        "components": {
-          "minecraft:material_instances": {
-            "*": {
-              "texture": "parched_spawner",
-              "render_method": "opaque"
+              "texture": "skeleton_spawner_side",
+              "render_method": "alpha_test"
+            },
+            "up": {
+              "texture": "spawner_top",
+              "render_method": "alpha_test"
+            },
+            "down": {
+              "texture": "spawner_bottom",
+              "render_method": "alpha_test"
             }
           }
         }
@@ -114,19 +138,16 @@
         "components": {
           "minecraft:material_instances": {
             "*": {
-              "texture": "spider_spawner",
-              "render_method": "opaque"
-            }
-          }
-        }
-      },
-      {
-        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'cave_spider'",
-        "components": {
-          "minecraft:material_instances": {
-            "*": {
-              "texture": "cave_spider_spawner",
-              "render_method": "opaque"
+              "texture": "spider_spawner_side",
+              "render_method": "alpha_test"
+            },
+            "up": {
+              "texture": "spawner_top",
+              "render_method": "alpha_test"
+            },
+            "down": {
+              "texture": "spawner_bottom",
+              "render_method": "alpha_test"
             }
           }
         }
@@ -136,30 +157,16 @@
         "components": {
           "minecraft:material_instances": {
             "*": {
-              "texture": "slime_spawner",
-              "render_method": "opaque"
-            }
-          }
-        }
-      },
-      {
-        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'silverfish'",
-        "components": {
-          "minecraft:material_instances": {
-            "*": {
-              "texture": "silverfish_spawner",
-              "render_method": "opaque"
-            }
-          }
-        }
-      },
-      {
-        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'stray'",
-        "components": {
-          "minecraft:material_instances": {
-            "*": {
-              "texture": "stray_spawner",
-              "render_method": "opaque"
+              "texture": "slime_spawner_side",
+              "render_method": "alpha_test"
+            },
+            "up": {
+              "texture": "spawner_top",
+              "render_method": "alpha_test"
+            },
+            "down": {
+              "texture": "spawner_bottom",
+              "render_method": "alpha_test"
             }
           }
         }
