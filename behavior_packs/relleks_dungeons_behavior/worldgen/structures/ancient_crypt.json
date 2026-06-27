@@ -15,7 +15,7 @@
                 "above_bottom": 60
             },
             "max": {
-                "above_bottom": 120
+                "above_bottom": 100
             } 
         },
         "biome_filters": {

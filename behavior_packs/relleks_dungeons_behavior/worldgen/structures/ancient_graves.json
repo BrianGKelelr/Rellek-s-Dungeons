@@ -5,15 +5,15 @@
             "identifier": "minecraft:ancient_graves"
         },
         "step": "surface_structures",
-        "terrain_adaptation": "beard_thin",
+        "terrain_adaptation": "none",
         "max_depth": 13,
         "liquid_settings": "ignore_waterlogging",
-        "start_pool": "minecraft:ancient_crypt_dungeons",
+        "start_pool": "minecraft:ancient_graves",
         "heightmap_projection": "world_surface",
         "start_height": {
             "type": "constant",
             "value": { 
-                "absolute": 10 
+                "absolute": -5
             }
         },
         "biome_filters": {
