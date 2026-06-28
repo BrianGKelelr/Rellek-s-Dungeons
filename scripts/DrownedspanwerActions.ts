@@ -33,7 +33,7 @@ const TRIGGER_RADIUS = 11;
 
 const ZOMBIE_COUNT = 8;
 const SKELETON_COUNT = 4;
-const SLIME_COUNT = 2;
+const SLIME_COUNT = 5;
 const SILVERFISH_COUNT = 12;
 const SPIDER_COUNT = 8;
 const CAVE_SPIDER_COUNT = 5;
