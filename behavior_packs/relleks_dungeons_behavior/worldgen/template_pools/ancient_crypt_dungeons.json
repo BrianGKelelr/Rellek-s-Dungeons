@@ -108,6 +108,14 @@
                     "processors": "minecraft:ancient_crypt_dungeon_processor"
                 },
                 "weight": 3
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/bridge2",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 3
             }
         ]
     }
