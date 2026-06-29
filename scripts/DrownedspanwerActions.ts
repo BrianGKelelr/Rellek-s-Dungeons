@@ -105,6 +105,10 @@ function setActive(loc: DimensionLocation, activate: boolean, isOminous: boolean
     if (block) {
         block.setPermutation(block.permutation.withState("relleks_dungeons:is_lit", activate));
         if(activate){
+            const now = system.currentTick;
+            despawnMobs(loc);
+            setCooldown(loc, now + COOLDOWN_TICKS);
+
             if(isOminous){
                 loc.dimension.spawnParticle("minecraft:trial_spawner_detection_ominous", loc);
                 loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
@@ -323,8 +327,6 @@ function spawnWave(loc: DimensionLocation, hasBadOmen: boolean): void {
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "stray"){
         spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "stray", equipStray, hasBadOmen, 0);
     }
-
-    setActive(loc, true, hasBadOmen);
 }
 
 function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string, equip: (enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean) => void, hasBadOmen: boolean, iterations: number): void {
@@ -424,19 +426,18 @@ function tickSpawner(loc: DimensionLocation): void {
     const tag = getSpawnerTag(loc);
 
     if (isActive(loc)) {
-        despawnMobs(loc);
         const remaining = loc.dimension.getEntities({ tags: [tag]});
 
         if (remaining.length === 0) {
             giveReward(loc, getNearbyPlayers(loc));
             setActive(loc, false, false);
-            setCooldown(loc, now + COOLDOWN_TICKS);
         }
         return;
     }
 
     const [playerIsNearby, hasBadOmen] = playerNearby(loc);
     if (playerIsNearby) {
+        setActive(loc, true, hasBadOmen);
         spawnWave(loc, hasBadOmen);
     }
 }
@@ -499,28 +500,10 @@ function cleanupSpawner(loc: DimensionLocation): boolean {
 }
 
 function despawnMobs(loc: DimensionLocation): void {
-    const radiusSq = TRIGGER_RADIUS * TRIGGER_RADIUS * 3; // Despawn radius is 3x the trigger radius
-
-    const anyPlayerInRange = loc.dimension.getPlayers().some(player => {
-        const dx = player.location.x - loc.x;
-        const dy = player.location.y - loc.y;
-        const dz = player.location.z - loc.z;
-        const distSq = dx * dx + dy * dy + dz * dz;
-        return distSq < radiusSq;
-    }); 
-
-    if (anyPlayerInRange) {
-        return; // At least one player is still close enough so don't despawn
-    }
-
     const tag = getSpawnerTag(loc);
     for (const entity of loc.dimension.getEntities({ tags: [tag] })) {
         try { entity.remove(); } catch {}
     }
-
-    const now = system.currentTick;
-    setActive(loc, false, false);
-    setCooldown(loc, now + COOLDOWN_TICKS);
 }
 
 world.afterEvents.playerBreakBlock.subscribe((event) => {
