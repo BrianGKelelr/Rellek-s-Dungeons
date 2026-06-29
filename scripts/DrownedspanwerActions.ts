@@ -246,8 +246,10 @@ function equipSkeleton(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolea
 
         const multiplier = hasBadOmen ? 1.5 : 1;
 
-        if (roll * multiplier > 0.95)       material = "chainmail";
-        else if (roll * multiplier > 0.75) material = "copper";
+        if (roll * multiplier > 0.95)
+            material = "chainmail";
+        else if (roll * multiplier > 0.75) 
+            material = "copper";
 
         if (material) {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=skeleton] slot.armor.head 0 ${material}_helmet`);
@@ -260,7 +262,26 @@ function equipSkeleton(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolea
 
 function equipHusk(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
 function equipParched(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
-function equipSpider(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
+
+function equipSpider(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {
+    system.runTimeout(() => {
+        const {x, y, z} = enemy.location;
+        const roll = Math.random();
+        let effect = "";
+
+        const multiplier = hasBadOmen ? 1.5 : 1;
+
+        if (roll * multiplier > 0.95)
+            effect = "invisibility";
+        if (roll * multiplier > 0.8)
+            effect = "speed"
+        
+        if(effect){
+            loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run effect @n[type=spider] ${effect} infinite 0 false`)
+        }
+    }, 1);  // 1 tick delay to allow spider to initialize before applying effects
+}
+
 function equipCaveSpider(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
 function equipSlime(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
 function equipSilverfish(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
