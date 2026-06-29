@@ -222,7 +222,7 @@ function equipZombie(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean)
 
         const multiplier = hasBadOmen ? 1.5 : 1;
 
-        if (roll * multiplier > 0.9)       material = "chainmail";
+        if (roll * multiplier > 0.95)       material = "chainmail";
         else if (roll * multiplier > 0.75) material = "copper";
 
         if (material) {
@@ -232,7 +232,7 @@ function equipZombie(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean)
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.feet 0 ${material}_boots`);
         }
 
-        if (Math.random() * multiplier > 0.7) {
+        if (Math.random() * multiplier > 0.9) {
             loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.weapon.mainhand 0 iron_sword`);
         }
     }, 1); // 1 tick delay to allow entity to fully initialize before equipping
@@ -246,7 +246,7 @@ function equipSkeleton(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolea
 
         const multiplier = hasBadOmen ? 1.5 : 1;
 
-        if (roll * multiplier > 0.9)       material = "chainmail";
+        if (roll * multiplier > 0.95)       material = "chainmail";
         else if (roll * multiplier > 0.75) material = "copper";
 
         if (material) {
