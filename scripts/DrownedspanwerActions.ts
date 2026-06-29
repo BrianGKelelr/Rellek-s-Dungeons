@@ -34,7 +34,6 @@ const TRIGGER_RADIUS = 11;
 const ZOMBIE_COUNT = 8;
 const SKELETON_COUNT = 4;
 const SLIME_COUNT = 5;
-const SILVERFISH_COUNT = 12;
 const SPIDER_COUNT = 8;
 const CAVE_SPIDER_COUNT = 5;
 
@@ -302,7 +301,6 @@ function equipCaveSpider(enemy: Entity, loc: DimensionLocation, hasBadOmen: bool
 }
 
 function equipSlime(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
-function equipSilverfish(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
 function equipStray(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
 
 /* ============================================================
@@ -359,9 +357,6 @@ function spawnWave(loc: DimensionLocation, hasBadOmen: boolean): void {
 
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "slime"){
         spawnWaveRecursive(loc, Math.floor(SLIME_COUNT * (hasBadOmen ? 1.5 : 1)), "slime", equipSlime, hasBadOmen, 0);
-
-    } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "silverfish"){
-        spawnWaveRecursive(loc, Math.floor(SILVERFISH_COUNT * (hasBadOmen ? 1.5 : 1)), "silverfish", equipSilverfish, hasBadOmen, 0);
 
     } else if(block.permutation.getState("relleks_dungeons:spawner_type") === "stray"){
         spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "stray", equipStray, hasBadOmen, 0);

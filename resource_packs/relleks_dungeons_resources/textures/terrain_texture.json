@@ -34,9 +34,6 @@
     "cave_spider_spawner_side": {
       "textures": "textures/blocks/zombie_spawner_side"
     },
-    "silverfish_spawner_side": {
-      "textures": "textures/blocks/zombie_spawner_side"
-    },
     "stray_spawner_side": {
       "textures": "textures/blocks/zombie_spawner_side"
     },

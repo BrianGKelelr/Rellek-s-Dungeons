@@ -8,8 +8,7 @@
         "relleks_dungeons:spawner_type": [
           "drowned", "bogged","zombie", 
           "skeleton", "husk", "parched",
-          "spider", "cave_spider", "slime",
-          "silverfish", "stray"
+          "spider", "cave_spider", "slime", "stray"
         ]
       },
       "menu_category": {
