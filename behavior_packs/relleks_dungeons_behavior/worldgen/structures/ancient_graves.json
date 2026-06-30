@@ -4,7 +4,7 @@
         "description": {
             "identifier": "minecraft:ancient_graves"
         },
-        "step": "surface_structures",
+        "step": "underground_structures",
         "terrain_adaptation": "none",
         "max_depth": 13,
         "liquid_settings": "ignore_waterlogging",

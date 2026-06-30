@@ -9,7 +9,6 @@ var TRIGGER_RADIUS = 11;
 var ZOMBIE_COUNT = 8;
 var SKELETON_COUNT = 4;
 var SLIME_COUNT = 5;
-var SILVERFISH_COUNT = 12;
 var SPIDER_COUNT = 8;
 var CAVE_SPIDER_COUNT = 5;
 var COOLDOWN_TICKS = 36e3;
@@ -46,6 +45,9 @@ function setActive(loc, activate, isOminous) {
   if (block) {
     block.setPermutation(block.permutation.withState("relleks_dungeons:is_lit", activate));
     if (activate) {
+      const now = system.currentTick;
+      despawnMobs(loc);
+      setCooldown(loc, now + COOLDOWN_TICKS);
       if (isOminous) {
         loc.dimension.spawnParticle("minecraft:trial_spawner_detection_ominous", loc);
         loc.dimension.runCommand(`playsound trial_spawner.detect_player @a ${loc.x} ${loc.y} ${loc.z}`);
@@ -125,7 +127,7 @@ function equipZombie(enemy, loc, hasBadOmen) {
     const roll = Math.random();
     let material = "";
     const multiplier = hasBadOmen ? 1.5 : 1;
-    if (roll * multiplier > 0.9) material = "chainmail";
+    if (roll * multiplier > 0.95) material = "chainmail";
     else if (roll * multiplier > 0.75) material = "copper";
     if (material) {
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.head 0 ${material}_helmet`);
@@ -133,7 +135,7 @@ function equipZombie(enemy, loc, hasBadOmen) {
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.legs 0 ${material}_leggings`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.armor.feet 0 ${material}_boots`);
     }
-    if (Math.random() * multiplier > 0.7) {
+    if (Math.random() * multiplier > 0.9) {
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=zombie] slot.weapon.mainhand 0 iron_sword`);
     }
   }, 1);
@@ -144,8 +146,10 @@ function equipSkeleton(enemy, loc, hasBadOmen) {
     const roll = Math.random();
     let material = "";
     const multiplier = hasBadOmen ? 1.5 : 1;
-    if (roll * multiplier > 0.9) material = "chainmail";
-    else if (roll * multiplier > 0.75) material = "copper";
+    if (roll * multiplier > 0.95)
+      material = "chainmail";
+    else if (roll * multiplier > 0.75)
+      material = "copper";
     if (material) {
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=skeleton] slot.armor.head 0 ${material}_helmet`);
       loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run replaceitem entity @n[type=skeleton] slot.armor.chest 0 ${material}_chestplate`);
@@ -159,12 +163,36 @@ function equipHusk(enemy, loc, hasBadOmen) {
 function equipParched(enemy, loc, hasBadOmen) {
 }
 function equipSpider(enemy, loc, hasBadOmen) {
+  system.runTimeout(() => {
+    const { x, y, z } = enemy.location;
+    const roll = Math.random();
+    let effect = "";
+    const multiplier = hasBadOmen ? 1.5 : 1;
+    if (roll * multiplier > 0.95)
+      effect = "invisibility";
+    if (roll * multiplier > 0.8)
+      effect = "speed";
+    if (effect) {
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run effect @n[type=spider] ${effect} infinite 0 false`);
+    }
+  }, 1);
 }
 function equipCaveSpider(enemy, loc, hasBadOmen) {
+  system.runTimeout(() => {
+    const { x, y, z } = enemy.location;
+    const roll = Math.random();
+    let effect = "";
+    const multiplier = hasBadOmen ? 1.5 : 1;
+    if (roll * multiplier > 0.95)
+      effect = "invisibility";
+    if (roll * multiplier > 0.8)
+      effect = "speed";
+    if (effect) {
+      loc.dimension.runCommand(`execute positioned ${x} ${y} ${z} run effect @n[type=cave_spider] ${effect} infinite 0 false`);
+    }
+  }, 1);
 }
 function equipSlime(enemy, loc, hasBadOmen) {
-}
-function equipSilverfish(enemy, loc, hasBadOmen) {
 }
 function equipStray(enemy, loc, hasBadOmen) {
 }
@@ -204,12 +232,9 @@ function spawnWave(loc, hasBadOmen) {
     spawnWaveRecursive(loc, Math.floor(CAVE_SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "cave_spider", equipCaveSpider, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "slime") {
     spawnWaveRecursive(loc, Math.floor(SLIME_COUNT * (hasBadOmen ? 1.5 : 1)), "slime", equipSlime, hasBadOmen, 0);
-  } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "silverfish") {
-    spawnWaveRecursive(loc, Math.floor(SILVERFISH_COUNT * (hasBadOmen ? 1.5 : 1)), "silverfish", equipSilverfish, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "stray") {
     spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "stray", equipStray, hasBadOmen, 0);
   }
-  setActive(loc, true, hasBadOmen);
 }
 function spawnWaveRecursive(loc, count, type, equip, hasBadOmen, iterations) {
   if (iterations > 35 || count <= 0) {
@@ -283,17 +308,16 @@ function tickSpawner(loc) {
     return;
   const tag = getSpawnerTag(loc);
   if (isActive(loc)) {
-    despawnMobs(loc);
     const remaining = loc.dimension.getEntities({ tags: [tag] });
     if (remaining.length === 0) {
       giveReward(loc, getNearbyPlayers(loc));
       setActive(loc, false, false);
-      setCooldown(loc, now + COOLDOWN_TICKS);
     }
     return;
   }
   const [playerIsNearby, hasBadOmen] = playerNearby(loc);
   if (playerIsNearby) {
+    setActive(loc, true, hasBadOmen);
     spawnWave(loc, hasBadOmen);
   }
 }
@@ -340,17 +364,6 @@ function cleanupSpawner(loc) {
   return false;
 }
 function despawnMobs(loc) {
-  const radiusSq = TRIGGER_RADIUS * TRIGGER_RADIUS * 3;
-  const anyPlayerInRange = loc.dimension.getPlayers().some((player) => {
-    const dx = player.location.x - loc.x;
-    const dy = player.location.y - loc.y;
-    const dz = player.location.z - loc.z;
-    const distSq = dx * dx + dy * dy + dz * dz;
-    return distSq < radiusSq;
-  });
-  if (anyPlayerInRange) {
-    return;
-  }
   const tag = getSpawnerTag(loc);
   for (const entity of loc.dimension.getEntities({ tags: [tag] })) {
     try {
@@ -358,9 +371,6 @@ function despawnMobs(loc) {
     } catch {
     }
   }
-  const now = system.currentTick;
-  setActive(loc, false, false);
-  setCooldown(loc, now + COOLDOWN_TICKS);
 }
 world.afterEvents.playerBreakBlock.subscribe((event) => {
   const blockId = event.brokenBlockPermutation.type.id;
