@@ -326,7 +326,7 @@
           },
           "block_entity_modifier": {
             "type": "minecraft:append_loot",
-            "loot_table": "loot_tables/chests/swamp_crypt_pots.json"
+            "loot_table": "loot_tables/chests/ancient_crypt_pots.json"
           }
         }
         ]
