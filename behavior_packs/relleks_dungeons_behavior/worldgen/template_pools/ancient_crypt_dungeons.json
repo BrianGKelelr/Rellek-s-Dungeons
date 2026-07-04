@@ -107,7 +107,7 @@
                     "location": "ancient_crypt/dungeon/bridge",
                     "processors": "minecraft:ancient_crypt_dungeon_processor"
                 },
-                "weight": 3
+                "weight": 1
             },
             {
                 "element": {
@@ -115,7 +115,55 @@
                     "location": "ancient_crypt/dungeon/bridge2",
                     "processors": "minecraft:ancient_crypt_dungeon_processor"
                 },
-                "weight": 3
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/pillars",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/pillars_cave",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/chest",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/chest2",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/ghost_room",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/dungeon/ghost_intersect",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
             }
         ]
     }
