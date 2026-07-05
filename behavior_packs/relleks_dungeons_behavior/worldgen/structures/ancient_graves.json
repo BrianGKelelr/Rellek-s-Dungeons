@@ -13,7 +13,7 @@
         "start_height": {
             "type": "constant",
             "value": { 
-                "absolute": -5
+                "absolute": -19
             }
         },
         "biome_filters": {

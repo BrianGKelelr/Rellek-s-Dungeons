@@ -136,22 +136,6 @@
             {
                 "element": {
                     "element_type": "minecraft:single_pool_element",
-                    "location": "ancient_crypt/dungeon/chest",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor"
-                },
-                "weight": 1
-            },
-            {
-                "element": {
-                    "element_type": "minecraft:single_pool_element",
-                    "location": "ancient_crypt/dungeon/chest2",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor"
-                },
-                "weight": 1
-            },
-            {
-                "element": {
-                    "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/dungeon/ghost_room",
                     "processors": "minecraft:ancient_crypt_dungeon_processor"
                 },

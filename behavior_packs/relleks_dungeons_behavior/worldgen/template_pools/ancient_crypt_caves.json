@@ -36,6 +36,30 @@
                     "processors": "minecraft:ancient_crypt_cave_processor"
                 },
                 "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/cave/ghost_cave",
+                    "processors": "minecraft:ancient_crypt_cave_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/cave/zombie_cave",
+                    "processors": "minecraft:ancient_crypt_cave_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "ancient_crypt/cave/pit",
+                    "processors": "minecraft:ancient_crypt_cave_processor"
+                },
+                "weight": 1
             }
         ]
     }
