@@ -8,7 +8,7 @@
         "terrain_adaptation": "encapsulate",
         "max_depth": 13,
         "liquid_settings": "ignore_waterlogging",
-        "start_pool": "minecraft:ancient_crypt_dungeons",
+        "start_pool": "minecraft:ancient_crypt_entrance",
         "heightmap_projection": "world_surface",
         "start_height": {
             "type": "constant",
