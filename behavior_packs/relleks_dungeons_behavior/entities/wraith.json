@@ -28,7 +28,7 @@
             },
 
             "minecraft:knockback_resistance": {
-                "value": 0.7
+                "value": 0.8
             },
 
             "minecraft:loot": {
@@ -52,11 +52,11 @@
             "minecraft:can_fly": {},
 
             "minecraft:flying_speed": {
-                "value": 0.15
+                "value": 0.2
             },
 
             "minecraft:movement": {
-                "value": 0.15
+                "value": 0.2
             },
 
             "minecraft:movement.hover": {},

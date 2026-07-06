@@ -341,57 +341,57 @@ function spawnWave(loc: DimensionLocation, hasBadOmen: boolean): void {
     if (block.permutation.getState("relleks_dungeons:spawner_type") === "drowned") {
         const count = Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
-        spawnWaveRecursive(loc, count, "drowned", equipDrowned, hasBadOmen, 0);
+        spawnWaveRecursive(loc, Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:drowned", equipDrowned, hasBadOmen, 0);
     } 
     else if (block.permutation.getState("relleks_dungeons:spawner_type") === "bogged") {
         const count = Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
-        spawnWaveRecursive(loc, count, "bogged", equipBogged, hasBadOmen, 0);
+        spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:bogged", equipBogged, hasBadOmen, 0);
     } 
     else if(block.permutation.getState("relleks_dungeons:spawner_type") === "zombie"){
         const count = Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
-        spawnWaveRecursive(loc, Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1)), "zombie", equipZombie, hasBadOmen, 0);
+        spawnWaveRecursive(loc, Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:zombie", equipZombie, hasBadOmen, 0);
     } 
     else if(block.permutation.getState("relleks_dungeons:spawner_type") === "skeleton"){
         const count = Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
-        spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "skeleton", equipSkeleton, hasBadOmen, 0);
+        spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:skeleton", equipSkeleton, hasBadOmen, 0);
     } 
     else if(block.permutation.getState("relleks_dungeons:spawner_type") === "husk"){
         const count = Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
-        spawnWaveRecursive(loc, Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1)), "husk", equipHusk, hasBadOmen, 0);
+        spawnWaveRecursive(loc, Math.floor(ZOMBIE_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:husk", equipHusk, hasBadOmen, 0);
     } 
     else if(block.permutation.getState("relleks_dungeons:spawner_type") === "parched"){
         const count = Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
-        spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "parched", equipParched, hasBadOmen, 0);
+        spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:parched", equipParched, hasBadOmen, 0);
     } 
     else if(block.permutation.getState("relleks_dungeons:spawner_type") === "spider"){
         const count = Math.floor(SPIDER_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
-        spawnWaveRecursive(loc, Math.floor(SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "spider", equipSpider, hasBadOmen, 0);
+        spawnWaveRecursive(loc, Math.floor(SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:spider", equipSpider, hasBadOmen, 0);
     } 
     else if(block.permutation.getState("relleks_dungeons:spawner_type") === "cave_spider"){
         const count = Math.floor(CAVE_SPIDER_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
-        spawnWaveRecursive(loc, Math.floor(CAVE_SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "cave_spider", equipCaveSpider, hasBadOmen, 0);
+        spawnWaveRecursive(loc, Math.floor(CAVE_SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:cave_spider", equipCaveSpider, hasBadOmen, 0);
     } 
     else if(block.permutation.getState("relleks_dungeons:spawner_type") === "slime"){
         const count = Math.floor(SLIME_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
-        spawnWaveRecursive(loc, Math.floor(SLIME_COUNT * (hasBadOmen ? 1.5 : 1)), "slime", equipSlime, hasBadOmen, 0);
+        spawnWaveRecursive(loc, Math.floor(SLIME_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:slime", equipSlime, hasBadOmen, 0);
     } 
     else if(block.permutation.getState("relleks_dungeons:spawner_type") === "stray"){
         const count = Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
-        spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "stray", equipStray, hasBadOmen, 0);
+        spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:stray", equipStray, hasBadOmen, 0);
     }
-    else if(block.permutation.getState("relleks_dungeons:spawer_type") === "wraith"){
+    else if(block.permutation.getState("relleks_dungeons:spawner_type") === "wraith"){
         const count = Math.floor(WRAITH_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
-        spawnWaveRecursive(loc, Math.floor(WRAITH_COUNT * (hasBadOmen ? 1.5 : 1)), "Wraith", equipWraith, hasBadOmen, 0);
+        spawnWaveRecursive(loc, Math.floor(WRAITH_COUNT * (hasBadOmen ? 1.5 : 1)), "relleks_dungeons:wraith", equipWraith, hasBadOmen, 0);
     }
 }
 
@@ -419,7 +419,7 @@ function spawnWaveRecursive(loc: DimensionLocation, count: number, type: string,
             if (!isValidSpawnPosition(loc.dimension, x, y, z)) continue;
 
             try {
-                const enemy = loc.dimension.spawnEntity(`minecraft:${type}`, { x, y, z });
+                const enemy = loc.dimension.spawnEntity(`${type}`, { x, y, z });
                 loc.dimension.runCommand(`playsound trial_spawner.spawn_mob @a ${loc.x} ${loc.y} ${loc.z}`);
                 enemy.addTag(tag);
                 equip(enemy, loc, hasBadOmen);
