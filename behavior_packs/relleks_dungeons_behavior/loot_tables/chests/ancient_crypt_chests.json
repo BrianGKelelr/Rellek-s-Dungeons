@@ -60,7 +60,7 @@
         },
         {
           "type": "item",
-          "name": "minecraft:redstone_dust",
+          "name": "minecraft:redstone",
           "weight": 2,
           "functions": [
             {
@@ -377,7 +377,7 @@
         },
         {
           "type": "item",
-          "name": "minecraft:music_disc_stall",
+          "name": "minecraft:music_disc_stal",
           "weight": 1,
           "functions": [
             {
