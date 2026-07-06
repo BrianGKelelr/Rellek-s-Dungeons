@@ -2,3 +2,5 @@ pack.name=Rellek's Dungeons Resource Pack
 
 entity.relleks_dungeons:wraith.name=Wraith
 item.spawn_egg.entity.relleks_dungeons:wraith.name=Wraith Spawn Egg
+
+item.relleks_dungeons:ancient_skull_framgnet=Ancient Skull Fragment
