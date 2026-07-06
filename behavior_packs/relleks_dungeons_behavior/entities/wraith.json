@@ -73,6 +73,8 @@
                 "can_walk": false
             },
 
+            "minecraft:burns_in_daylight": {},
+
             "minecraft:damage_sensor": {
                 "triggers": [
                     {
@@ -117,6 +119,10 @@
                     },
                     {
                         "cause": "wither",
+                        "deals_damage": false
+                    },
+                    {
+                        "cause": "suffocation",
                         "deals_damage": false
                     },
                     {
