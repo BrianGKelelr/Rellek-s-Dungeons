@@ -11,6 +11,7 @@ var SKELETON_COUNT = 4;
 var SLIME_COUNT = 5;
 var SPIDER_COUNT = 8;
 var CAVE_SPIDER_COUNT = 5;
+var WRAITH_COUNT = 2;
 var COOLDOWN_TICKS = 36e3;
 var CHECK_INTERVAL = 60;
 var DISCOVERY_INTERVAL = 200;
@@ -196,6 +197,8 @@ function equipCaveSpider(enemy, loc, hasBadOmen) {
     }
   }, 1);
 }
+function equipWraith(enemy, loc, hasBadOmen) {
+}
 function equipSlime(enemy, loc, hasBadOmen) {
 }
 function equipStray(enemy, loc, hasBadOmen) {
@@ -258,6 +261,10 @@ function spawnWave(loc, hasBadOmen) {
     const count = Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1));
     setPending(loc, count);
     spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "stray", equipStray, hasBadOmen, 0);
+  } else if (block.permutation.getState("relleks_dungeons:spawer_type") === "wraith") {
+    const count = Math.floor(WRAITH_COUNT * (hasBadOmen ? 1.5 : 1));
+    setPending(loc, count);
+    spawnWaveRecursive(loc, Math.floor(WRAITH_COUNT * (hasBadOmen ? 1.5 : 1)), "Wraith", equipWraith, hasBadOmen, 0);
   }
 }
 function spawnWaveRecursive(loc, count, type, equip, hasBadOmen, iterations) {

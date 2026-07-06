@@ -8,7 +8,8 @@
         "relleks_dungeons:spawner_type": [
           "drowned", "bogged","zombie", 
           "skeleton", "husk", "parched",
-          "spider", "cave_spider", "slime", "stray"
+          "spider", "cave_spider", "slime", "stray",
+          "wraith"
         ]
       },
       "menu_category": {
@@ -51,6 +52,25 @@
           "minecraft:material_instances": {
             "up": {
               "texture": "spawner_top_open",
+              "render_method": "alpha_test"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('relleks_dungeons:spawner_type') == 'wraith'",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "wraith_spawner_side",
+              "render_method": "alpha_test"
+            },
+            "up": {
+              "texture": "spawner_top",
+              "render_method": "alpha_test"
+            },
+            "down": {
+              "texture": "spawner_bottom",
               "render_method": "alpha_test"
             }
           }

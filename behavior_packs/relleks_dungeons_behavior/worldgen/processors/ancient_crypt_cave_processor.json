@@ -50,6 +50,19 @@
           {
             "input_predicate": {
               "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:gray_concrete",
+              "probability": 1
+            },
+            "output_state": {
+              "name": "relleks_dungeons:drowned_spawner",
+              "states": {
+                "relleks_dungeons:spawner_type": "wraith"
+              }
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
               "block": "minecraft:stone_bricks",
               "probability": 0.3
             },

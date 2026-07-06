@@ -13,6 +13,9 @@
     "spawner_bottom": {
       "textures": "textures/blocks/spawner_bottom"
     },
+    "wraith_spawner_side": {
+      "textures": "textures/blocks/wraith_spawner_side"
+    },
     "drowned_spawner_side": {
       "textures": "textures/blocks/drowned_spawner_side"
     },

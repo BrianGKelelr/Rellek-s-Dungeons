@@ -4,7 +4,7 @@
     "name": "relleks_dungeons_resources",
     "description": "Custom dungeon structures",
     "version": [1, 0, 0],
-    "min_engine_version": [1, 20, 10],
+    "min_engine_version": [1, 21, 20],
     "uuid": "b066e11d-eec1-413b-84d4-aae3de991209"
   },
   "modules": [
@@ -14,5 +14,10 @@
       "version": [1, 0, 0]
     }
   ],
-  "dependencies": []
+  "dependencies": [
+    {
+      "uuid": "0db64fbe-dfd9-4078-82cb-588d73022314",
+      "version": [1, 0, 0]
+    }
+  ]
 }

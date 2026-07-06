@@ -36,6 +36,7 @@ const SKELETON_COUNT = 4;
 const SLIME_COUNT = 5;
 const SPIDER_COUNT = 8;
 const CAVE_SPIDER_COUNT = 5;
+const WRAITH_COUNT = 2;
 
 const COOLDOWN_TICKS = 36000; //36000 = 30 minutes
 
@@ -302,6 +303,10 @@ function equipCaveSpider(enemy: Entity, loc: DimensionLocation, hasBadOmen: bool
     }, 1);  // 1 tick delay to allow spider to initialize before applying effects
 }
 
+//wraith needn't be equipped but we define this function anyways to allow for easy integration with recursive
+//spawning function.
+function equipWraith(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {};
+
 function equipSlime(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
 function equipStray(enemy: Entity, loc: DimensionLocation, hasBadOmen: boolean): void {}
 
@@ -382,6 +387,11 @@ function spawnWave(loc: DimensionLocation, hasBadOmen: boolean): void {
         const count = Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
         spawnWaveRecursive(loc, Math.floor(SKELETON_COUNT * (hasBadOmen ? 1.5 : 1)), "stray", equipStray, hasBadOmen, 0);
+    }
+    else if(block.permutation.getState("relleks_dungeons:spawer_type") === "wraith"){
+        const count = Math.floor(WRAITH_COUNT * (hasBadOmen ? 1.5 : 1));
+        setPending(loc, count);
+        spawnWaveRecursive(loc, Math.floor(WRAITH_COUNT * (hasBadOmen ? 1.5 : 1)), "Wraith", equipWraith, hasBadOmen, 0);
     }
 }
 

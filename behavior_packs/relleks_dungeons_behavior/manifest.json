@@ -4,55 +4,31 @@
     "name": "Rellek's Dungeons",
     "description": "Custom dungeon structures",
     "uuid": "0db64fbe-dfd9-4078-82cb-588d73022314",
-    "version": [
-      1,
-      0,
-      0
-    ],
-    "min_engine_version": [
-      1,
-      21,
-      20
-    ]
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 21, 20]
   },
   "modules": [
     {
       "type": "data",
       "uuid": "c51e757f-f461-41b6-9712-9ceea58eddca",
-      "version": [
-        1,
-        0,
-        0
-      ]
+      "version": [1, 0, 0]
     },
     {
       "type": "script",
       "language": "javascript",
       "uuid": "e7a7d78b-a106-4506-a64b-eb30cf3a69d9",
       "entry": "scripts/main.js",
-      "version": [
-        1,
-        0,
-        0
-      ]
+      "version": [1, 0, 0]
     }
   ],
   "dependencies": [
     {
       "module_name": "@minecraft/server",
-      "version": [
-        2,
-        8,
-        0
-      ]
+      "version": [2, 8, 0]
     },
     {
       "uuid": "b066e11d-eec1-413b-84d4-aae3de991209",
-      "version": [
-        1,
-        0,
-        0
-      ]
+      "version": [1, 0, 0]
     }
   ]
 }
