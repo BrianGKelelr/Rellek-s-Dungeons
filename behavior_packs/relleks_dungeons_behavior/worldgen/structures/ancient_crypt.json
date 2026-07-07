@@ -11,9 +11,12 @@
         "start_pool": "minecraft:ancient_crypt_entrance",
         "heightmap_projection": "world_surface",
         "start_height": {
-            "type": "constant",
-            "value": { 
-                "absolute": -35
+            "type": "uniform",
+            "max": {
+                "absolute": -25
+            },
+            "min": {
+                "absolute": -50
             }
         },
         "biome_filters": {
@@ -47,6 +50,10 @@
                 {
                     "test": "has_biome_tag",
                     "value": "warm"
+                },
+                {
+                    "test": "has_biome_tag",
+                    "value": "river"
                 }
             ]
         }
