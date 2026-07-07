@@ -1,0 +1,102 @@
+{
+  "format_version": "1.21.20",
+  "minecraft:processor_list": {
+    "description": {
+      "identifier": "minecraft:ancient_crypt_dungeon_processor"
+    },
+    "processors": [
+      {
+        "processor_type": "minecraft:rule",
+        "rules": [
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:stone_bricks",
+              "probability": 0.3
+            },
+            "output_state": {
+              "name": "minecraft:mossy_stone_bricks"
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:stone_bricks",
+              "probability": 0.1
+            },
+            "output_state": {
+              "name": "minecraft:cracked_stone_bricks"
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:stone_brick_wall",
+              "probability": 0.4
+            },
+            "output_state": {
+              "name": "minecraft:mossy_stone_brick_wall"
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:cobblestone",
+              "probability": 0.6
+            },
+            "output_state": {
+              "name": "minecraft:mossy_cobblestone"
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:cobblestone_wall",
+              "probability": 0.4
+            },
+            "output_state": {
+              "name": "minecraft:mossy_cobblestone_wall"
+            }
+          },
+          {
+            "input_predicate": {
+                "predicate_type": "minecraft:random_block_match",
+                "block": "minecraft:decorated_pot",
+                "probability": 0.3
+            },
+            "output_state": {
+                "name": "minecraft:stone_button",
+                "states": {
+                    "minecraft:facing_direction": 1
+                }
+            }
+          },
+          {
+            "input_predicate": {
+                "predicate_type": "minecraft:random_block_match",
+                "block": "minecraft:decorated_pot",
+                "probability": 0.9
+            },
+            "output_state": {
+                "name": "minecraft:air"
+            }
+          },
+          {
+          "input_predicate": {
+            "predicate_type": "minecraft:random_block_match",
+            "block": "minecraft:decorated_pot",
+            "probability": 0.9
+          },
+          "output_state": {
+            "name": "minecraft:decorated_pot"
+          },
+          "block_entity_modifier": {
+            "type": "minecraft:append_loot",
+            "loot_table": "loot_tables/chests/ancient_crypt_pots.json"
+          }
+        }
+        ]
+      }
+    ]
+  }
+}

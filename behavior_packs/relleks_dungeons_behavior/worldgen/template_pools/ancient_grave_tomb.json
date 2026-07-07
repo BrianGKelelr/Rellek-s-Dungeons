@@ -2,7 +2,7 @@
     "format_version": "1.21.20",
     "minecraft:template_pool": {
         "description": {
-            "identifier": "minecraft:ancient_graves"
+            "identifier": "minecraft:ancient_grave_tomb"
         },
         "elements": [
             {
