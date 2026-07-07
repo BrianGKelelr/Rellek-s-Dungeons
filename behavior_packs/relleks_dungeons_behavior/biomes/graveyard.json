@@ -39,11 +39,7 @@
           {
             "dimension": "minecraft:overworld",
             "targets": [
-              "minecraft:plains",
-              "minecraft:forest",
-              "minecraft:birch_forest",
-              "minecraft:taiga",
-              "minecraft:roofed_forest"
+              "minecraft:plains"
             ],
             "amount": 0.1,
             "noise_frequency_scale": 1
@@ -54,7 +50,9 @@
         "tags": [
           "monster",
           "overworld",
-          "graveyard"
+          "graveyard",
+          "plains",
+          "bee_habitat"
         ]
       }
     }

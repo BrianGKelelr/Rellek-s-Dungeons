@@ -5,35 +5,32 @@
       "identifier": "relleks_dungeons:graveyard"
     },
     "components": {
-      "minecraft:sky_color": {
-        "sky_color": "#b9b9b9"
-      },
       "minecraft:fog_appearance": {
-        "fog_identifier": "minecraft:fog_pale_garden"
+        "fog_identifier": "minecraft:fog_plains"
       },
       "minecraft:water_appearance": {
-        "surface_color": "#76889D"
+        "surface_color": "#44AFF5"
       },
       "minecraft:biome_music": {
         "volume_multiplier": 0
       },
       "minecraft:foliage_appearance": {
-        "color": "#878d76"
+        "color": "#77AB2F"
       },
       "minecraft:grass_appearance": {
-        "color": "#778272"
+        "color": "#91BD59"
       },
       "minecraft:dry_foliage_color": {
-        "color": "#A0A69C"
+        "color": "#A37546"
       },
       "minecraft:atmosphere_identifier": {
-        "atmosphere_identifier": "minecraft:pale_garden_atmospherics"
+        "atmosphere_identifier": "minecraft:default_atmospherics"
       },
       "minecraft:color_grading_identifier": {
-        "color_grading_identifier": "minecraft:coolish_color_grading"
+        "color_grading_identifier": "minecraft:default_color_grading"
       },
       "minecraft:lighting_identifier": {
-        "lighting_identifier": "minecraft:pale_garden_lighting"
+        "lighting_identifier": "minecraft:default_lighting"
       },
       "minecraft:water_identifier": {
         "water_identifier": "minecraft:default_water"

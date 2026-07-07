@@ -1,0 +1,43 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:weighted_random_feature": {
+    "description": {
+      "identifier": "graveyard:grave_feature"
+    },
+    "features": [
+      [ "graveyard:grave1_feature", 1 ],
+      [ "graveyard:grave2_feature", 1 ],
+      [ "graveyard:grave3_feature", 1 ],
+      [ "graveyard:grave4_feature", 1 ],
+      [ "graveyard:grave5_feature", 1 ],
+      [ "graveyard:grave6_feature", 1 ],
+      [ "graveyard:grave7_feature", 1 ],
+      [ "graveyard:grave8_feature", 2 ],
+      [ "graveyard:grave9_feature", 2 ],
+      [ "graveyard:grave10_feature", 2 ],
+      [ "graveyard:grave11_feature", 2 ],
+      [ "graveyard:grave12_feature", 2 ],
+      [ "graveyard:grave13_feature", 2 ],
+      [ "graveyard:grave14_feature", 2 ],
+      [ "graveyard:grave15_feature", 2 ],
+      [ "graveyard:grave16_feature", 2 ],
+      [ "graveyard:grave17_feature", 2 ],
+      [ "graveyard:grave18_feature", 2 ],
+      [ "graveyard:grave19_feature", 2 ],
+      [ "graveyard:grave20_feature", 2 ],
+      [ "graveyard:grave21_feature", 2 ],
+      [ "graveyard:grave22_feature", 2 ],
+      [ "graveyard:grave23_feature", 2 ],
+      [ "graveyard:grave24_feature", 2 ],
+      [ "graveyard:grave25_feature", 2 ],
+      [ "graveyard:grave26_feature", 2 ],
+      [ "graveyard:grave27_feature", 2 ],
+      [ "graveyard:grave28_feature", 2 ],
+      [ "graveyard:grave29_feature", 2 ],
+      [ "graveyard:grave30_feature", 2 ],
+      [ "graveyard:grave31_feature", 2 ],
+      [ "graveyard:grave32_feature", 2 ],
+      [ "graveyard:grave33_feature", 2 ]
+    ]
+  }
+}
