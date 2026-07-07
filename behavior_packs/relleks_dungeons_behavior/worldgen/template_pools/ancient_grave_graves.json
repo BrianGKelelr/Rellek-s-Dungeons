@@ -9,7 +9,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_graves/grave1",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 2
@@ -18,7 +18,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_graves/grave2",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 2
@@ -27,7 +27,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_graves/grave3",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 2
@@ -36,7 +36,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_graves/grave4",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 2
@@ -45,7 +45,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_graves/grave5",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 2
@@ -54,7 +54,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_graves/grave6",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 2
@@ -63,7 +63,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_graves/grave7",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 2
@@ -72,7 +72,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_graves/grave8",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 2
@@ -81,7 +81,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_graves/grave9",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 2
@@ -90,7 +90,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_graves/grave10",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 1

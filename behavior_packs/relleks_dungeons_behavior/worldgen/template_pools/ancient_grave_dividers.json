@@ -9,7 +9,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_dividers/divider1",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 1
@@ -18,7 +18,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_dividers/divider2",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 1
@@ -27,7 +27,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_dividers/divider3",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 1
@@ -36,7 +36,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_dividers/divider4",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 1
@@ -45,7 +45,7 @@
                 "element": {
                     "element_type": "minecraft:single_pool_element",
                     "location": "ancient_crypt/grave_dividers/divider5",
-                    "processors": "minecraft:ancient_crypt_dungeon_processor",
+                    "processors": "minecraft:ancient_grave_processor",
                     "projection": "terrain_matching"
                 },
                 "weight": 1
