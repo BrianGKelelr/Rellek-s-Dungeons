@@ -52,11 +52,11 @@
             "minecraft:can_fly": {},
 
             "minecraft:flying_speed": {
-                "value": 0.2
+                "value": 0.25
             },
 
             "minecraft:movement": {
-                "value": 0.2
+                "value": 0.25
             },
 
             "minecraft:movement.hover": {},
@@ -138,7 +138,7 @@
 
             "minecraft:behavior.nearest_attackable_target": {
                 "priority": 2,
-                "within_radius": 25,
+                "within_radius": 48,
                 "reselect_targets": true,
                 "entity_types": [
                     {
@@ -147,7 +147,7 @@
                             "subject": "other",
                             "value": "player"
                         },
-                        "max_dist": 35
+                        "max_dist": 48
                     }
                 ]
             },
