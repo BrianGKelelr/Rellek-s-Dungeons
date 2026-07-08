@@ -37,7 +37,8 @@
       [ "graveyard:grave30_feature", 2 ],
       [ "graveyard:grave31_feature", 2 ],
       [ "graveyard:grave32_feature", 2 ],
-      [ "graveyard:grave33_feature", 2 ]
+      [ "graveyard:grave33_feature", 2 ],
+      [ "graveyard:pot_feature", 15]
     ]
   }
 }
