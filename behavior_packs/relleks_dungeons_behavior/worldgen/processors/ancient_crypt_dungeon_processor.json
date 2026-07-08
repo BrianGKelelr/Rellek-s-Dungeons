@@ -73,6 +73,16 @@
           {
             "input_predicate": {
               "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:stone_brick_wall",
+              "probability": 0.5
+            },
+            "output_state": {
+              "name": "minecraft:mossy_stone_brick_wall"
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
               "block": "minecraft:stone_bricks",
               "probability": 0.1
             },

@@ -1,0 +1,28 @@
+{
+    "format_version": "1.21.20",
+    "minecraft:jigsaw": {
+        "description": {
+            "identifier": "minecraft:lich_summon"
+        },
+        "step": "surface_structures",
+        "terrain_adaptation": "beard_thin",
+        "max_depth": 20,
+        "liquid_settings": "ignore_waterlogging",
+        "start_pool": "minecraft:lich_summon",
+        "heightmap_projection": "world_surface",
+        "start_height": {
+            "type": "constant",
+            "value": { 
+                "absolute":0
+            }
+        },
+        "biome_filters": {
+            "all_of": [ 
+                { 
+                    "test": "has_biome_tag", 
+                    "value": "graveyard" 
+                }
+            ]
+        }
+    }
+}

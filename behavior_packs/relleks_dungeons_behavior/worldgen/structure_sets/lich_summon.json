@@ -1,0 +1,21 @@
+{
+    "format_version": "1.21.20",
+    "minecraft:structure_set": {
+        "description": {
+            "identifier": "minecraft:lich_summon"
+        },
+        "placement": {
+            "type": "minecraft:random_spread",
+            "salt": 39281139,
+            "separation": 5,
+            "spacing": 11,
+            "spread_type": "linear"
+        },
+        "structures": [
+            {
+                "structure": "minecraft:lich_summon",
+                "weight": 1
+            }
+        ]
+    }
+}
