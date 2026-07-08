@@ -1,0 +1,46 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:weighted_random_feature": {
+    "description": {
+      "identifier": "graveyard:pot_feature"
+    },
+    "features": [
+      [ "graveyard:pot1_feature", 1 ],
+      [ "graveyard:pot2_feature", 1 ],
+      [ "graveyard:pot3_feature", 1 ],
+      [ "graveyard:pot4_feature", 1 ],
+      [ "graveyard:pot5_feature", 1 ],
+      [ "graveyard:pot6_feature", 1 ],
+      [ "graveyard:pot7_feature", 1 ],
+      [ "graveyard:pot8_feature", 1 ],
+      [ "graveyard:pot9_feature", 1 ],
+      [ "graveyard:pot10_feature", 1 ],
+      [ "graveyard:pot11_feature", 1 ],
+      [ "graveyard:pot12_feature", 1 ],
+      [ "graveyard:pot13_feature", 1 ],
+      [ "graveyard:pot14_feature", 1 ],
+      [ "graveyard:pot15_feature", 1 ],
+      [ "graveyard:pot16_feature", 1 ],
+      [ "graveyard:pot17_feature", 1 ],
+      [ "graveyard:pot18_feature", 1 ],
+      [ "graveyard:pot19_feature", 1 ],
+      [ "graveyard:pot20_feature", 1 ],
+      [ "graveyard:pot21_feature", 1 ],
+      [ "graveyard:pot22_feature", 1 ],
+      [ "graveyard:pot23_feature", 1 ],
+      [ "graveyard:pot24_feature", 1 ],
+      [ "graveyard:pot25_feature", 1 ],
+      [ "graveyard:pot26_feature", 1 ],
+      [ "graveyard:pot27_feature", 1 ],
+      [ "graveyard:pot28_feature", 1 ],
+      [ "graveyard:pot29_feature", 1 ],
+      [ "graveyard:pot30_feature", 1 ],
+      [ "graveyard:pot31_feature", 1 ],
+      [ "graveyard:pot32_feature", 1 ],
+      [ "graveyard:pot33_feature", 1 ],
+      [ "graveyard:pot34_feature", 1 ],
+      [ "graveyard:pot35_feature", 1 ],
+      [ "graveyard:pot36_feature", 1 ]
+    ]
+  }
+}
