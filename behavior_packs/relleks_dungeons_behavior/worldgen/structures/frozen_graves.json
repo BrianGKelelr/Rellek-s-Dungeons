@@ -43,6 +43,10 @@
                 {
                     "test": "has_biome_tag",
                     "value": "frozen_river"
+                },
+                {
+                    "test": "has_biome_tag",
+                    "value": "ocean"
                 }
             ]
         }

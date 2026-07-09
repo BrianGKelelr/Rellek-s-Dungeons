@@ -7,7 +7,7 @@
         "step": "underground_structures",
         "terrain_adaptation": "beard_thin",
         "max_depth": 9,
-        "liquid_settings": "apply_waterlogging",
+        "liquid_settings": "ignore_waterlogging",
         "start_pool": "minecraft:sunken_grave_tomb",
         "heightmap_projection": "world_surface",
         "start_height": {
