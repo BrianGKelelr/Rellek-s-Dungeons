@@ -5,7 +5,7 @@
             "identifier": "minecraft:ancient_graves"
         },
         "step": "underground_structures",
-        "terrain_adaptation": "none",
+        "terrain_adaptation": "beard_thin",
         "max_depth": 9,
         "liquid_settings": "ignore_waterlogging",
         "start_pool": "minecraft:ancient_grave_tomb",
