@@ -41,7 +41,7 @@
             },
 
             "minecraft:physics": {
-                "has_gravity": false,
+                "has_gravity": true,
                 "has_collision": false
             },
 
@@ -69,67 +69,28 @@
                 "can_open_doors": false,
                 "can_break_doors": false,
                 "avoid_sun": true,
-                "can_sink": false,
-                "can_walk": false
+                "can_walk": false,
+                "can_swim": true,
+                "can_sink": true
             },
 
             "minecraft:despawn": {
-                "despawn_from_distance": {
-                "min_distance": 32,
-                "max_distance": 128
-                }
+                "despawn_from_distance": {}
             },
 
             "minecraft:burns_in_daylight": {},
 
+            "minecraft:behavior.flee_sun": {
+                "priority": 2,
+                "speed_multiplier": 1
+            },
+
+            "minecraft:is_hidden_when_invisible": {},
+
             "minecraft:damage_sensor": {
                 "triggers": [
                     {
-                        "cause": "contact",
-                        "deals_damage": false
-                    },
-                    {
-                        "cause": "drowning",
-                        "deals_damage": false
-                    },
-                    {
-                        "cause": "fall",
-                        "deals_damage": false
-                    },
-                    {
-                        "cause": "falling_block",
-                        "deals_damage": false
-                    },
-                    {
-                        "cause": "lava",
-                        "deals_damage": false
-                    },
-                    {
-                        "cause": "magic",
-                        "deals_damage": false
-                    },
-                    {
-                        "cause": "projectile",
-                        "deals_damage": false
-                    },
-                    {
-                        "cause": "stalactite",
-                        "deals_damage": false
-                    },
-                    {
-                        "cause": "stalagmite",
-                        "deals_damage": false
-                    },
-                    {
-                        "cause": "thorns",
-                        "deals_damage": false
-                    },
-                    {
-                        "cause": "wither",
-                        "deals_damage": false
-                    },
-                    {
-                        "cause": "suffocation",
+                        "cause": "freezing",
                         "deals_damage": false
                     },
                     {
@@ -144,19 +105,25 @@
             },
 
             "minecraft:behavior.nearest_attackable_target": {
-                "priority": 2,
-                "within_radius": 48,
                 "reselect_targets": true,
+                "must_see": true,
                 "entity_types": [
                     {
                         "filters": {
-                            "test": "is_family",
-                            "subject": "other",
-                            "value": "player"
-                        },
-                        "max_dist": 48
+                        "test": "is_family",
+                        "subject": "other",
+                        "value": "player"
+                        }
+                    },
+                    {
+                        "filters": {
+                        "test": "is_family",
+                        "subject": "other",
+                        "value": "irongolem"
+                        }
                     }
-                ]
+                ],
+                "priority": 2
             },
 
             "minecraft:behavior.delayed_attack": {

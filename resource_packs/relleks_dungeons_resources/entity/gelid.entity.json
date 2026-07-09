@@ -1,0 +1,32 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:client_entity": {
+        "description": {
+            "identifier": "relleks_dungeons:gelid",
+            "materials": {
+                "default": "entity_alphatest"
+            },
+            "textures": {
+                "default": "textures/entity/wraith"
+            },
+            "geometry": {
+                "default": "geometry.wraith"
+            },
+            "render_controllers": ["controller.render.wraith"],
+            "animations": {
+                "walk_controller": "controller.animation.wraith.walk",
+                "attack_controller": "controller.animation.wraith.attack",
+                "attack": "animation.wraith.attack",
+                "idle": "animation.wraith.idle",
+                "move": "animation.wraith.move"
+            },
+            "spawn_egg": {
+                "overlay_color": "#bdd1d1",
+                "base_color": "#9fb3b3"
+            },
+            "scripts": {
+                "animate": ["walk_controller", "attack_controller"]
+            }
+        }
+    }
+}
