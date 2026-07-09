@@ -1,0 +1,252 @@
+{
+  "format_version": "1.21.20",
+  "minecraft:processor_list": {
+    "description": {
+      "identifier": "minecraft:sunken_grave_processor"
+    },
+    "processors": [
+      {
+        "processor_type": "minecraft:rule",
+        "rules": [
+            {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:green_concrete",
+              "probability": 1
+            },
+            "output_state": {
+              "name": "relleks_dungeons:drowned_spawner",
+              "states": {
+                "relleks_dungeons:spawner_type": "drowned"
+              }
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:white_concrete",
+              "probability": 1
+            },
+            "output_state": {
+              "name": "relleks_dungeons:drowned_spawner",
+              "states": {
+                "relleks_dungeons:spawner_type": "bogged"
+              }
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:light_gray_concrete",
+              "probability": 1
+            },
+            "output_state": {
+              "name": "relleks_dungeons:drowned_spawner",
+              "states": {
+                "relleks_dungeons:spawner_type": "wraith"
+              }
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:tuff_bricks",
+              "probability": 0.25
+            },
+            "output_state": {
+              "name": "minecraft:tuff"
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:polished_tuff",
+              "probability": 0.1
+            },
+            "output_state": {
+              "name": "minecraft:tuff"
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:polished_tuff_wall",
+              "probability": 0.5
+            },
+            "output_state": {
+              "name": "minecraft:tuff_wall"
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:tuff_bricks",
+              "probability": 0.1
+            },
+            "output_state": {
+              "name": "minecraft:mossy_cobblestone"
+            }
+          },
+          {
+            "input_predicate": {
+              "predicate_type": "minecraft:random_block_match",
+              "block": "minecraft:polished_tuff",
+              "probability": 0.1
+            },
+            "output_state": {
+              "name": "minecraft:mossy_cobblestone"
+            }
+          },
+          {
+            "input_predicate": {
+                "predicate_type": "minecraft:random_block_match",
+                "block": "minecraft:green_candle",
+                "probability": 0.4
+            },
+            "output_state": {
+                "name": "minecraft:air"
+            }
+          },
+          {
+            "input_predicate": {
+                "predicate_type": "minecraft:random_block_match",
+                "block": "minecraft:green_candle",
+                "probability": 0.1
+            },
+            "output_state": {
+                "name": "minecraft:flower_pot"
+            }
+          },
+          {
+            "input_predicate": {
+                "predicate_type": "minecraft:random_block_match",
+                "block": "minecraft:green_candle",
+                "probability": 0.1
+            },
+            "output_state": {
+                "name": "minecraft:brown_mushroom"
+            }
+          },
+          {
+            "input_predicate": {
+                "predicate_type": "minecraft:random_block_match",
+                "block": "minecraft:green_candle",
+                "probability": 0.1
+            },
+            "output_state": {
+                "name": "minecraft:red_mushroom"
+            }
+          },
+          {
+            "input_predicate": {
+                "predicate_type": "minecraft:random_block_match",
+                "block": "minecraft:decorated_pot",
+                "probability": 0.95
+            },
+            "output_state": {
+                "name": "minecraft:air"
+            }
+          },
+          {
+          "input_predicate": {
+            "predicate_type": "minecraft:random_block_match",
+            "block": "minecraft:decorated_pot",
+            "probability": 0.9
+          },
+          "output_state": {
+            "name": "minecraft:decorated_pot"
+          },
+          "block_entity_modifier": {
+            "type": "minecraft:append_loot",
+            "loot_table": "loot_tables/chests/swamp_crypt_pots.json"
+          }
+        },
+        {
+            "block_entity_modifier": {
+                "type": "minecraft:append_loot",
+                "loot_table": "loot_tables/chests/swamp_crypt_chest.json"
+            },
+            "input_predicate": {
+                "predicate_type": "minecraft:blockstate_match",
+                "block_state": {
+                    "name": "minecraft:chest",
+                    "states": {
+                        "minecraft:cardinal_direction": "north"
+                    }
+                }
+            },
+            "output_state": {
+                "name": "minecraft:chest",
+                "states": {
+                    "minecraft:cardinal_direction": "north"
+                }
+            }
+        },
+        {
+            "block_entity_modifier": {
+                "type": "minecraft:append_loot",
+                "loot_table": "loot_tables/chests/swamp_crypt_chest.json"
+            },
+            "input_predicate": {
+                "predicate_type": "minecraft:blockstate_match",
+                "block_state": {
+                    "name": "minecraft:chest",
+                    "states": {
+                        "minecraft:cardinal_direction": "south"
+                    }
+                }
+            },
+            "output_state": {
+                "name": "minecraft:chest",
+                "states": {
+                    "minecraft:cardinal_direction": "south"
+                }
+            }
+        },
+        {
+            "block_entity_modifier": {
+                "type": "minecraft:append_loot",
+                "loot_table": "loot_tables/chests/swamp_crypt_chest.json"
+            },
+            "input_predicate": {
+                "predicate_type": "minecraft:blockstate_match",
+                "block_state": {
+                    "name": "minecraft:chest",
+                    "states": {
+                        "minecraft:cardinal_direction": "east"
+                    }
+                }
+            },
+            "output_state": {
+                "name": "minecraft:chest",
+                "states": {
+                    "minecraft:cardinal_direction": "east"
+                }
+            }
+        },
+        {
+            "block_entity_modifier": {
+                "type": "minecraft:append_loot",
+                "loot_table": "loot_tables/chests/swamp_crypt_chest.json"
+            },
+            "input_predicate": {
+                "predicate_type": "minecraft:blockstate_match",
+                "block_state": {
+                    "name": "minecraft:chest",
+                    "states": {
+                        "minecraft:cardinal_direction": "west"
+                    }
+                }
+            },
+            "output_state": {
+                "name": "minecraft:chest",
+                "states": {
+                    "minecraft:cardinal_direction": "west"
+                }
+            }
+        }
+        ]
+      }
+    ]
+  }
+}

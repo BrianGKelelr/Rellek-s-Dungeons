@@ -2,18 +2,18 @@
     "format_version": "1.21.20",
     "minecraft:structure_set": {
         "description": {
-            "identifier": "minecraft:swamp_crypt"
+            "identifier": "minecraft:frozen_graves"
         },
         "placement": {
             "type": "minecraft:random_spread",
             "salt": 39281139,
-            "separation": 5,
-            "spacing": 200,
+            "separation": 1,
+            "spacing": 30,
             "spread_type": "linear"
         },
         "structures": [
             {
-                "structure": "minecraft:swamp_crypt",
+                "structure": "minecraft:frozen_graves",
                 "weight": 1
             }
         ]

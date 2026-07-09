@@ -2,43 +2,35 @@
     "format_version": "1.21.20",
     "minecraft:jigsaw": {
         "description": {
-            "identifier": "minecraft:ancient_graves"
+            "identifier": "minecraft:frozen_graves"
         },
         "step": "underground_structures",
-        "terrain_adaptation": "none",
+        "terrain_adaptation": "beard_thin",
         "max_depth": 9,
         "liquid_settings": "ignore_waterlogging",
-        "start_pool": "minecraft:ancient_grave_tomb",
+        "start_pool": "minecraft:frozen_grave_tomb",
         "heightmap_projection": "world_surface",
         "start_height": {
             "type": "constant",
             "value": { 
-                "absolute": -36
+                "absolute": 0
             }
         },
         "biome_filters": {
             "any_of": [ 
                 { 
                     "test": "has_biome_tag", 
-                    "value": "plains" 
+                    "value": "frozen" 
                 },
                 {
                     "test": "has_biome_tag",
-                    "value": "forest"
-                },
-                {
-                    "test": "has_biome_tag",
-                    "value": "flower_forest"
+                    "value": "cold"
                 }
             ],
             "none_of": [
                 {
                     "test": "has_biome_tag",
-                    "value": "extreme_hills"
-                },
-                {
-                    "test": "has_biome_tag",
-                    "value": "cold"
+                    "value": "grove"
                 },
                 {
                     "test": "has_biome_tag",
@@ -46,11 +38,11 @@
                 },
                 {
                     "test": "has_biome_tag",
-                    "value": "warm"
+                    "value": "river"
                 },
                 {
                     "test": "has_biome_tag",
-                    "value": "river"
+                    "value": "frozen_river"
                 }
             ]
         }

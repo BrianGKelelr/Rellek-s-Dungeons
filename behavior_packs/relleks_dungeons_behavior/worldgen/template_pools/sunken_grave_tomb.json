@@ -1,0 +1,18 @@
+{
+    "format_version": "1.21.20",
+    "minecraft:template_pool": {
+        "description": {
+            "identifier": "minecraft:sunken_grave_tomb"
+        },
+        "elements": [
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/tomb/tomb",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 1
+            }
+        ]
+    }
+}

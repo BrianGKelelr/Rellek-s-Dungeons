@@ -1,0 +1,182 @@
+{
+    "format_version": "1.21.20",
+    "minecraft:template_pool": {
+        "description": {
+            "identifier": "minecraft:sunken_grave_graves"
+        },
+        "elements": [
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/grave1",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 2
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/grave2",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 2
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/grave3",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 2
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/grave4",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 2
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/grave5",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 2
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/grave6",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 2
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/grave7",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 2
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/grave8",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 2
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/grave9",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 2
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/grave10",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 2
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/grave11",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 2
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/building1",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/building2",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/building3",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/spawner_wraith",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/spawner_bogged",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/spawner_drowned",
+                    "processors": "minecraft:sunken_grave_processor"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/divider1",
+                    "processors": "minecraft:sunken_grave_processor",
+                    "projection": "terrain_matching"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/divider2",
+                    "processors": "minecraft:sunken_grave_processor",
+                    "projection": "terrain_matching"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/divider3",
+                    "processors": "minecraft:sunken_grave_processor",
+                    "projection": "terrain_matching"
+                },
+                "weight": 1
+            },
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "sunken_crypt/grave_graves/divider4",
+                    "processors": "minecraft:sunken_grave_processor",
+                    "projection": "terrain_matching"
+                },
+                "weight": 1
+            }
+        ]
+    }
+}

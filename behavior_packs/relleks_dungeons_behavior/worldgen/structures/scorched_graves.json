@@ -2,51 +2,39 @@
     "format_version": "1.21.20",
     "minecraft:jigsaw": {
         "description": {
-            "identifier": "minecraft:ancient_graves"
+            "identifier": "minecraft:scorched_graves"
         },
         "step": "underground_structures",
-        "terrain_adaptation": "none",
+        "terrain_adaptation": "beard_thin",
         "max_depth": 9,
         "liquid_settings": "ignore_waterlogging",
-        "start_pool": "minecraft:ancient_grave_tomb",
+        "start_pool": "minecraft:scorched_grave_tomb",
         "heightmap_projection": "world_surface",
         "start_height": {
             "type": "constant",
             "value": { 
-                "absolute": -36
+                "absolute": 0
             }
         },
         "biome_filters": {
             "any_of": [ 
                 { 
                     "test": "has_biome_tag", 
-                    "value": "plains" 
+                    "value": "desert" 
                 },
                 {
                     "test": "has_biome_tag",
-                    "value": "forest"
+                    "value": "mesa"
                 },
                 {
                     "test": "has_biome_tag",
-                    "value": "flower_forest"
+                    "value": "savanna"
                 }
             ],
             "none_of": [
                 {
                     "test": "has_biome_tag",
-                    "value": "extreme_hills"
-                },
-                {
-                    "test": "has_biome_tag",
-                    "value": "cold"
-                },
-                {
-                    "test": "has_biome_tag",
                     "value": "mutated"
-                },
-                {
-                    "test": "has_biome_tag",
-                    "value": "warm"
                 },
                 {
                     "test": "has_biome_tag",

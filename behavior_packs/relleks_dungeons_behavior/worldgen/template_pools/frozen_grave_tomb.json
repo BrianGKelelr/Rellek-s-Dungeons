@@ -1,0 +1,18 @@
+{
+    "format_version": "1.21.20",
+    "minecraft:template_pool": {
+        "description": {
+            "identifier": "minecraft:frozen_grave_tomb"
+        },
+        "elements": [
+            {
+                "element": {
+                    "element_type": "minecraft:single_pool_element",
+                    "location": "frozen_crypt/tomb/tomb",
+                    "processors": "minecraft:ancient_crypt_dungeon_processor"
+                },
+                "weight": 1
+            }
+        ]
+    }
+}
