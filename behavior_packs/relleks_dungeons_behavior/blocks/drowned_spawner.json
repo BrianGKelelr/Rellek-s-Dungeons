@@ -6,9 +6,10 @@
       "states": {
         "relleks_dungeons:is_lit": [false, true],
         "relleks_dungeons:spawner_type": [
-          "drowned", "bogged","zombie", 
-          "skeleton", "husk", "parched",
-          "spider", "cave_spider", "slime", "stray",
+          "zombie", "skeleton","spider", 
+          "drowned", "bogged", "slime",
+          "husk", "parched", "creeper", 
+          "stray", "gelid", "silverfish",
           "wraith"
         ]
       },

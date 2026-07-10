@@ -33,9 +33,9 @@ const TRIGGER_RADIUS = 11;
 
 const ZOMBIE_COUNT = 8;
 const SKELETON_COUNT = 4;
-const SLIME_COUNT = 5;
+const SLIME_COUNT = 4;
 const SPIDER_COUNT = 8;
-const CAVE_SPIDER_COUNT = 5;
+const SILVERFISH_COUNT = 15;
 const WRAITH_COUNT = 2;
 
 const COOLDOWN_TICKS = 36000; //36000 = 30 minutes
@@ -374,9 +374,9 @@ function spawnWave(loc: DimensionLocation, hasBadOmen: boolean): void {
         spawnWaveRecursive(loc, Math.floor(SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:spider", equipSpider, hasBadOmen, 0);
     } 
     else if(block.permutation.getState("relleks_dungeons:spawner_type") === "cave_spider"){
-        const count = Math.floor(CAVE_SPIDER_COUNT * (hasBadOmen ? 1.5 : 1));
+        const count = Math.floor(SILVERFISH_COUNT * (hasBadOmen ? 1.5 : 1));
         setPending(loc, count);
-        spawnWaveRecursive(loc, Math.floor(CAVE_SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:cave_spider", equipCaveSpider, hasBadOmen, 0);
+        spawnWaveRecursive(loc, Math.floor(SILVERFISH_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:cave_spider", equipCaveSpider, hasBadOmen, 0);
     } 
     else if(block.permutation.getState("relleks_dungeons:spawner_type") === "slime"){
         const count = Math.floor(SLIME_COUNT * (hasBadOmen ? 1.5 : 1));
