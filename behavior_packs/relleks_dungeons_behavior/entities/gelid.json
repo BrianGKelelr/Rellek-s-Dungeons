@@ -135,7 +135,10 @@
         "minecraft:conditional_bandwidth_optimization": {},
 
         "minecraft:despawn": {
-            "despawn_from_distance": {}
+            "despawn_from_distance": {
+                    "min_distance": 32,
+                    "max_distance": 128
+                }
         },
 
         "minecraft:equip_item": {
