@@ -1,0 +1,37 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:block": {
+    "description": {
+      "identifier": "relleks_dungeons:frozen_skull",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:light_dampening": 0,
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 80
+      },
+      "minecraft:light_emission": 0,
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 2
+      },
+      "minecraft:map_color": "#6c896e",
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:material_instances": {
+      "*": {
+        "texture": "drowned_spawner_side",
+        "render_method": "alpha_test"
+      },
+      "up": {
+        "texture": "spawner_top",
+        "render_method": "alpha_test"
+      },
+      "down": {
+        "texture": "spawner_bottom",
+        "render_method": "alpha_test"
+      }
+    }
+    }
+  }
+}

@@ -8,9 +8,9 @@ var SPAWNER_BLOCK_ID = "relleks_dungeons:drowned_spawner";
 var TRIGGER_RADIUS = 11;
 var ZOMBIE_COUNT = 8;
 var SKELETON_COUNT = 4;
-var SLIME_COUNT = 5;
+var SLIME_COUNT = 4;
 var SPIDER_COUNT = 8;
-var CAVE_SPIDER_COUNT = 5;
+var SILVERFISH_COUNT = 15;
 var WRAITH_COUNT = 2;
 var COOLDOWN_TICKS = 36e3;
 var CHECK_INTERVAL = 60;
@@ -250,9 +250,9 @@ function spawnWave(loc, hasBadOmen) {
     setPending(loc, count);
     spawnWaveRecursive(loc, Math.floor(SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:spider", equipSpider, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "cave_spider") {
-    const count = Math.floor(CAVE_SPIDER_COUNT * (hasBadOmen ? 1.5 : 1));
+    const count = Math.floor(SILVERFISH_COUNT * (hasBadOmen ? 1.5 : 1));
     setPending(loc, count);
-    spawnWaveRecursive(loc, Math.floor(CAVE_SPIDER_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:cave_spider", equipCaveSpider, hasBadOmen, 0);
+    spawnWaveRecursive(loc, Math.floor(SILVERFISH_COUNT * (hasBadOmen ? 1.5 : 1)), "minecraft:cave_spider", equipCaveSpider, hasBadOmen, 0);
   } else if (block.permutation.getState("relleks_dungeons:spawner_type") === "slime") {
     const count = Math.floor(SLIME_COUNT * (hasBadOmen ? 1.5 : 1));
     setPending(loc, count);

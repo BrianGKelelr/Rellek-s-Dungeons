@@ -34,17 +34,23 @@
     "slime_spawner_side": {
       "textures": "textures/blocks/slime_spawner_side"
     },
-    "cave_spider_spawner_side": {
-      "textures": "textures/blocks/zombie_spawner_side"
-    },
     "stray_spawner_side": {
-      "textures": "textures/blocks/zombie_spawner_side"
+      "textures": "textures/blocks/stray_spawner_side"
     },
     "husk_spawner_side": {
-      "textures": "textures/blocks/zombie_spawner_side"
+      "textures": "textures/blocks/husk_spawner_side"
     },
     "parched_spawner_side": {
-      "textures": "textures/blocks/zombie_spawner_side"
+      "textures": "textures/blocks/parched_spawner_side"
+    },
+    "creeper_spawner_side": {
+      "textures": "textures/blocks/creeper_spawner_side"
+    },
+    "gelid_spawner_side": {
+      "textures": "textures/blocks/gelid_spawner_side"
+    },
+    "silverfish_spawner_side": {
+      "textures": "textures/blocks/silverish_spawner_side"
     }
   }
 }

@@ -2,6 +2,15 @@
     "texture_data": {
         "relleks_dungeons:ancient_skull_fragment": {
             "textures": "textures/items/ancient_skull_fragment"
+        },
+        "relleks_dungeons:sunken_skull_fragment": {
+            "textures": "textures/items/sunken_skull_fragment"
+        },
+        "relleks_dungeons:scorched_skull_fragment": {
+            "textures": "textures/items/scorched_skull_fragment"
+        },
+        "relleks_dungeons:frozen_skulll_fragment": {
+            "textures": "texutres/items/frozen_skull_fragment"
         }
     }
 }

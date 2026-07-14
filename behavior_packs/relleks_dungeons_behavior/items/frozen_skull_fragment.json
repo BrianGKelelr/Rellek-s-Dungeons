@@ -1,0 +1,15 @@
+{
+    "format_version": "1.26.30",
+    "minecraft:item":{
+        "description":{
+            "identifier": "relleks_dungeons:frozen_skull_fragment",
+            "menu_category":{
+                "category": "items"
+            }
+        },
+        "components":{
+            "minecraft:max_stack_size": 64,
+            "minecraft:icon": "relleks_dungeons:frozen_skull_fragment"
+        }
+    }
+}
