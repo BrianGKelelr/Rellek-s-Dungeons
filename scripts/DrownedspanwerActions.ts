@@ -4,29 +4,13 @@ import {
     BlockCustomComponent,
     BlockComponentStepOnEvent,
     DimensionLocation,
-    ItemStack,
     Entity,
-    Enchantment,
     
 } from "@minecraft/server";
 
 /* ============================================================
    CONFIG
 ============================================================ */
-
-function enchantItem(item: ItemStack, enchantment: string, level: number): void {
-    const enchantable = item.getComponent("minecraft:enchantable");
-
-    if (!enchantable)
-        return;
-
-    try {
-        enchantable.addEnchantment(new Enchantment(enchantment, level));
-    } catch (e) {
-        console.error(`Error enchanting item: ${e}`);
-    }
-}
-
 const SPAWNER_BLOCK_ID = "relleks_dungeons:drowned_spawner";
 
 const TRIGGER_RADIUS = 11;

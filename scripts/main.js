@@ -1,8 +1,7 @@
 // ct:./DrownedspanwerActions
 import {
   world,
-  system,
-  Enchantment
+  system
 } from "@minecraft/server";
 var SPAWNER_BLOCK_ID = "relleks_dungeons:drowned_spawner";
 var TRIGGER_RADIUS = 11;

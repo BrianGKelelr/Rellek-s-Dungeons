@@ -9,7 +9,7 @@
           "zombie", "skeleton","spider", 
           "drowned", "bogged", "slime",
           "husk", "parched", "creeper", 
-          "stray", "gelid", "silverfish",
+          "stray", "silverfish",
           "wraith"
         ]
       },
@@ -43,7 +43,7 @@
         "render_method": "alpha_test"
       }
     },
-      "relleks_dungeons:drownedspawner_actions": {}
+    "relleks_dungeons:drownedspawner_actions": {}
     },
     "permutations": [
       {
