@@ -71,11 +71,6 @@
       "minecraft:movement": {
         "value": 0.35
       },
-      "minecraft:block_movement_slowdown_immunity": {
-        "blocks": [
-          "minecraft:web"
-        ]
-      },
       "minecraft:knockback_resistance": {
         "value": 0.8
       },
@@ -93,7 +88,7 @@
       "minecraft:behavior.move_around_target": {
         "destination_pos_spread_degrees": 360,
         "destination_position_range": {
-          "range_min": 4.0,
+          "range_min": 0,
           "range_max": 12.0
         },
         "priority": 3,
@@ -127,9 +122,9 @@
     "component_groups": {
       "melee_mode": {
         "minecraft:attack": {
-          "damage": 6,
+          "damage": 4,
           "effect_duration": 10,
-          "effect_name": "minecraft:poison"
+          "effect_name": "poison"
         },
         "minecraft:behavior.melee_box_attack": {
           "priority": 3
