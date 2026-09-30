@@ -50,6 +50,10 @@
                 {
                     "test": "has_biome_tag",
                     "value": "ocean"
+                },
+                {
+                    "test": "has_biome_tag",
+                    "value": "mountains"
                 }
             ]
         }
