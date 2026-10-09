@@ -11,7 +11,7 @@
                     "location": "sunken_crypt/grave_graves/grave1",
                     "processors": "minecraft:sunken_grave_processor"
                 },
-                "weight": 2
+                "weight": 3
             },
             {
                 "element": {
@@ -19,7 +19,7 @@
                     "location": "sunken_crypt/grave_graves/grave2",
                     "processors": "minecraft:sunken_grave_processor"
                 },
-                "weight": 2
+                "weight": 3
             },
             {
                 "element": {
@@ -27,7 +27,7 @@
                     "location": "sunken_crypt/grave_graves/grave3",
                     "processors": "minecraft:sunken_grave_processor"
                 },
-                "weight": 2
+                "weight": 3
             },
             {
                 "element": {
@@ -35,7 +35,7 @@
                     "location": "sunken_crypt/grave_graves/grave4",
                     "processors": "minecraft:sunken_grave_processor"
                 },
-                "weight": 2
+                "weight": 3
             },
             {
                 "element": {
@@ -43,7 +43,7 @@
                     "location": "sunken_crypt/grave_graves/grave5",
                     "processors": "minecraft:sunken_grave_processor"
                 },
-                "weight": 2
+                "weight": 3
             },
             {
                 "element": {
@@ -51,7 +51,7 @@
                     "location": "sunken_crypt/grave_graves/grave6",
                     "processors": "minecraft:sunken_grave_processor"
                 },
-                "weight": 2
+                "weight": 3
             },
             {
                 "element": {
@@ -59,7 +59,7 @@
                     "location": "sunken_crypt/grave_graves/grave7",
                     "processors": "minecraft:sunken_grave_processor"
                 },
-                "weight": 2
+                "weight": 3
             },
             {
                 "element": {
@@ -67,7 +67,7 @@
                     "location": "sunken_crypt/grave_graves/grave8",
                     "processors": "minecraft:sunken_grave_processor"
                 },
-                "weight": 2
+                "weight": 3
             },
             {
                 "element": {
@@ -75,7 +75,7 @@
                     "location": "sunken_crypt/grave_graves/grave9",
                     "processors": "minecraft:sunken_grave_processor"
                 },
-                "weight": 2
+                "weight": 3
             },
             {
                 "element": {
@@ -83,7 +83,7 @@
                     "location": "sunken_crypt/grave_graves/grave10",
                     "processors": "minecraft:sunken_grave_processor"
                 },
-                "weight": 2
+                "weight": 3
             },
             {
                 "element": {
@@ -91,7 +91,7 @@
                     "location": "sunken_crypt/grave_graves/grave11",
                     "processors": "minecraft:sunken_grave_processor"
                 },
-                "weight": 2
+                "weight": 3
             },
             {
                 "element": {
@@ -148,7 +148,7 @@
                     "processors": "minecraft:sunken_grave_processor",
                     "projection": "terrain_matching"
                 },
-                "weight": 1
+                "weight": 2
             },
             {
                 "element": {
@@ -157,7 +157,7 @@
                     "processors": "minecraft:sunken_grave_processor",
                     "projection": "terrain_matching"
                 },
-                "weight": 1
+                "weight": 2
             },
             {
                 "element": {
@@ -166,7 +166,7 @@
                     "processors": "minecraft:sunken_grave_processor",
                     "projection": "terrain_matching"
                 },
-                "weight": 1
+                "weight": 2
             },
             {
                 "element": {
@@ -175,7 +175,7 @@
                     "processors": "minecraft:sunken_grave_processor",
                     "projection": "terrain_matching"
                 },
-                "weight": 1
+                "weight": 2
             }
         ]
     }

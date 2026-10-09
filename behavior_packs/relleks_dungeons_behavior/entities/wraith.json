@@ -13,12 +13,12 @@
             },
 
             "minecraft:health": {
-                "value": 40,
-                "max": 40
+                "value": 30,
+                "max": 30
             },
 
             "minecraft:attack": {
-                "damage": 10,
+                "damage": 5,
                 "cooldown_time": 1.0
             },
 

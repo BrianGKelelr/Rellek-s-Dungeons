@@ -1,3 +1,7 @@
+/*
+Behavior for the Ancient Crypt spider jockey boss.
+*/
+
 import { world, BlockPermutation } from "@minecraft/server";
 
 const TARGET_MOB_ID = "relleks_dungeons:boss_ancient"; 
